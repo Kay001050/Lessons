@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التطبيق الصرفي: موسوعة المشتقات الشاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. نظام التصميم (Design System)
+           ========================================= */
+        :root {
+            --primary-color: #1a3c5e;      /* كحلي غامق وقور */
+            --secondary-color: #c9a66b;    /* ذهبي أكاديمي */
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #dfe6e9;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --sidebar-width: 300px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* ألوان الأحكام */
+            --rule-bg: #e3f2fd; --rule-border: #2196f3;
+            --warn-bg: #fff8e1; --warn-border: #ffc107;
+            --err-bg: #ffebee;  --err-border: #f44336;
+            
+            /* الخطوط */
+            --font-title: 'Tajawal', sans-serif;
+            --font-body: 'Amiri', serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-title); margin-bottom: 15px; }
+
+        /* =========================================
+           2. التخطيط (Layout)
+           ========================================= */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        /* الشريط الجانبي */
+        #sidebar {
+            min-width: var(--sidebar-width);
+            max-width: var(--sidebar-width);
+            background: var(--primary-color);
+            color: #fff;
+            transition: var(--transition);
+            position: fixed;
+            height: 100vh;
+            z-index: 999;
+            overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        }
+
+        #sidebar.active { margin-right: calc(var(--sidebar-width) * -1); }
+
+        .sidebar-header {
+            padding: 25px;
+            background: rgba(0,0,0,0.1);
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h3 { color: var(--secondary-color); margin: 0; font-weight: 800; font-size: 1.5rem; }
+        .sidebar-header p { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; font-family: var(--font-title); }
+
+        ul.components { padding: 20px 0; list-style: none; }
+        ul.components li { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        ul.components li button {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            text-align: right;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-title);
+        }
+
+        ul.components li button:hover { background: rgba(255,255,255,0.05); color: #fff; padding-right: 35px; }
+        ul.components li button.active { 
+            background: var(--secondary-color); 
+            color: var(--primary-color); 
+            font-weight: bold;
+            padding-right: 35px;
+        }
+        
+        ul.components li button i { margin-left: 10px; width: 20px; text-align: center; }
+
+        /* المحتوى الرئيسي */
+        #content {
+            width: 100%;
+            padding: 40px;
+            padding-right: calc(var(--sidebar-width) + 40px); /* تعويض المساحة */
+            transition: var(--transition);
+        }
+
+        #content.full-width { padding-right: 40px; }
+
+        /* زر القائمة */
+        #sidebarCollapse {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        #sidebarCollapse:hover { transform: scale(1.1); }
+
+        /* =========================================
+           3. تنسيق النصوص والبطاقات
+           ========================================= */
+        .tab-pane { display: none; animation: fadeIn 0.5s ease; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .matn-box {
+            background-color: #fff;
+            border-right: 5px solid var(--secondary-color);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .matn-box::before {
+            content: '❝';
+            position: absolute; top: 10px; left: 20px;
+            font-size: 4rem; color: rgba(201, 166, 107, 0.1);
+            font-family: serif;
+        }
+
+        .matn-text { text-align: justify; color: #444; line-height: 2.2; }
+        .highlight { color: var(--primary-color); font-weight: bold; background: rgba(201, 166, 107, 0.15); padding: 0 5px; border-radius: 4px; }
+
+        /* الصناديق التنبيهية */
+        .alert { padding: 15px 20px; border-radius: 8px; margin: 20px 0; display: flex; gap: 15px; align-items: flex-start; }
+        .alert-info { background: var(--rule-bg); border: 1px solid var(--rule-border); color: #0d47a1; }
+        .alert-warning { background: var(--warn-bg); border: 1px solid var(--warn-border); color: #e65100; }
+        .alert-danger { background: var(--err-bg); border: 1px solid var(--err-border); color: #b71c1c; }
+        .alert i { font-size: 1.4rem; margin-top: 5px; }
+
+        /* =========================================
+           4. الجداول (Tables)
+           ========================================= */
+        .styled-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .styled-table thead { background: var(--primary-color); color: #fff; }
+        .styled-table th, .styled-table td { padding: 18px; text-align: right; border-bottom: 1px solid var(--border-color); }
+        .styled-table th { font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:nth-child(even) { background-color: #f8fbfd; }
+        .styled-table tr:hover { background-color: #e3f2fd; transition: 0.2s; }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: var(--font-title);
+        }
+        .badge-weight { background: var(--secondary-color); color: #fff; }
+        .badge-ex { background: #e0e0e0; color: #333; }
+
+        /* =========================================
+           5. التشجير والخرائط الذهنية (CSS Tree)
+           ========================================= */
+        .tree-wrapper {
+            overflow-x: auto;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tree { display: inline-flex; direction: ltr; }
+        .tree ul { padding-top: 20px; position: relative; transition: .5s; display: flex; justify-content: center; }
+        .tree li { float: left; text-align: center; list-style-type: none; position: relative; padding: 20px 5px 0 5px; transition: .5s; }
+        
+        /* Connectors */
+        .tree li::before, .tree li::after {
+            content: ''; position: absolute; top: 0; right: 50%;
+            border-top: 2px solid var(--primary-color); width: 50%; height: 20px;
+        }
+        .tree li::after { right: auto; left: 50%; border-left: 2px solid var(--primary-color); }
+        .tree li:only-child::after, .tree li:only-child::before { display: none; }
+        .tree li:only-child { padding-top: 0; }
+        .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+        .tree li:last-child::before { border-right: 2px solid var(--primary-color); border-radius: 0 5px 0 0; }
+        .tree li:first-child::after { border-radius: 5px 0 0 0; }
+        .tree ul ul::before { content: ''; position: absolute; top: 0; left: 50%; border-left: 2px solid var(--primary-color); width: 0; height: 20px; }
+
+        .node {
+            border: 2px solid var(--primary-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: bold;
+            display: inline-block;
+            border-radius: 5px;
+            background: #fff;
+            transition: all 0.5s;
+            min-width: 120px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .node.root { background: var(--primary-color); color: #fff; font-size: 1.2rem; }
+        .node.leaf { background: #f1f8e9; border-color: var(--secondary-color); border-style: dashed; }
+        .tree li:hover .node { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 20; }
+
+        /* =========================================
+           6. التجاوب (Responsive)
+           ========================================= */
+        @media (max-width: 992px) {
+            #sidebar { margin-right: calc(var(--sidebar-width) * -1); }
+            #sidebar.active { margin-right: 0; }
+            #content { padding-right: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>التطبيق الصرفي</h3>
+            <p>الأستاذ الدكتور عبده الراجحي</p>
+        </div>
+
+        <ul class="components">
+            <li><button class="active" onclick="switchTab('intro')"><i class="fas fa-book-open"></i> 1. مقدمة الاشتقاق</button></li>
+            <li><button onclick="switchTab('ism-fail')"><i class="fas fa-user"></i> 2. اسم الفاعل</button></li>
+            <li><button onclick="switchTab('mubalagha')"><i class="fas fa-angle-double-up"></i> 3. صيغ المبالغة</button></li>
+            <li><button onclick="switchTab('sifa')"><i class="fas fa-gem"></i> 4. الصفة المشبهة</button></li>
+            <li><button onclick="switchTab('ism-mafool')"><i class="fas fa-box-open"></i> 5. اسم المفعول</button></li>
+            <li><button onclick="switchTab('zaman-makan')"><i class="fas fa-map-marker-alt"></i> 6. اسما الزمان والمكان</button></li>
+            <li><button onclick="switchTab('ism-ala')"><i class="fas fa-tools"></i> 7. اسم الآلة</button></li>
+            <li><button onclick="switchTab('taajub')"><i class="fas fa-exclamation-circle"></i> 8. التعجب والتفضيل</button></li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <button type="button" id="sidebarCollapse" title="إخفاء/إظهار القائمة">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <section id="intro" class="tab-pane active">
+            <h2 class="section-title">1. مدخل إلى الاشتقاق</h2>
+            
+            <div class="matn-box">
+                <p class="matn-text">
+                    "تتميز اللغة العربية بأنها <span class="highlight">لغة اشتقاقية</span>، وهذا يعني أن هناك مادة لغوية معينة مثل (ك ت ب) يمكن تشكيلها على هيئات مختلفة، كل هيئة منها لها وزن خاص، ولها وظيفة خاصة كأن نقول مثلاً: (كاتب) أو (مكتوب) أو (مكتب). وأنت تلاحظ أن مثل هذه العملية إنما تجري داخل المادة اللغوية السابقة وتشكلها تشكيلاً جديداً. وهي العملية التي تعرف بالاشتقاق."
+                </p>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>مقارنة لغوية:</strong> يذكر المصنف أن العربية تختلف عن اللغات "الالتصاقية" (Agglutinative) كالإنجليزية التي تعتمد على لصق لواحق (Suffixes) أو سوابق (Prefixes) مثل (Write -> Writer)، بينما العربية تعتمد على تغيير البنية الداخلية للكلمة.
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <strong>ضابط الاشتقاق:</strong> الاشتقاق في العربية واضح غاية الوضوح، إذ تضبطه قواعد ومقاييس، قليلة لا تكاد تتخلف.
+                </div>
+            </div>
+        </section>
+
+        <section id="ism-fail" class="tab-pane">
+            <h2 class="section-title">2. اسم الفاعل</h2>
+            
+            <div class="matn-box">
+                <p class="matn-text">
+                    "وهو اسم يشتق من الفعل للدلالة على وصف من قام بالفعل، فكلمة (كاتب) مثلاً اسم فاعل تدل على وصف الذي قام بالكتابة. واللغويون القدماء يقولون إن اسم الفاعل يشبه الفعل المضارع... ويصاغ اسم الفاعل على النحو التالي:"
+                </p>
+            </div>
+
+            <div class="tree-wrapper">
+                <h4>خريطة صياغة اسم الفاعل</h4>
+                <div class="tree">
+                    <ul>
+                        <li>
+                            <a href="#" class="node root">اسم الفاعل</a>
+                            <ul>
+                                <li>
+                                    <a href="#" class="node">من الثلاثي (فَاعِل)</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">صحيح: كاتب</a></li>
+                                        <li><a href="#" class="node leaf">أجوف: قائل (همزة)</a></li>
+                                        <li><a href="#" class="node leaf">ناقص: داعٍ (حذف)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="node">من غير الثلاثي</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">مُضَارِع</a></li>
+                                        <li><a href="#" class="node leaf">ميم مضمومة</a></li>
+                                        <li><a href="#" class="node leaf">كسر ما قبل الآخر</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>أولاً: صياغته من الثلاثي</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>نوع الفعل</th>
+                        <th>الحكم الصرفي</th>
+                        <th>أمثلة من المصنف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>الصحيح السالم</td>
+                        <td>يأتي على وزن <span class="badge badge-weight">فَاعِل</span> دون تغيير</td>
+                        <td>كتب <span class="badge badge-ex">كاتب</span>، لعب <span class="badge badge-ex">لاعب</span>، قرأ <span class="badge badge-ex">قارئ</span></td>
+                    </tr>
+                    <tr>
+                        <td>الأجوف (عين ألف)</td>
+                        <td>تقلب الألف همزة</td>
+                        <td>قال <span class="badge badge-ex">قائل</span>، باع <span class="badge badge-ex">بائع</span>، دار <span class="badge badge-ex">دائر</span></td>
+                    </tr>
+                    <tr>
+                        <td>الأجوف (عين صحيحة)</td>
+                        <td>تبقى كما هي</td>
+                        <td>عَوِر <span class="badge badge-ex">عَاوِر</span>، حَيِد <span class="badge badge-ex">حَايِد</span>، حَوِل <span class="badge badge-ex">حَاوِل</span></td>
+                    </tr>
+                    <tr>
+                        <td>الناقص (لام علة)</td>
+                        <td>تحذف الياء في الرفع والجر (نكرة)</td>
+                        <td>دعا <span class="badge badge-ex">داعٍ</span>، مشى <span class="badge badge-ex">ماشٍ</span>، رضي <span class="badge badge-ex">راضٍ</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>ثانياً: صياغته من غير الثلاثي</h3>
+            <div class="alert alert-info">
+                <i class="fas fa-cog"></i>
+                <div>
+                    <strong>القاعدة:</strong> على وزن المضارع مع إبدال حرف المضارعة ميماً مضمومة وكسر ما قبل الآخر.
+                    <br>مثال: دحرج يُدحرج <span class="badge badge-weight">مُدَحْرِج</span>، استغفر يستغفر <span class="badge badge-weight">مُسْتَغْفِر</span>.
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>استثناءات هامة ذكرها المصنف:</strong>
+                    <ol>
+                        <li><strong>المعتل قبل الآخر:</strong> إذا كان ما قبل الآخر ألفاً، تبقى كما هي (ويكون الوزن التقديري بالكسر). مثال: اختار يختار <span class="badge badge-ex">مُخْتَار</span> (أصله مُخْتَيِر)، اقتاد <span class="badge badge-ex">مُقْتَاد</span>.</li>
+                        <li><strong>الشواذ:</strong> كلمات وردت بفتح ما قبل الآخر والقياس الكسر: <span class="badge badge-ex">مُسْهَب</span> (من أسهب)، <span class="badge badge-ex">مُحْصَن</span> (من أحصن).</li>
+                        <li><strong>رباعي على وزن فاعل:</strong> شذوذاً مثل: أيفع <span class="badge badge-ex">يافع</span>، أمحل <span class="badge badge-ex">ماحل</span>.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="mubalagha" class="tab-pane">
+            <h2 class="section-title">3. صيغ المبالغة</h2>
+            <div class="matn-box">
+                <p class="matn-text">
+                    "وهي أسماء تشتق من الأفعال للدلالة على معنى اسم الفاعل مع تأكيد المعنى وتقويته والمبالغة فيه... وهي لا تشتق إلا من الفعل الثلاثي، ولها أوزان أشهرها خمسة."
+                </p>
+            </div>
+
+            <div class="tree-wrapper">
+                <h4>أوزان صيغ المبالغة</h4>
+                <div class="tree">
+                    <ul>
+                        <li>
+                            <a href="#" class="node root">صيغ المبالغة</a>
+                            <ul>
+                                <li>
+                                    <a href="#" class="node">الخمسة القياسية</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">فَعَّال (سَفَّاح)</a></li>
+                                        <li><a href="#" class="node leaf">مِفْعَال (مِقْدَام)</a></li>
+                                        <li><a href="#" class="node leaf">فَعُول (شَكُور)</a></li>
+                                        <li><a href="#" class="node leaf">فَعِيل (عَلِيم)</a></li>
+                                        <li><a href="#" class="node leaf">فَعِل (حَذِر)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="node">أوزان سماعية</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">فَاعُول (فَارُوق)</a></li>
+                                        <li><a href="#" class="node leaf">فِعِّيل (صِدِّيق)</a></li>
+                                        <li><a href="#" class="node leaf">مِفْعِيل (مِعْطِير)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-star"></i>
+                <div>
+                    <strong>من غير الثلاثي (نادر):</strong> وردت صيغ مخالفة للقاعدة (من غير الثلاثي):
+                    <br> أدرك فهو <span class="badge badge-ex">دَرَّاك</span>، أعان فهو <span class="badge badge-ex">مِعْوَان</span>، أهان فهو <span class="badge badge-ex">مِهْوَان</span>، أنذر فهو <span class="badge badge-ex">نَذِير</span>، أزهق فهو <span class="badge badge-ex">زَهُوق</span>.
+                </div>
+            </div>
+        </section>
+
+        <section id="sifa" class="tab-pane">
+            <h2 class="section-title">4. الصفة المشبهة</h2>
+            <div class="matn-box">
+                <p class="matn-text">
+                    "وهي اسم يصاغ من الفعل اللازم للدلالة على معنى اسم الفاعل... وتفترق عن اسم الفاعل في أنها تدل على صفة ثابتة."
+                </p>
+            </div>
+
+            <h3>أوزانها بحسب حركة عين الفعل</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>وزن الفعل</th>
+                        <th>دلالة الفعل</th>
+                        <th>وزن الصفة</th>
+                        <th>مثال</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3" style="font-weight:bold; color:var(--primary-color)">فَعِلَ</td>
+                        <td>فرح أو حزن (متجدد)</td>
+                        <td><span class="badge badge-weight">فَعِل</span></td>
+                        <td>فَرِح، تَعِب، ضَجِر</td>
+                    </tr>
+                    <tr>
+                        <td>لون، عيب، حلية</td>
+                        <td><span class="badge badge-weight">أَفْعَل</span> (مؤنثه فَعْلَاء)</td>
+                        <td>أحمر حمراء، أعور عوراء، أهيف هيفاء</td>
+                    </tr>
+                    <tr>
+                        <td>خلو أو امتلاء</td>
+                        <td><span class="badge badge-weight">فَعْلَان</span> (مؤنثه فَعْلَى)</td>
+                        <td>عطشان عطشى، ريَّان رَيَّى</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="5" style="font-weight:bold; color:var(--primary-color)">فَعُلَ</td>
+                        <td rowspan="5">سجايا وطبائع ثابتة</td>
+                        <td><span class="badge badge-weight">فَعَل</span></td>
+                        <td>حَسَن، بَطَل</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-weight">فُعُل</span></td>
+                        <td>جُنُب</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-weight">فَعَال</span></td>
+                        <td>جَبَان</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-weight">فَعُول</span></td>
+                        <td>وَقُور</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-weight">فُعَال</span></td>
+                        <td>شُجَاع</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--primary-color)">فَعَلَ</td>
+                        <td>عام</td>
+                        <td><span class="badge badge-weight">فَيْعِل</span> (غالباً)</td>
+                        <td>ساد <span class="badge badge-ex">سَيِّد</span>، مات <span class="badge badge-ex">مَيِّت</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-plus"></i>
+                <div>
+                    <strong>أوزان أخرى:</strong> فَعِيل (كريم)، فَعْل (ضخم)، فِعْل (رِخْو)، فُعْل (صُلْب).
+                </div>
+            </div>
+        </section>
+
+        <section id="ism-mafool" class="tab-pane">
+            <h2 class="section-title">5. اسم المفعول</h2>
+            <div class="matn-box">
+                <p class="matn-text">
+                    "هو اسم يشتق من الفعل المضارع المتعدي المبني للمجهول، وهو يدل على وصف من يقع عليه الفعل... يشتق من الثلاثي على وزن (مفعول)."
+                </p>
+            </div>
+
+            <h3>تفصيل الإعلال في الثلاثي</h3>
+            <div class="tree-wrapper">
+                <h4>التغييرات الصرفية في المعتل</h4>
+                <div class="tree">
+                    <ul>
+                        <li>
+                            <a href="#" class="node root">معتل العين/اللام</a>
+                            <ul>
+                                <li>
+                                    <a href="#" class="node">أجوف</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">واوي: قال > مَقُول<br>(حذف واو مفعول)</a></li>
+                                        <li><a href="#" class="node leaf">يائي: باع > مَبِيع<br>(حذف الواو وكسر الفاء)</a></li>
+                                        <li><a href="#" class="node leaf">ألفي: خاف > مَخُوف<br>(رد الألف لأصلها)</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="node">ناقص</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">واوي: دعا > مَدْعُوّ<br>(إدغام الواو)</a></li>
+                                        <li><a href="#" class="node leaf">يائي: رمى > مَرْمِيّ<br>(قلب الواو ياء)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <strong>طريقة ميسرة للناقص:</strong> نأتي بالمضارع، نضع مكان حرف المضارعة ميماً مفتوحة، ونضعّف الحرف الأخير.
+                    <br>غزا يغزو <span class="badge badge-ex">مَغْزُوّ</span>، طوى يطوي <span class="badge badge-ex">مَطْوِيّ</span>.
+                </div>
+            </div>
+
+            <h3>من غير الثلاثي</h3>
+            <p>على وزن المضارع مع إبدال حرف المضارعة ميماً مضمومة وفتح ما قبل الآخر. (أخرج <span class="badge badge-ex">مُخْرَج</span>).</p>
+            
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <strong>تنبيهات:</strong>
+                    <ul>
+                        <li><strong>التشابه:</strong> (مُخْتَار، مُشَادّ) تتشابه لفظاً مع اسم الفاعل وتختلف تقديراً (مُخْتَيِر vs مُخْتَيَر).</li>
+                        <li><strong>اللازم:</strong> يلزم استعمال شبه الجملة معه (ذهب به <span class="badge badge-ex">مَذْهُوبٌ بِهِ</span>).</li>
+                        <li><strong>الشواذ:</strong> (مَجْنُون، مَحْمُوم، مَسْلُول) جاءت على مفعول من غير الثلاثي (أجنّ، أحمّ، أسلّ).</li>
+                        <li><strong>أبنية بديلة:</strong> فَعِيل (جريح، قتيل)، فَعُولَة (رَكُوبَة)، فِعْل (نِسْي).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="zaman-makan" class="tab-pane">
+            <h2 class="section-title">6. اسما الزمان والمكان</h2>
+            <div class="matn-box">
+                <p class="matn-text">
+                    "اسمان يشتقان على وزن واحد... ويدلان على زمن وقوع الفعل أو مكانه."
+                </p>
+            </div>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>الوزن</th>
+                        <th>الحالة</th>
+                        <th>الأمثلة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3"><span class="badge badge-weight">مَفْعِل</span><br>(بكسر العين)</td>
+                        <td>المثال الواوي</td>
+                        <td>وعد <span class="badge badge-ex">مَوْعِد</span></td>
+                    </tr>
+                    <tr>
+                        <td>الأجوف اليائي</td>
+                        <td>باع <span class="badge badge-ex">مَبِيع</span>، بات <span class="badge badge-ex">مَبِيت</span></td>
+                    </tr>
+                    <tr>
+                        <td>الصحيح مكسور العين مضارعاً</td>
+                        <td>جلس (يجلِس) <span class="badge badge-ex">مَجْلِس</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-weight">مَفْعَل</span><br>(بفتح العين)</td>
+                        <td>فيما عدا الحالات الثلاث</td>
+                        <td>شرب <span class="badge badge-ex">مَشْرَب</span>، سعى <span class="badge badge-ex">مَسْعَى</span>، قام <span class="badge badge-ex">مَقَام</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-bomb"></i>
+                <div>
+                    <strong>شواذ (سماعية):</strong> كلمات جاءت بكسر العين والقياس الفتح، مثل: <span class="badge badge-ex">مَسْجِد، مَشْرِق، مَغْرِب، مَنْبِت، مَنْسِك، مَجْزِر</span>.
+                </div>
+            </div>
+            <p><strong>من غير الثلاثي:</strong> على وزن اسم المفعول (اجتمع <span class="badge badge-ex">مُجْتَمَع</span>).</p>
+        </section>
+
+        <section id="ism-ala" class="tab-pane">
+            <h2 class="section-title">7. اسم الآلة</h2>
+            <p>يدل على الآلة، ولا يشتق إلا من الثلاثي المتعدي.</p>
+            
+            <div class="tree-wrapper">
+                <h4>أقسام اسم الآلة</h4>
+                <div class="tree">
+                    <ul>
+                        <li>
+                            <a href="#" class="node root">اسم الآلة</a>
+                            <ul>
+                                <li>
+                                    <a href="#" class="node">مشتق قياسي</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">مِفْعَال (مِفْتَاح)</a></li>
+                                        <li><a href="#" class="node leaf">مِفْعَل (مِبْرَد)</a></li>
+                                        <li><a href="#" class="node leaf">مِفْعَلَة (مِكْنَسَة)</a></li>
+                                        <li><a href="#" class="node leaf">حديث: فَعَّالَة/فَاعُول</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="node">جامد (سماعي)</a>
+                                    <ul>
+                                        <li><a href="#" class="node leaf">سِكِّين</a></li>
+                                        <li><a href="#" class="node leaf">قَدُوم</a></li>
+                                        <li><a href="#" class="node leaf">فَأْس</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="alert alert-danger">
+                <i class="fas fa-times-circle"></i>
+                <div>
+                    <strong>شواذ:</strong> (مُنْخُل، مُدْهُن، مِكْحُلَة) بضم الميم والعين، مخالفة للقياس.
+                </div>
+            </div>
+        </section>
+
+        <section id="taajub" class="tab-pane">
+            <h2 class="section-title">8. التعجب والتفضيل</h2>
+            <div class="matn-box">
+                <p class="matn-text">
+                    "للتعجب صيغتان: ما أَفْعَلَ، وأَفْعِلْ بِهِ... وللتفضيل اسم يصاغ على وزن أَفْعَل. ويشترط لصياغتهما مباشرة سبعة شروط."
+                </p>
+            </div>
+
+            <h3>الشروط السبعة للصياغة المباشرة</h3>
+            <ul style="list-style: none; display: flex; flex-wrap: wrap; gap: 10px;">
+                <li class="badge badge-weight">1. ثلاثي</li>
+                <li class="badge badge-weight">2. متصرف</li>
+                <li class="badge badge-weight">3. تام</li>
+                <li class="badge badge-weight">4. مثبت</li>
+                <li class="badge badge-weight">5. مبني للمعلوم</li>
+                <li class="badge badge-weight">6. قابل للتفاوت</li>
+                <li class="badge badge-weight">7. ليس الوصف منه على أفعل فعلاء</li>
+            </ul>
+
+            <h3>كيفية التوصل عند فقد الشروط</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>الشرط المفقود</th>
+                        <th>الطريقة</th>
+                        <th>المثال</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>غير ثلاثي / ناقص / وصف لون</td>
+                        <td>فعل مساعد + مصدر صريح</td>
+                        <td>استغفر <span class="badge badge-ex">ما أعظمَ استغفارَه</span></td>
+                    </tr>
+                    <tr>
+                        <td>منفي / مبني للمجهول</td>
+                        <td>فعل مساعد + مصدر مؤول</td>
+                        <td>لا يفوز <span class="badge badge-ex">ما أجدرَ ألا يفوزَ</span></td>
+                    </tr>
+                    <tr>
+                        <td>جامد / غير قابل للتفاوت</td>
+                        <td>لا يصاغ مطلقاً</td>
+                        <td>مات، نعم، بئس (ممتنع)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>أحكام اسم التفضيل (المطابقة)</h3>
+            <div class="alert alert-info">
+                <i class="fas fa-balance-scale"></i>
+                <div>
+                    <ul>
+                        <li><strong>نكرة (غير مضاف / مضاف لنكرة):</strong> يلزم الإفراد والتذكير (الزيدان أفضلُ من..).</li>
+                        <li><strong>معرف بـ (أل):</strong> تجب المطابقة (الزيدان الأفضلان، الفاطمة الفضلى).</li>
+                        <li><strong>مضاف لمعرفة:</strong> يجوز الوجهان (أفضلُ القوم / أفضلا القوم).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+    // التحكم في التبويبات
+    function switchTab(tabId) {
+        // إخفاء الكل
+        document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.components button').forEach(el => el.classList.remove('active'));
+        
+        // إظهار المطلوب
+        document.getElementById(tabId).classList.add('active');
+        
+        // تحديد الزر النشط
+        const activeBtn = document.querySelector(`button[onclick="switchTab('${tabId}')"]`);
+        if(activeBtn) activeBtn.classList.add('active');
+
+        // التمرير للأعلى
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // إغلاق القائمة في الموبايل
+        if(window.innerWidth <= 992) {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('content').classList.add('full-width');
+        }
+    }
+
+    // التحكم في القائمة الجانبية
+    document.getElementById('sidebarCollapse').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('content').classList.toggle('full-width');
+    });
+</script>
+
+</body>
+</html>
