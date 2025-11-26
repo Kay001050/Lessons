@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس نون التوكيد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for colors */
+        :root {
+            --font-family: 'Tajawal', sans-serif;
+            --bg-color: #f8f9fa;
+            --container-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --card-header-bg: #f1f3f5;
+            
+            --color-wujub: #28a745;
+            --color-wujub-bg: #eaf6ec;
+            --color-imtina: #dc3545;
+            --color-imtina-bg: #fdebee;
+            --color-jawaz-kasir: #007bff;
+            --color-jawaz-kasir-bg: #e6f2ff;
+            --color-jawaz-qalil: #ffc107;
+            --color-jawaz-qalil-bg: #fff8e6;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Tabs Styling */
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            background-color: #fff;
+        }
+
+        .tab-button {
+            padding: 20px 30px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-family: var(--font-family);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .tab-button.active {
+            opacity: 1;
+        }
+        
+        .tab-button.active::after {
+            width: 100%;
+        }
+
+        .tab-button:hover {
+            opacity: 1;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card and Accordion Styling */
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 20px 25px;
+            background-color: var(--card-header-bg);
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* Styling for details/summary (Accordion) */
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 20px 25px;
+            background-color: var(--card-header-bg);
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        summary:hover {
+            background-color: #e9ecef;
+        }
+
+        summary::after {
+            content: '▼';
+            font-size: 1rem;
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+        
+        details[open] summary {
+            background-color: #e9ecef;
+        }
+
+        details[open] summary::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        details > div {
+            padding: 25px;
+            border-top: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        /* Ruling-specific styles */
+        .card-wujub .card-header { background-color: var(--color-wujub-bg); color: var(--color-wujub); border-color: var(--color-wujub); }
+        .card-imtina .card-header { background-color: var(--color-imtina-bg); color: var(--color-imtina); border-color: var(--color-imtina); }
+        .card-jawaz-kasir .card-header { background-color: var(--color-jawaz-kasir-bg); color: var(--color-jawaz-kasir); border-color: var(--color-jawaz-kasir); }
+        .card-jawaz-qalil .card-header { background-color: var(--color-jawaz-qalil-bg); color: var(--color-jawaz-qalil); border-color: var(--color-jawaz-qalil); }
+        
+        details.r-wujub > summary { background-color: var(--color-wujub-bg); color: var(--color-wujub); }
+        details.r-imtina > summary { background-color: var(--color-imtina-bg); color: var(--color-imtina); }
+        details.r-jawaz > summary { background-color: var(--color-jawaz-kasir-bg); color: var(--color-jawaz-kasir); }
+
+        /* Content styling */
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-hover);
+            padding-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #555;
+            margin-top: 25px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-right: 20px;
+        }
+
+        ul li {
+            position: relative;
+            padding-right: 35px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        ul li::before {
+            content: '✔';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--color-wujub);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .card-imtina ul li::before {
+            content: '✖';
+            color: var(--color-imtina);
+        }
+        
+        .card-jawaz-kasir ul li::before {
+            content: '▶';
+            color: var(--color-jawaz-kasir);
+        }
+        
+        .card-jawaz-qalil ul li::before {
+            content: '•';
+            color: var(--color-jawaz-qalil);
+        }
+
+        .example {
+            background-color: #f7f7f7;
+            border-right: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            border-radius: 5px;
+        }
+        
+        .example-wujub { border-color: var(--color-wujub); }
+        .example-imtina { border-color: var(--color-imtina); }
+        .example-jawaz-kasir { border-color: var(--color-jawaz-kasir); }
+        .example-jawaz-qalil { border-color: var(--color-jawaz-qalil); }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e9ecef;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Table Styling for Isnad */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            text-align: right;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--bg-color);
+        }
+        
+        tr:hover {
+            background-color: #e6f2ff;
+        }
+        
+        .step {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .step code {
+            font-size: 1rem;
+        }
+        
+        .final-result {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Mind Map Styling */
+        .mind-map {
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .mind-map ul {
+            list-style-type: none;
+            padding-right: 0;
+            position: relative;
+        }
+
+        .mind-map li {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .mind-map .node {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            background-color: #fff;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .mind-map li:hover > .node {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .mind-map ul ul {
+            padding-right: 50px;
+        }
+
+        /* Connecting lines for Mind Map */
+        .mind-map li {
+            padding-right: 50px;
+        }
+        
+        .mind-map li::before, .mind-map li::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            border-color: var(--primary-color);
+        }
+
+        /* Horizontal line to node */
+        .mind-map li::before {
+            border-top: 2px solid var(--primary-color);
+            width: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Vertical line connecting siblings */
+        .mind-map li::after {
+            border-right: 2px solid var(--primary-color);
+            height: 100%;
+            top: 0;
+            right: 0;
+        }
+        
+        .mind-map li:first-child::after {
+            top: 50%;
+            height: 50%;
+        }
+
+        .mind-map li:last-child::after {
+            height: 50%;
+        }
+        
+        .mind-map > ul > li {
+            padding-right: 0;
+        }
+        
+        .mind-map > ul > li::before, .mind-map > ul > li::after {
+            display: none; /* No lines for the root node */
+        }
+        
+        .mind-map .node.root {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5rem;
+            padding: 20px 35px;
+            border-width: 3px;
+        }
+        
+        .mind-map .node.branch-wujub { border-color: var(--color-wujub); color: var(--color-wujub); }
+        .mind-map li:hover > .node.branch-wujub { background-color: var(--color-wujub); color: white; box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); }
+        .mind-map .node.branch-imtina { border-color: var(--color-imtina); color: var(--color-imtina); }
+        .mind-map li:hover > .node.branch-imtina { background-color: var(--color-imtina); color: white; box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3); }
+        .mind-map .node.branch-jawaz { border-color: var(--color-jawaz-kasir); color: var(--color-jawaz-kasir); }
+        .mind-map li:hover > .node.branch-jawaz { background-color: var(--color-jawaz-kasir); color: white; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); }
+        
+        .mind-map .node.leaf {
+            font-weight: 500;
+            font-size: 1rem;
+            background-color: var(--bg-color);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>التطبيق الصرفي: مبحث نون التوكيد</h1>
+            <p>هيكلة شاملة وتفصيلية لأحكام وإسناد الفعل المؤكد بنون التوكيد</p>
+        </header>
+
+        <div class="tab-container">
+            <button class="tab-button active" onclick="openTab(event, 'tab-rulings')">الأحكام (الوجوب والامتناع والجواز)</button>
+            <button class="tab-button" onclick="openTab(event, 'tab-isnad')">الإعراب والإسناد للضمائر</button>
+            <button class="tab-button" onclick="openTab(event, 'tab-mindmap')">الخريطة الذهنية الشاملة</button>
+        </div>
+
+        <div id="tab-rulings" class="tab-content active">
+            
+            <div class="card">
+                <div class="card-header">
+                    ما هي نون التوكيد؟ وما وظيفتها؟
+                </div>
+                <div class="card-body">
+                    <p>نون التوكيد في العربية نونان: <strong>ثقيلة</strong> (مشددة: نّ) و<strong>خفيفة</strong> (ساكنة: نْ).</p>
+                    <p>وهي لاحقة صرفية تؤدي معنى صرفياً معيناً وهو <strong>تقوية الفعل</strong> وجعل زمنه <strong>مستقبلاً</strong>.</p>
+                    <p>الفعل المضارع يدل على الزمن الحاضر والزمن المستقبل (الحال والاستقبال). فإذا لحقته نون التوكيد، فإنه يدل على <strong>المستقبل ليس غير</strong>.</p>
+                </div>
+            </div>
+
+            <h2>أحكام توكيد الأفعال بالنون</h2>
+
+            <details class="r-imtina" open>
+                <summary>1. الفعل الماضي</summary>
+                <div>
+                    <p><strong>الحكم: يمتنع توكيده بالنون مطلقاً.</strong></p>
+                    <p><strong>السبب:</strong> لأن الفعل الماضي يدل على الزمن الماضي، ونون التوكيد تخلّص الفعل للمستقبل، فلا يجتمعان.</p>
+                    <div class="example example-imtina">
+                        <strong>خطأ:</strong> لا يجوز أن تقول: <code>كتبنَّ</code> أو <code>ذهبنَّ</code>.
+                    </div>
+                </div>
+            </details>
+
+            <details class="r-jawaz" open>
+                <summary>2. الفعل الأمر</summary>
+                <div>
+                    <p><strong>الحكم: يجوز توكيده دائماً وبدون شرط.</strong></p>
+                    <p><strong>السبب:</strong> لأن فعل الأمر مستقبل دائماً بطبيعته، فهو ينسجم مع دلالة النون.</p>
+                    <div class="example example-jawaz-kasir">
+                        يمكنك القول: <code>اكتب</code> (غير مؤكد) أو <code>اكتبنَّ</code> (مؤكد).<br>
+                        مثال آخر: <code>اسعَ</code> (غير مؤكد) أو <code>اسعَيَنَّ</code> (مؤكد).
+                    </div>
+                </div>
+            </details>
+            
+            <details open>
+                <summary>3. الفعل المضارع (الأحكام التفصيلية)</summary>
+                <div>
+                    <p>للفعل المضارع ثلاث حالات تفصيلية: الوجوب، والامتناع، والجواز (بكثرة وبقلة).</p>
+                    
+                    <div class="card card-wujub">
+                        <div class="card-header">
+                            (أ) الوجوب: متى يجب توكيد المضارع؟
+                        </div>
+                        <div class="card-body">
+                            <p>يجب توكيد الفعل المضارع بالنون إذا اجتمعت فيه <strong>أربعة شروط</strong> مجتمعة:</p>
+                            <ul>
+                                <li>أن يكون <strong>مثبتاً</strong> (غير منفي).</li>
+                                <li>أن يكون دالاً على <strong>الاستقبال</strong> (ليس للحال).</li>
+                                <li>أن يكون <strong>جواباً لقسم</strong>.</li>
+                                <li>أن يكون <strong>غير مفصولٍ</strong> عن لام القسم بفاصل.</li>
+                            </ul>
+                            <div class="example example-wujub">
+                                <code>(والله <strong>لأذاكرنَّ</strong> حتى النجاح)</code> - استوفى الشروط.<br>
+                                <code>(وتالله <strong>لأكيدنَّ</strong> أصنامكم)</code> - استوفى الشروط.<br>
+                                <code>(وحياتك <strong>لأفينَّ</strong> بالوعد)</code> - استوفى الشروط.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-imtina">
+                        <div class="card-header">
+                            (ب) الامتناع: متى يمتنع توكيد المضارع؟
+                        </div>
+                        <div class="card-body">
+                            <p>يمتنع توكيد الفعل المضارع إذا فُقِد شرط واحد من شروط الوجوب السابقة:</p>
+                            <ul>
+                                <li><strong>إذا كان منفياً:</strong><br>
+                                    <span class="example example-imtina"><code>(والله <strong>لا أهملُ</strong> واجبي)</code> - (لا يجوز: لا أهملنّ).</span>
+                                </li>
+                                <li><strong>إذا كان دالاً على الحال (بوجود قرينة مثل "الآن"):</strong><br>
+                                    <span class="example example-imtina"><code>(والله <strong>لأقرأُ</strong> الآن)</code> - (لا يجوز: لأقرأنّ).</span>
+                                </li>
+                                <li><strong>إذا فُصِل عن لام القسم بفاصل (مثل قد، السين، سوف):</strong><br>
+                                    <span class="example example-imtina"><code>(والله <strong>لقد يسهو</strong> العالم)</code><br>
+                                          <code>(والله <strong>سيفلحُ</strong> المجد)</code><br>
+                                          <code>(والله <strong>لسوف يفلحُ</strong> المجد)</code></span>
+                                </li>
+                                <li><strong>إذا فُصِل عن لام القسم بمعموله (كالمفعول به):</strong><br>
+                                    <span class="example example-imtina"><code>(والله <strong>للنجاحَ تبلغُ</strong> بالعمل الجاد)</code> - (الأصل: والله لتبلغن النجاح).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-jawaz-kasir">
+                        <div class="card-header">
+                            (ج) الجواز بكثرة: متى يقترب التوكيد من الوجوب؟
+                        </div>
+                        <div class="card-body">
+                            <p>يكون توكيد المضارع جائزاً ولكنه كثير ومستحسن (يقرب من الوجوب) في حالتين:</p>
+                            <ul>
+                                <li><strong>أن يقع فعل شرط بعد (إمّا):</strong> (وهي "إن" الشرطية مدغمة مع "ما" الزائدة).<br>
+                                    <span class="example example-jawaz-kasir"><code>(<strong>فإما تجتهدنَّ</strong> تبلغ مرادك)</code> - (الأصل: إن ما تجتهد).</span>
+                                </li>
+                                <li><strong>أن يكون الفعل مسبوقاً بكلمة تدل على الطلب:</strong>
+                                    <ul>
+                                        <li><strong>الأمر (بلام الأمر):</strong> <code>(<strong>لتعملنَّ</strong> بجد لبناء مستقبلك)</code></li>
+                                        <li><strong>النهي (بلا الناهية):</strong> <code>(<strong>لا تهملنَّ</strong> واجباتك)</code></li>
+                                        <li><strong>الدعاء:</strong> <code>(<strong>لا يريكنَّ</strong> الله مكروهاً)</code></li>
+                                        <li><strong>التمني:</strong> <code>(ليتك <strong>تلتفتنَّ</strong> إلى نفسك)</code></li>
+                                        <li><strong>الاستفهام:</strong> (مثال: <code>هل <strong>تساعدنَّ</strong> المحتاج؟</code>)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-jawaz-qalil">
+                        <div class="card-header">
+                            (د) الجواز بقلة: متى يكون التوكيد قليلاً؟
+                        </div>
+                        <div class="card-body">
+                            <p>يكون توكيد المضارع جائزاً ولكنه قليل الاستعمال في الحالات التالية:</p>
+                            <ul>
+                                <li><strong>أن يقع الفعل بعد (لا) النافية (ليست ناهية):</strong><br>
+                                    <span class="example example-jawaz-qalil"><code>(ابتعد عن أمر <strong>لا يعنينَّك</strong>)</code> - والأحسن: <code>لا يعنيك</code>.</span>
+                                </li>
+                                <li><strong>أن يقع الفعل بعد (لم):</strong><br>
+                                    <span class="example example-jawaz-qalil"><code>(<strong>لم يحضرنَّ</strong> عليّ)</code> - والأحسن: <code>لم يحضر</code>.</span>
+                                </li>
+                                <li><strong>أن يقع الفعل بعد كلمة شرط غير (إن):</strong><br>
+                                    <span class="example example-jawaz-qalil"><code>(من <strong>يذاكرنَّ</strong> ينجح)</code> - والأحسن: <code>من يذاكر</code>.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+        </div>
+
+        <div id="tab-isnad" class="tab-content">
+            
+            <h2>الإعراب والبناء عند التوكيد</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    متى يُبنى الفعل ومتى يُعرب مع نون التوكيد؟
+                </div>
+                <div class="card-body">
+                    <p>الفعل المضارع معرب دائماً إلا في حالتين:</p>
+                    <ol>
+                        <li>أن تتصل به <strong>نون النسوة</strong> (يبنى على السكون).</li>
+                        <li>أن تتصل به <strong>نون التوكيد المباشرة</strong> (يبنى على الفتح).</li>
+                    </ol>
+                    <p><strong>القاعدة الذهبية:</strong> إذا باشرت نون التوكيد الفعل (لم يفصل بينهما فاصل)، يُبنى على الفتح. إذا لم تباشره (وُجِد فاصل كالضمائر: ألف الاثنين، واو الجماعة، ياء المخاطبة)، يظل الفعل <strong>معرباً</strong>.</p>
+                    
+                    <h3>حالة البناء (الاتصال المباشر)</h3>
+                    <p>إذا كان الفعل للمفرد (صحيحاً أو معتلاً)، تتصل به النون مباشرة ويبنى على الفتح.</p>
+                    <div class="example example-wujub">
+                        <code>(لأفعلَنَّ)</code> - <code>(ليفعلَنَّ محمد)</code> - <code>(لنفعلَنَّ)</code>
+                    </div>
+                    <p><strong>ملاحظة هامة (للمعتل الآخر):</strong> إذا كان الفعل معتل الآخر، رُدَّت لام الفعل إلى أصلها عند البناء:</p>
+                    <ul>
+                        <li><code>يسعى</code> (أصلها ياء) -> <code>(لتسعَيَنَّ)</code></li>
+                        <li><code>يدعو</code> (أصلها واو) -> <code>(لتدعُوَنَّ)</code></li>
+                        <li><code>يرمي</code> (أصلها ياء) -> <code>(لترمِيَنَّ)</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>إسناد الفعل المؤكد إلى الضمائر (حالة عدم الاتصال المباشر)</h2>
+
+            <details open>
+                <summary>1. إسناده إلى ألف الاثنين</summary>
+                <div>
+                    <p><strong>الحكم:</strong> الفعل يكون <strong>معرباً</strong> (مرفوع بثبوت النون المحذوفة) وليس مبنياً، لوجود فاصل (ألف الاثنين).</p>
+                    <h3>التغييرات خطوة بخطوة (مثال: تكتبان):</h3>
+                    <ol>
+                        <li class="step">الأصل: <code>(تكتبان)</code> + نون التوكيد <code>(نَّ)</code> = <code>(تكتبانِ + نَّ)</code>.</li>
+                        <li class="step">تجتمع ثلاث نونات (نون الرفع، ونون التوكيد الثقيلة)، وهو ثقيل.</li>
+                        <li class="step"><strong>الحل:</strong> تُحذف <code>(نون الرفع)</code> لالتقاء الأمثال.</li>
+                        <li class="step">تُكسر نون التوكيد (للتفريق) فتصبح <code>(نِّ)</code>. (لا تُستعمل النون الخفيفة مع المثنى).</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتكتبانِّ)</code>.</li>
+                    </ol>
+                    <p><strong>ملاحظة التقاء الساكنين:</strong> (الألف <code>(ا)</code> والنون الأولى <code>(نْ)</code> الساكنة من <code>(نَّ)</code>). يجوز التقاء الساكنين هنا لأن الأول حرف ألف والثاني حرف مشدد (مثل: <code>الضالِّين</code>).</p>
+                    <p><strong>في المعتل الآخر:</strong> تُرد اللام لأصلها وتُفتح لمناسبة الألف.</p>
+                    <div class="example">
+                        <code>(لتسعيانِّ)</code> - <code>(لتدعُوانِّ)</code> - <code>(لترمِيانِّ)</code>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>2. إسناده إلى واو الجماعة</summary>
+                <div>
+                    <p><strong>الحكم:</strong> الفعل <strong>معرب</strong> لوجود فاصل (واو الجماعة المحذوفة لفظاً).</p>
+                    
+                    <h3>أ. الفعل الصحيح (مثال: تكتبون):</h3>
+                    <ol>
+                        <li class="step">الأصل: <code>(لتكتبون)</code> + <code>(نَّ)</code> = <code>(لتكتبونَ + نَّ)</code>.</li>
+                        <li class="step">تُحذف <code>(نون الرفع)</code>. يصبح: <code>(لتكتبو + نَّ)</code>.</li>
+                        <li class="step">يلتقي ساكنان: <code>(واو الجماعة)</code> الساكنة والنون الأولى <code>(نْ)</code> الساكنة.</li>
+                        <li class="step"><strong>الحل:</strong> تُحذف <code>(واو الجماعة)</code> منعاً لالتقاء الساكنين.</li>
+                        <li class="step">تُحرَّك الباء (ما قبل الواو) بالضمة للدلالة على الواو المحذوفة.</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتكتبُنَّ)</code>.</li>
+                    </ol>
+
+                    <h3>ب. الفعل المعتل الآخر:</h3>
+                    <p><strong>إذا كان آخره (واو) أو (ياء) (مثال: تدعون، تجرون):</strong></p>
+                    <p>الفعل أصلاً حُذفت لامه (<code>تدعو + ون = تدعُونَ</code>). يُعامل معاملة الصحيح:</p>
+                    <ol>
+                        <li class="step">الأصل: <code>(تدعونَ + نَّ)</code> -> (تُحذف نون الرفع) -> <code>(تدعو + نَّ)</code>.</li>
+                        <li class="step">(يلتقي ساكنان) -> (تُحذف واو الجماعة) -> (تُضم العين).</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتدعُنَّ)</code>، <code>(لتجرُنَّ)</code>. (على وزن: <code>تفعُنَّ</code>).</li>
+                    </ol>
+                    
+                    <p><strong>إذا كان آخره (ألف) (مثال: تسعون، ترضون):</strong></p>
+                    <p>الفعل أصلاً حُذفت لامه وبقي ما قبلها مفتوحاً (<code>تسعَى + ون = تسعَوْنَ</code>).</p>
+                    <ol>
+                        <li class="step">الأصل: <code>(تسعَوْنَ + نَّ)</code> -> (تُحذف نون الرفع) -> <code>(تسعَوْ + نَّ)</code>.</li>
+                        <li class="step">يلتقي ساكنان: <code>(واو الجماعة)</code> و <code>(النون الأولى)</code>.</li>
+                        <li class="step"><strong>الحل (مختلف):</strong> لا يمكن الحذف هنا (لئلا يلتبس بالمفرد). <strong>تُحرَّك واو الجماعة بالضمة</strong>.</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتَسعَوُنَّ)</code>، <code>(لترضَوُنَّ)</code>.</li>
+                    </ol>
+                </div>
+            </details>
+
+            <details>
+                <summary>3. إسناده إلى ياء المخاطبة</summary>
+                <div>
+                    <p><strong>الحكم:</strong> الفعل <strong>معرب</strong> لوجود فاصل (ياء المخاطبة المحذوفة لفظاً أو المحركة).</p>
+                    
+                    <h3>أ. الفعل الصحيح (مثال: تكتبين):</h3>
+                    <ol>
+                        <li class="step">الأصل: <code>(لتكتبين)</code> + <code>(نَّ)</code> = <code>(لتكتبينَ + نَّ)</code>.</li>
+                        <li class="step">تُحذف <code>(نون الرفع)</code>. يصبح: <code>(لتكتبي + نَّ)</code>.</li>
+                        <li class="step">يلتقي ساكنان: <code>(ياء المخاطبة)</code> الساكنة والنون الأولى <code>(نْ)</code> الساكنة.</li>
+                        <li class="step"><strong>الحل:</strong> تُحذف <code>(ياء المخاطبة)</code> منعاً لالتقاء الساكنين.</li>
+                        <li class="step">تُحرَّك الباء (ما قبل الياء) بالكسرة للدلالة على الياء المحذوفة.</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتكتبِنَّ)</code>.</li>
+                    </ol>
+
+                    <h3>ب. الفعل المعتل الآخر:</h3>
+                    <p><strong>إذا كان آخره (واو) أو (ياء) (مثال: تدعين، تجرين):</strong></p>
+                    <p>يُعامل معاملة الصحيح (لأن لامه محذوفة أصلاً):</p>
+                    <ol>
+                        <li class="step">الأصل: <code>(تدعينَ + نَّ)</code> -> (تُحذف نون الرفع) -> <code>(تدعي + نَّ)</code>.</li>
+                        <li class="step">(يلتقي ساكنان) -> (تُحذف ياء المخاطبة) -> (تُكسر العين).</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتدعِنَّ)</code>، <code>(لتجرِنَّ)</code>. (على وزن: <code>تفعِنَّ</code>).</li>
+                    </ol>
+                    
+                    <p><strong>إذا كان آخره (ألف) (مثال: تسعين، ترضين):</strong></p>
+                    <p>الفعل أصلاً حُذفت لامه وبقي ما قبلها مفتوحاً (<code>تسعَى + ين = تسعَيْنَ</code>).</p>
+                    <ol>
+                        <li class="step">الأصل: <code>(تسعَيْنَ + نَّ)</code> -> (تُحذف نون الرفع) -> <code>(تسعَيْ + نَّ)</code>.</li>
+                        <li class="step">يلتقي ساكنان: <code>(ياء المخاطبة)</code> و <code>(النون الأولى)</code>.</li>
+                        <li class="step"><strong>الحل (مختلف):</strong> لا يمكن الحذف. <strong>تُحرَّك ياء المخاطبة بالكسرة</strong>.</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتَسعَيِنَّ)</code>، <code>(لترضَيِنَّ)</code>.</li>
+                    </ol>
+                </div>
+            </details>
+            
+            <details>
+                <summary>4. إسناده إلى نون النسوة</summary>
+                <div>
+                    <p><strong>الحكم:</strong> الفعل <strong>مبني على السكون</strong> لاتصاله بنون النسوة (التي تسبق نون التوكيد).</p>
+                    
+                    <h3>التغييرات خطوة بخطوة (مثال: يكتبْنَ):</h3>
+                    <ol>
+                        <li class="step">الأصل: <code>(يكتبْنَ)</code> + نون التوكيد <code>(نَّ)</code> = <code>(يكتبْنَ + نَّ)</code>.</li>
+                        <li class="step">المشكلة: تلتقي ثلاث نونات (نون النسوة، ونون التوكيد الثقيلة).</li>
+                        <li class="step"><strong>الحل:</strong> لا يمكن حذف أي نون (لأن نون النسوة فاعل ولا يوجد ما يدل عليها).</li>
+                        <li class="step">يتم الفصل بين <code>(نون النسوة)</code> الساكنة و <code>(نون التوكيد)</code> بـ <strong>ألف فارقة</strong>.</li>
+                        <li class="step">تُكسر نون التوكيد.</li>
+                        <li class="step"><strong>الصورة النهائية:</strong> <code>(لتكتبْنانِّ)</code>.</li>
+                    </ol>
+                    <p><strong>في المعتل الآخر:</strong> (نفس القاعدة تماماً)</p>
+                    <div class="example">
+                        <code>(لتدعُوْنانِّ)</code> - <code>(لتسْعَيْنانِّ)</code> - <code>(لتجْرينانِّ)</code>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+
+        <div id="tab-mindmap" class="tab-content">
+            <div class="mind-map">
+                <ul>
+                    <li>
+                        <div class="node root">نون التوكيد (الثقيلة والخفيفة)</div>
+                        <ul>
+                            <li>
+                                <div class="node">الوظيفة: تقوية الفعل وجعله للمستقبل</div>
+                            </li>
+                            <li>
+                                <div class="node">أحكام التوكيد</div>
+                                <ul>
+                                    <li><div class="node branch-imtina">1. الفعل الماضي: ممتنع دائماً</div></li>
+                                    <li><div class="node branch-jawaz">2. الفعل الأمر: جائز دائماً</div></li>
+                                    <li>
+                                        <div class="node">3. الفعل المضارع</div>
+                                        <ul>
+                                            <li>
+                                                <div class="node branch-wujub">الوجوب (يجب)</div>
+                                                <ul>
+                                                    <li><div class="node leaf">1. جواب لقسم</div></li>
+                                                    <li><div class="node leaf">2. مثبت</div></li>
+                                                    <li><div class="node leaf">3. دال على الاستقبال</div></li>
+                                                    <li><div class="node leaf">4. غير مفصول عن اللام</div></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="node branch-imtina">الامتناع (يمتنع)</div>
+                                                <ul>
+                                                    <li><div class="node leaf">إذا فقد شرطاً من شروط الوجوب (منفي، للحال، مفصول)</div></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="node branch-jawaz">الجواز (يجوز)</div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="node">الجواز بكثرة</div>
+                                                        <ul>
+                                                            <li><div class="node leaf">1. بعد (إمّا) الشرطية</div></li>
+                                                            <li><div class="node leaf">2. بعد (طلب): أمر، نهي، استفهام، تمنٍ، دعاء</div></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <div class="node">الجواز بقلة</div>
+                                                        <ul>
+                                                            <li><div class="node leaf">1. بعد (لا) النافية</div></li>
+                                                            <li><div class="node leaf">2. بعد (لم)</div></li>
+                                                            <li><div class="node leaf">3. بعد أداة شرط غير (إن)</div></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node">الإعراب والإسناد</div>
+                                <ul>
+                                    <li>
+                                        <div class="node">البناء (مبني على الفتح)</div>
+                                        <ul>
+                                            <li><div class="node leaf">إذا اتصلت النون اتصالاً مباشراً (للمفرد)</div></li>
+                                            <li><div class="node leaf">مثال: (لأفعلَنَّ)، (لتسعَيَنَّ)</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node">الإعراب (معرب)</div>
+                                        <ul>
+                                            <li><div class="node leaf">إذا فصل بين الفعل والنون فاصل (ضمير)</div></li>
+                                            <li>
+                                                <div class="node">1. ألف الاثنين: (لتكتبانِّ) - (معرب / حذفت نون الرفع)</div>
+                                            </li>
+                                            <li>
+                                                <div class="node">2. واو الجماعة: (لتكتبُنَّ) - (معرب / حذفت النون والواو) / (لتسعَوُنَّ) - (معرب / حذفت النون وحركت الواو)</div>
+                                            </li>
+                                            <li>
+                                                <div class="node">3. ياء المخاطبة: (لتكتبِنَّ) - (معرب / حذفت النون والياء) / (لتسعَيِنَّ) - (معرب / حذفت النون وحركت الياء)</div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node">البناء (مبني على السكون)</div>
+                                        <ul>
+                                            <li><div class="node leaf">1. نون النسوة: (لتكتبْنانِّ) - (أضيفت ألف فاصلة)</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div><script>
+        function openTab(evt, tabName) {
+            // Get all elements with class="tab-content" and hide them
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Get all elements with class="tab-button" and remove the class "active"
+            var tabbuttons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Activate the first tab by default
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementsByClassName("tab-button")[0].click();
+        });
+    </script>
+
+</body>
+</html>
