@@ -1,1 +1,140 @@
-جاري الانشاء
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دروس حوزة الغدير - سنة ثانية</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        :root {
+            --primary-green: #2e7d32;   /* أخضر غامق حوزوي */
+            --light-green: #e8f5e9;     /* خلفية خضراء فاتحة جداً */
+            --accent-green: #4caf50;    /* أخضر ساطع للعناوين */
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-green);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* تنسيق الحاوية الرئيسية */
+        .container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            border-top: 5px solid var(--primary-green);
+        }
+
+        /* تنسيق النصوص */
+        h1 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        p.description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* شريط الحالة (قيد الإنشاء) */
+        .status-badge {
+            display: inline-block;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border: 1px solid #ffeeba;
+        }
+
+        /* تنسيق قائمة المواد */
+        .subjects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .subject-tag {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background-color 0.2s;
+        }
+
+        .subject-tag:hover {
+            transform: translateY(-2px);
+            background-color: var(--accent-green);
+            cursor: pointer;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+
+        <h1>موقع تجريبي لعرض الدروس الملخصة والمنسقة بالذكاء الاصطناعي</h1>
+        
+        <p class="description">
+            مخصص لطلبة <strong>حوزة الغدير</strong> (السنة الثانية)
+        </p>
+
+        <div class="status-badge">
+            ⚠️ الصفحة قيد الإنشاء
+        </div>
+
+        <h3>ستشمل المواد التالية:</h3>
+        
+        <div class="subjects-grid">
+            <span class="subject-tag">فقه</span>
+            <span class="subject-tag">نحو</span>
+            <span class="subject-tag">صرف</span>
+            <span class="subject-tag">أخلاق</span>
+            <span class="subject-tag">حاسبات</span>
+            <span class="subject-tag">تجويد</span>
+            <span class="subject-tag">عقائد</span>
+            <span class="subject-tag">أخرى</span>
+        </div>
+
+        <footer>
+            &copy; 2025 حوزة الغدير - المشروع التقني التجربي
+        </footer>
+    </div>
+
+</body>
+</html>
