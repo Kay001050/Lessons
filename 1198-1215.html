@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل مسائل الخمس (1198-1215) - منهاج الصالحين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #159895;
+            --accent-color: #57c5b6;
+            --bg-color: #f0f4f8;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --ruling-bg: #e8f5e9;
+            --ruling-text: #1b5e20;
+            --condition-bg: #fff3e0;
+            --condition-text: #e65100;
+            --subject-bg: #e3f2fd;
+            --subject-text: #0d47a1;
+            --precaution-bg: #fce4ec;
+            --precaution-text: #880e4f;
+            --definition-bg: #f3e5f5;
+            --definition-text: #4a148c;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .masala-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border-right: 5px solid var(--secondary-color);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .masala-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .masala-header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .masala-number {
+            font-weight: 900;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            background: #e0f7fa;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .masala-body {
+            padding: 20px;
+        }
+
+        .analysis-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .analysis-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            border: 1px solid #eee;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 80px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Labels Styling */
+        .lbl-subject { background-color: var(--subject-bg); color: var(--subject-text); }
+        .lbl-ruling { background-color: var(--ruling-bg); color: var(--ruling-text); }
+        .lbl-condition { background-color: var(--condition-bg); color: var(--condition-text); }
+        .lbl-precaution { background-color: var(--precaution-bg); color: var(--precaution-text); }
+        .lbl-definition { background-color: var(--definition-bg); color: var(--definition-text); }
+        .lbl-detail { background-color: #eceff1; color: #455a64; }
+
+        .text-content {
+            flex: 1;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+        }
+
+        .rules-box {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border: 1px dashed #aed581;
+            border-radius: 8px;
+        }
+
+        .rules-title {
+            color: #33691e;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Specialized Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Tree structure for complex issues */
+        .tree-node {
+            margin-right: 20px;
+            border-right: 2px solid #ccc;
+            padding-right: 15px;
+            margin-top: 10px;
+        }
+        .tree-label {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>تحليل مسائل الخمس (منهاج الصالحين)</h1>
+        <p>تفكيك، تشجير، وتبويب المسائل من 1198 إلى 1215</p>
+        <p>بأقصى درجات التفصيل والدقة</p>
+    </header>
+
+    <div class="section-title">
+        <span>🌊</span>
+        الرابع: ما أُخرج من البحر بالغوص
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مقدمة المبحث</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">ما أخرج من البحر بالغوص من الجوهر ونحوه.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">الإخراج</span>
+                    <span class="text-content">لا مثل السمك وغيره من الحيوان.</span>
+                </div>
+            </div>
+            <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>الخمس في الغوص يختص بالجواهر والأشياء الثمينة (جمادات أو نباتات بحرية ثمينة) ولا يشمل الحيوانات المائية كالسمك.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1198</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-condition">الشرط</span>
+                    <span class="text-content">يعتبر في وجوب الخمس فيما يخرج بالغوص بلوغ النصاب.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-definition">تحديد النصاب</span>
+                    <span class="text-content">وهو قيمة دينار واحد (أي المثقال الصيرفيّ من الذهب المسكوك).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم (السلب)</span>
+                    <span class="text-content">فلا خمس فيما ينقص عن ذلك.</span>
+                </div>
+            </div>
+            <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>اشتراط النصاب في "الغوص".</li>
+                    <li>النصاب قيمي (قيمة دينار) وليس وزني فقط.</li>
+                    <li>المعيار هو الدينار الذهبي (المثقال الصيرفي).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1199</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الفرضية</span>
+                    <span class="text-content">إذا اشترك جماعة في الغوص.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-condition">القيد</span>
+                    <span class="text-content">ولم يبلغ نصيب كلٍّ منهم النصاب.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم</span>
+                    <span class="text-content">لم يجب الخمس فيه.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">التنظير</span>
+                    <span class="text-content">كما مرّ نظيره في المعدن.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">حكم تبعي</span>
+                    <span class="text-content">كما يجري هنا ما مرّ فيه من اعتبار بلوغه النصاب بعد استثناء مؤونة الإخراج.</span>
+                </div>
+            </div>
+             <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>قاعدة "الانحلال في النصاب": كل شريك يحاسب على نصابه بشكل مستقل، ولا يضم مال الشركاء لبعضه لإكمال النصاب.</li>
+                    <li>قاعدة "استثناء المؤونة": النصاب المعتبر هو (الصافي) بعد طرح تكاليف الإخراج.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1200</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الفرضية</span>
+                    <span class="text-content">إذا أخرج بآلة من دون غوص.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">الاحتياط</span>
+                    <span class="text-content">فالأحوط وجوباً جريان حكم الغوص عليه.</span>
+                </div>
+            </div>
+             <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>توسعة مفهوم الغوص احتياطاً ليشمل الاستخراج بالآلات الحديثة دون نزول الإنسان ببدنه.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1201</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">الأنهار العظيمة.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم</span>
+                    <span class="text-content">حكمها حكم البحر فيما يخرج منها بالغوص.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1202</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم العام</span>
+                    <span class="text-content">لا فرق بين اتّحاد النوع وعدمه فيما تقدّم من اعتبار بلوغ النصاب في تعلّق الخمس بما يخرج بالغوص.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">التوضيح</span>
+                    <span class="text-content">فإذا كان مجموع ما أُخرج يبلغ النصاب وجب فيه الخمس وإن كان من أنواع مختلفة.</span>
+                </div>
+            </div>
+            <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>قاعدة "الضم في الأنواع": يضم اللؤلؤ إلى المرجان (مثلاً) لإكمال النصاب إذا كان المُخرج واحداً، ولا يشترط اتحاد الجنس.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1203</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">العنبر.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم 1</span>
+                    <span class="text-content">يجب الخمس في العنبر إن أُخرج بالغوص.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم 2 (الترقي)</span>
+                    <span class="text-content">بل يجب فيه وإن أُخذ من وجه الماء أو الساحل.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1204</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">ما يستخرج من البحر من الأموال غير المتكوّنة فيه.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">مثال</span>
+                    <span class="text-content">كما إذا غرقت سفينة وتركها أصحابها وأباحوا ما فيها لمستخرجه فاستخرج شخص لنفسه شيئاً منها.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم (السلب)</span>
+                    <span class="text-content">فإنّ ذلك لا يدخل تحت عنوان الغوص.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم (الإثبات)</span>
+                    <span class="text-content">يدخل في الأرباح السنويّة (أرباح المكاسب).</span>
+                </div>
+            </div>
+             <div class="rules-box">
+                <div class="rules-title">💡 القواعد المستفادة</div>
+                <ul>
+                    <li>عنوان "الغوص" ينصرف للمتكونات الطبيعية في البحر، أما الأشياء العارضة (كغرق السفن) فتخضع لقانون "أرباح المكاسب" (يخمس الفاضل عن المؤونة، لا كل ما يخرج).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>🏞️</span>
+        الخامس: الأرض التي تملّكها الكافر من المسلم
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">المتن العام</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">الأرض التي تملّكها الكافر من المسلم ببيع أو هبة أو نحو ذلك.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">رأي المشهور</span>
+                    <span class="text-content">على المشهور بين الفقهاء (رضوان الله تعالى عليهم) وجوب الخمس.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">رأي السيد (الإشكال)</span>
+                    <span class="text-content">ولكن ثبوت الخمس فيها بمعناه المعروف لا يخلو عن إشكال.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">النتيجة العملية</span>
+                    <span class="text-content">فلا يترك مراعاة الاحتياط فيه.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>💰</span>
+        السادس: الحلال المخلوط بالحرام
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">أقسام المال المختلط (قبل المسائل المرقمة)</span>
+        </div>
+        <div class="masala-body">
+            
+            <div class="tree-node">
+                <div class="tree-label">الحالة الأولى: (الجهل المطلق)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">الشرط</span>
+                        <span class="text-content">إذا لم يتميّز ولم يتيسّر له معرفة صاحبه ولا مقداره (بحيث احتمل زيادته على الخمس ونقيصته عنه).</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">فإنه يحلّ بإخراج خمسه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">مصرف الخمس</span>
+                        <span class="text-content">والأحوط وجوباً إعطاؤه بقصد الأعمّ من الخمس والصدقة عن المالك إلى من يكون مصرفاً للخمس ولمجهول المالك معاً.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الحالة الثانية: (العلم الإجمالي بالزيادة أو النقيصة)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">الشرط</span>
+                        <span class="text-content">وإذا عَلِمَ أنّ المقدار الحرام يزيد على الخمس أو أنّه ينقص عنه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم الأساسي</span>
+                        <span class="text-content">لزمه التصدّق عن المالك بالمقدار الذي يعلم أنّه حرام.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">قيد الحكم</span>
+                        <span class="text-content">إذا لم يكن الخلط بتقصير منه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">في حال التقصير</span>
+                        <span class="text-content">وإلّا فالأحوط وجوباً التصدّق بالزائد ولو بتسليم المال كلّه إلى الفقير قاصداً به التصدّق بالمقدار المجهول مالكه، ثُمَّ يتصالح هو والفقير في تعيين حصّة كلٍّ منهمــا.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">إذن الحاكم</span>
+                        <span class="text-content">والأحوط لزومــاً أن يكون التصدّق بإذن الحاكم الشرعيّ.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الحالة الثالثة: (العلم بالمقدار والجهل بالمالك)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">الشرط</span>
+                        <span class="text-content">وإذا عَلِمَ المقدار ولم ‏يتيسّر له معرفة المالك.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">تصدّق به عنه سواء أكان الحرام بمقدار الخمس أم كان أقلّ منه أم كان أكثر منه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">إذن الحاكم</span>
+                        <span class="text-content">والأحوط وجوباً أن يكون التصدّق بإذن الحاكم الشرعيّ.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الحالة الرابعة: (العلم بالمالك والجهل بالمقدار)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">الشرط</span>
+                        <span class="text-content">وإن عَلِمَ المالك ولم ‏يتيسّر له معرفة المقدار.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">الحل الأول</span>
+                        <span class="text-content">فإن أمكن التراضي معه بصلح أو نحوه فهو.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">الحل الثاني (بلا تقصير)</span>
+                        <span class="text-content">وإلّا اكتفى بردّ المقدار المعلوم إليه إذا لم يكن الخلط بتقصير منه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">الحل الثالث (مع التقصير)</span>
+                        <span class="text-content">وإلّا فالأحوط لزوماً ردّ المقدار الزائد أيضاً.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-condition">قيد النزاع</span>
+                        <span class="text-content">هذا إذا لم ‏يتخاصما في تحديد المقدار أو في تعيينه وإلّا تحاكما إلى الحاكم الشرعيّ فيفصل النزاع بينهما.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الحالة الخامسة: (العلم بالمالك والمقدار)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">وإن عَلِمَ المالك والمقدار وجب دفعه إليه ويكون التعيين بالتراضي بينهما.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1205</span>
+        </div>
+        <div class="masala-body">
+            <p style="font-weight: bold; color: var(--primary-color);">تفريعات العلم بالمالك في عدد محصور:</p>
+            
+            <div class="tree-node">
+                <div class="tree-label">الفرضية الأولى: علم القدر ولم يعلم المالك بعينه (في عدد محصور)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الإجراء الأولي</span>
+                        <span class="text-content">أعلمهم بالحال.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">أ) ادعاه أحدهم وأقره الباقي</span>
+                        <span class="text-content">أو اعترفوا بأنّه ليس لهم: سلّمه إليه ويكون التعيين بالتراضي بينهما.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">ب) ادعاه أزيد من واحد</span>
+                        <span class="text-content">فإن تراضوا بصلح أو نحوه فهو، وإلّا تعيّن الرجوع إلى الحاكم الشرعيّ في حسم الدعوى.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">ج) الجهل والامتناع</span>
+                        <span class="text-content">وإن أظهر الجميع جهلهم بالحال وامتنعوا عن التراضي بينهم يلزم العمل بالقرعة.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-precaution">إجراء القرعة</span>
+                        <span class="text-content">والأحوط لزوماً تصدّي الحاكم الشرعيّ أو وكيله لإجرائها.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الفرضية الثانية: لم يتيسر معرفة القدر وعلم صاحبه (في عدد محصور)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">هكذا الحكم (أي نفس التفصيل السابق)، إلّا أنّ ما تقدّم في كيفيّة الخروج عن عهدة المقدار الحرام في صورة الجهل به والعلم بالمالك (الصلح أو رد المعلوم/الزائد) يجري هنا أيضاً.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1206</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع العام</span>
+                    <span class="text-content">إذا كان في ذمّته مال حرام.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">نفي الخمس</span>
+                    <span class="text-content">فلا محلّ للخمس.</span>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>الحالة</th>
+                        <th>التفصيل</th>
+                        <th>الحكم / الأحوط</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>علم الجنس والمقدار وعرف الصاحب</td>
+                        <td>واضحة</td>
+                        <td>ردّه إليه.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">علم الجنس والمقدار وجهل الصاحب</td>
+                        <td>العدد محصور</td>
+                        <td>الأحوط وجوباً استرضاء الجميع، وإن لم يمكن عمل بالقرعة.</td>
+                    </tr>
+                    <tr>
+                        <td>العدد غير محصور</td>
+                        <td>تصدّق به عنه.</td>
+                    </tr>
+                    <tr>
+                        <td>شرط التصدق</td>
+                        <td>الأحوط وجوباً أن يكون بإذن الحاكم الشرعيّ.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">علم الجنس وجهل المقدار</td>
+                        <td>إبراء الذمة</td>
+                        <td>جاز الاقتصار على الأقلّ (إذا لم يكن الجهل لشك في التفريغ أو تقصير).</td>
+                    </tr>
+                    <tr>
+                        <td>معرفة المالك لاحقاً</td>
+                        <td>إن عرف المالك رده إليه، وإلا فالتفصيل بين المحصور (استرضاء/قرعة) وغير المحصور (صدقة بإذن الحاكم).</td>
+                    </tr>
+                    <tr>
+                        <td>لم يعرف الجنس (قيمي في الذمة)</td>
+                        <td>مردد بين أجناس مختلفة</td>
+                        <td>يرجع إلى القيمة إن لم يمكن القطع بتفريغ الذمّة على نحو لا يلزم ضرر أو حرج، وإلّا كان هو المتعيّن.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1207</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الفرضية</span>
+                    <span class="text-content">إذا تبيّن المالك بعد دفع الخمس.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">الحكم</span>
+                    <span class="text-content">كان ضامناً له على الأحوط لزوماً.</span>
+                </div>
+            </div>
+            <div class="rules-box">
+                <div class="rules-title">💡 قاعدة</div>
+                <ul><li>إخراج خمس المال المختلط بالحرام "مطهر للمال" ظاهراً، ولكن لا يسقط الضمان واقعاً إذا ظهر المالك.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1208</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">أ) علم أن الحرام أكثر من الخمس</span>
+                    <span class="text-content">وجب عليه دفع الزائد أيضاً.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-subject">ب) علم أن الحرام أنقص</span>
+                    <span class="text-content">لم ‏يجز له استرداد الزائد على مقدار الحرام على الأحوط لزوماً.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1209</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-condition">الشرط</span>
+                    <span class="text-content">إذا كان الحرام المختلط من الخمس أو الزكاة أو الوقف العامّ أو الخاصّ.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم</span>
+                    <span class="text-content">لا يحلّ المال المختلط به بإخراج الخمس.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">الإجراء</span>
+                    <span class="text-content">بل يجري عليه حكم معلوم المالك، فيراجع وليّ الخمس أو الزكاة أو الوقف.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1210</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الفرضية</span>
+                    <span class="text-content">إذا كان الحلال الذي اختلط به الحرام قد تعلّق به الخمس (خمس الأرباح مثلاً).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">الترتيب</span>
+                    <span class="text-content">فالأحوط لزوماً إخراج خمس التحليل (للتخلص من الحرام) أوّلاً، ثُمَّ إخراج خمس الباقي.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">مثال عملي</span>
+                    <span class="text-content">إذا كان عنده 75 ديناراً:
+                        <br>1. يخرج خمس التحليل (15 دينار) -> الباقي 60.
+                        <br>2. يخرج خمس الباقي (12 دينار) -> الصافي 48 دينار.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1211</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الفرضية</span>
+                    <span class="text-content">إذا أتلف الحلال المختلط بالحرام قبل إخراج خمسه.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم 1</span>
+                    <span class="text-content">سقط الخمس (خمس التحليل).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الحكم 2</span>
+                    <span class="text-content">وجرى عليه حكم ردّ المظالم المتقدّم في المسألة (1206) لأنه صار ديناً في الذمة.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>📈</span>
+        السابع: ما يفضل عن مؤونة سنته (أرباح المكاسب)
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">المتن العام (قاعدة أرباح المكاسب)</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">الموضوع</span>
+                    <span class="text-content">ما يفضل عن مؤونة سنته له ولعياله ممّا يستفيده.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">مصادر الربح المكتسب</span>
+                    <span class="text-content">بصناعة أو زراعة أو تجارة أو إجارة أو حيازة للمباح أو أيّ كسب آخر.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">مصادر الربح غير المكتسب</span>
+                    <span class="text-content">بل يتعلّق الخمس بكلّ فائدة مملوكة وإن لم‏ تكن مكتسبة كالهبة والهديّة والجائزة والمال الموصى به ونماء الوقف الخاصّ أو العامّ إذا صار ملكاً طِلقاً للموقوف عليه.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">الاستثناءات (لا خمس فيها)</span>
+                    <span class="text-content">
+                        1. المهر.<br>
+                        2. عوض الخلع.<br>
+                        3. ديات الأعضاء.<br>
+                        4. ما يملك بالإرث (وفي حكمه دية النفس).<br>
+                    </span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-condition">استثناء من الاستثناء</span>
+                    <span class="text-content">عدا ما يملكه المؤمن بعنوان ثانويّ كالتعصيب (ميراث لا يستحقه شرعاً ولكن أخذه).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">احتياط الميراث</span>
+                    <span class="text-content">والأحوط لزوماً إخراج خمس الميراث الذي لا يحتسب من غير الأب والابن.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1212</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">حكم المال المملوك بالخمس/الزكاة</span>
+                    <span class="text-content">لا يجب الخمس فيما مُلِكَ بالخمس أو الزكاة (ولو زاد عن المؤونة).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-precaution">حكم المال المملوك بالصدقات المندوبة</span>
+                    <span class="text-content">الأحوط لزوماً إخراج خمس ما زاد عن مؤونته ممّا ملكه بالصدقات المندوبة أو الواجبة (غير الزكاة) كالكفّارات وردّ المظالم.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1213 (زيادة الأعيان والقيمة)</span>
+        </div>
+        <div class="masala-body">
+            <div class="tree-node">
+                <div class="tree-label">الزيادة العينية (نماء)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-subject">الفرضية</span>
+                        <span class="text-content">أعيان لم يتعلق بها خمس (أو أدي خمسه) وزادت.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">وجب الخمس في الزيادة المنفصلة (كالولد/اللبن) أو المتصلة التي لها مالية (كالسمن في دجاج اللحم).</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">الزيادة السوقية (ارتفاع السعر)</div>
+                <p>تنقسم إلى ثلاثة أقسام مفصلة في نهاية المسألة:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>القسم</th>
+                            <th>الوصف</th>
+                            <th>حكم الخمس في الزيادة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الأول</td>
+                            <td>ما أعدّه للاتّجار بعينه (كالبضائع).</td>
+                            <td><span style="color:red; font-weight:bold;">يجب</span> الخمس في الزيادة وإن لم ‏يبعه (إذا أمكن بيعه).</td>
+                        </tr>
+                        <tr>
+                            <td>الثاني</td>
+                            <td>ما ملكه بالإرث/الهبة ونحوه (لم يتعلق به خمس ولم يعده للتجارة).</td>
+                            <td><span style="color:green; font-weight:bold;">لا يجب</span> الخمس في الزيادة وإن باعه بالزيادة.</td>
+                        </tr>
+                        <tr>
+                            <td>الثالث</td>
+                            <td>ما ملكه بالمعاوضة (شراء) بقصد الاقتناء لا الاتّجار.</td>
+                            <td><span style="color:orange; font-weight:bold;">لا يجب</span> الخمس إلا إذا باعه (تعد الزيادة من أرباح سنة البيع).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1214</span>
+        </div>
+        <div class="masala-body">
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <span class="label lbl-subject">أصحاب المواشي (الغنم وغيرها)</span>
+                    <span class="text-content">يجب عليهم في آخر السنة إخراج خمس الباقي بعد مؤونتهم من نماء الغنم (صوف، سمن، لبن، سخال).</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-detail">إذا بيع شيء</span>
+                    <span class="text-content">إذا بيع أثناء السنة وبقي شيء من ثمنه وجب إخراج خمسه أيضاً.</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="label lbl-ruling">التعميم</span>
+                    <span class="text-content">وكذلك الحكم في سائر الحيوانات (بقاء العين أو الثمن).</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="masala-card">
+        <div class="masala-header">
+            <span class="masala-number">مسألة 1215</span>
+        </div>
+        <div class="masala-body">
+            <p><strong>الموضوع:</strong> من عمّر بستاناً وغرس فيه نخلاً وشجراً للاتّجار بثمره.</p>
+            
+            <div class="tree-node">
+                <div class="tree-label">أولاً: حكم أصل البستان (الأرض والشجر المغروس)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">صرف مالاً مخمساً أو لا خمس فيه (إرث)</span>
+                        <span class="text-content">لم ‏يجب إخراج خمسه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">اشترى بذمة ووفى بمال فيه خمس</span>
+                        <span class="text-content">يجب إخراج خمس المال المدفوع نفسه.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">صرف من ربح السنة الحالية</span>
+                        <span class="text-content">يجب إخراج خمس نفس ما غرسه وأحدثه بعد استثناء مؤونة السنة.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">ثانياً: حكم النماء (الثمر والجديد)</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-ruling">الحكم</span>
+                        <span class="text-content">يجب الخمس في:
+                            <ul>
+                                <li>النمّاء المنفصل (ثمر، سعف).</li>
+                                <li>النمّاء المتصل المعتد به مالياً.</li>
+                                <li>الشجر النابت جديداً (كالفسيل والتال) في سنته.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-node">
+                <div class="tree-label">ثالثاً: حكم ارتفاع القيمة السوقية للبستان</div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">أعده للتجارة بثمره (لا بالبستان)</span>
+                        <span class="text-content">لا يجب الخمس في ارتفاع القيمة، نعم إذا باعه فالزيادة ربح سنة البيع.</span>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="label lbl-detail">أعده للتجارة بنفس البستان (مقاولة)</span>
+                        <span class="text-content">وجب الخمس في ارتفاع القيمة الحاصل في آخر السنة وإن لم ‏يبعه.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
