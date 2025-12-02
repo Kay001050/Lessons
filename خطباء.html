@@ -3,494 +3,588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل خطباء المنبر الحسيني | حوزة الغدير</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <title>دليل خطباء المنبر الحسيني | حوزة الغدير 2025</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        /* ==================== إعدادات المتغيرات والألوان (Design Tokens) ==================== */
         :root {
-            /* نظام الألوان - نمط إسلامي حديث */
-            --primary-dark: #0f2c3e;
-            --primary-light: #1a4a63;
-            --accent-gold: #c5a059;
-            --accent-gold-light: #e6c88a;
-            --bg-body: #f7f9fa;
-            --card-bg: #ffffff;
-            --text-heading: #1a202c;
-            --text-body: #4a5568;
-            --border-color: #e2e8f0;
-            --success-green: #276749;
+            /* الألوان الأساسية - هوية حوزوية وقورة */
+            --color-primary: #1a3c40;     /* تركواز غامق/بترولي */
+            --color-primary-dark: #0f2528;
+            --color-accent: #c49a6c;      /* ذهبي معتق */
+            --color-accent-light: #e6c8a2;
+            --color-bg: #fdfbf7;          /* لون الورق القديم الفاتح جداً */
+            --color-card-bg: #ffffff;
+            --color-text-head: #1d1d1d;
+            --color-text-body: #4a4a4a;
+            --color-border: #e0e0e0;
             
-            /* المسافات والأبعاد */
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            /* التباعد والظلال */
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
+            --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
             --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-gold: 0 10px 20px -5px rgba(196, 154, 108, 0.3);
             
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            /* انتقالات */
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* تأسيس الصفحة */
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-        
+        /* ==================== التأسيس (Reset & Base) ==================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-body);
-            line-height: 1.7;
+            background-color: var(--color-bg);
+            color: var(--color-text-body);
+            line-height: 1.6;
             overflow-x: hidden;
+            /* زخرفة خلفية إسلامية خفيفة جداً */
+            background-image: radial-gradient(#c49a6c 0.5px, transparent 0.5px), radial-gradient(#c49a6c 0.5px, var(--color-bg) 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-attachment: fixed;
         }
 
-        h1, h2, h3, .amiri-font { font-family: 'Amiri', serif; }
-
-        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
+        h1, h2, h3, h4, .font-amiri { font-family: 'Amiri', serif; }
+        
+        a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* ================= الهيدر والهوية ================= */
+        /* ==================== الرأس (Header) ==================== */
         header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #000000 100%);
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
             color: white;
-            padding: 4rem 1.5rem 6rem; /* مساحة سفلية إضافية للبحث */
+            padding: 3rem 1rem 6rem; /* مساحة إضافية للبحث العائم */
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 5px solid var(--color-accent);
         }
 
-        /* زخرفة خلفية خفيفة */
+        /* زخرفة إسلامية هندسية في الهيدر */
         header::before {
-            content: '';
+            content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c5a059' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.6;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z' fill='%23c49a6c' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
-        .header-content { position: relative; z-index: 10; }
+        .header-container { position: relative; z-index: 2; }
 
-        .subtitle {
-            color: var(--accent-gold);
-            font-size: 1rem;
-            letter-spacing: 1px;
+        .logo-text {
+            color: var(--color-accent);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: block;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border-bottom: 1px solid var(--color-accent);
+            padding-bottom: 5px;
         }
 
         header h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to bottom, #fff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            line-height: 1.3;
         }
 
-        /* ================= مربع البحث العائم ================= */
-        .search-wrapper {
-            margin-top: -3.5rem;
+        header p { font-size: 1.2rem; opacity: 0.9; font-weight: 300; }
+
+        /* ==================== أدوات التحكم (البحث والفرز) ==================== */
+        .controls-wrapper {
+            max-width: 1000px;
+            margin: -3.5rem auto 3rem;
             padding: 0 1.5rem;
             position: relative;
-            z-index: 20;
+            z-index: 10;
             display: flex;
-            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .search-box {
+        .search-container {
+            flex: 2;
+            min-width: 280px;
             background: white;
-            width: 100%;
-            max-width: 700px;
-            padding: 0.75rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
+            padding: 0.5rem 1rem;
             border: 2px solid transparent;
-            transition: var(--transition-smooth);
+            transition: var(--transition);
         }
 
-        .search-box:focus-within {
-            border-color: var(--accent-gold);
+        .search-container:focus-within {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-lg);
             transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
+        .search-icon { color: var(--color-accent); font-size: 1.2rem; margin-left: 10px; }
+        
         .search-input {
-            flex: 1;
+            width: 100%;
             border: none;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
             font-family: 'Tajawal', sans-serif;
-            color: var(--text-heading);
+            font-size: 1.1rem;
+            color: var(--color-text-head);
+            padding: 10px 0;
+            background: transparent;
         }
 
-        .search-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-light);
-            color: var(--accent-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-left: 5px;
+        .sort-container {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
         }
 
-        /* ================= شبكة الخطباء ================= */
-        .main-container {
+        .sort-select {
+            width: 100%;
+            height: 100%;
+            padding: 0 1.5rem;
+            appearance: none;
+            background: white;
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            color: var(--color-text-head);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .sort-select:focus, .sort-select:hover { border-color: var(--color-accent); }
+
+        /* سهم القائمة المنسدلة المخصص */
+        .sort-arrow {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--color-accent);
+        }
+
+        /* ==================== شبكة العرض (Grid) ==================== */
+        .main-content {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 4rem 1.5rem;
+            padding: 0 1.5rem 4rem;
         }
 
-        .grid-layout {
+        .preachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 2rem;
+            margin-top: 1rem;
         }
 
-        /* ================= تصميم البطاقة ================= */
-        .khatib-card {
-            background: var(--card-bg);
+        /* رسالة عدم وجود نتائج */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            background: white;
             border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: none; /* مخفي افتراضياً */
+        }
+        .no-results h3 { color: var(--color-primary); margin-bottom: 0.5rem; font-size: 1.5rem; }
+        .no-results p { color: #888; }
+
+        /* ==================== تصميم البطاقة (Card) ==================== */
+        .card {
+            background: var(--color-card-bg);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: var(--transition-smooth);
-            cursor: pointer;
+            transition: var(--transition);
             position: relative;
-            border: 1px solid var(--border-color);
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
-        .khatib-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-gold-light);
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--color-accent-light);
         }
 
-        .card-img-container {
-            width: 100%;
-            padding-top: 125%; /* نسبة عرض 4:5 (مستطيل بورتريه) */
+        /* --- تقنية الصورة الذكية --- */
+        .card-img-wrapper {
             position: relative;
-            background-color: #e2e8f0;
+            width: 100%;
+            padding-top: 125%; /* نسبة ارتفاع 5:4 (بورتريه) - حجم معياري */
+            background-color: #f0f0f0;
             overflow: hidden;
+            border-bottom: 4px solid var(--color-accent);
         }
 
-        .card-img-container img {
+        /* الخلفية الضبابية لملء الفراغ */
+        .card-img-bg {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px) brightness(0.9);
+            transform: scale(1.2); /* لإخفاء حواف الضبابية */
+            z-index: 1;
+        }
+
+        /* الصورة الأمامية الواضحة */
+        .card-img-front {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; /* تحافظ على أبعاد الصورة الأصلية */
+            z-index: 2;
             transition: transform 0.6s ease;
         }
 
-        .khatib-card:hover .card-img-container img {
-            transform: scale(1.05);
-        }
-
-        /* تأثير الظل الداخلي على الصورة */
-        .card-img-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-            opacity: 0.8;
-        }
+        .card:hover .card-img-front { transform: scale(1.03); }
 
         .card-body {
             padding: 1.5rem;
             text-align: center;
-            background: white;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
+            position: relative;
         }
 
-        .khatib-name {
+        /* زخرفة خلف النص في البطاقة */
+        .card-body::after {
+            content: "۞";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: var(--color-accent);
+            opacity: 0.05;
+            font-family: 'Amiri';
+            pointer-events: none;
+        }
+
+        .card-title {
             font-size: 1.25rem;
+            color: var(--color-primary);
             font-weight: 700;
-            color: var(--primary-dark);
             margin-bottom: 0.5rem;
             line-height: 1.4;
         }
 
-        .khatib-phone-preview {
-            color: var(--text-body);
-            font-size: 0.95rem;
-            font-weight: 500;
-            opacity: 0.8;
-            direction: ltr; /* لعرض الرقم بشكل صحيح */
+        .card-phone {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-family: 'Tajawal', sans-serif;
+            direction: ltr; /* لعرض الأرقام بشكل صحيح */
         }
 
-        .view-btn {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--accent-gold);
+        .card-btn {
+            margin-top: auto;
+            color: var(--color-accent);
             font-weight: 700;
+            font-size: 0.9rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
         }
+        .card-btn span { transition: margin-right 0.3s; }
+        .card:hover .card-btn span { margin-right: 5px; }
 
-        /* ================= النافذة المنبثقة (Modal) ================= */
+        /* ==================== النافذة المنبثقة (Modal) ==================== */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(15, 44, 62, 0.85); /* خلفية داكنة */
-            backdrop-filter: blur(8px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 37, 40, 0.9); /* خلفية داكنة مشتقة من الهوية */
+            backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
             opacity: 0;
             visibility: hidden;
-            transition: var(--transition-smooth);
+            transition: var(--transition);
+            padding: 20px;
         }
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
-        .modal-content {
+        .modal-card {
             background: white;
             width: 100%;
             max-width: 900px;
+            min-height: 450px;
             border-radius: var(--radius-lg);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            position: relative;
             display: flex;
-            flex-direction: row; /* تخطيط أفقي */
-            transform: scale(0.95) translateY(20px);
-            transition: var(--transition-smooth);
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            transform: translateY(30px) scale(0.95);
+            transition: var(--transition);
+            position: relative;
         }
 
-        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        .modal-overlay.active .modal-card { transform: translateY(0) scale(1); }
 
         .modal-close {
             position: absolute;
             top: 15px; left: 15px;
             width: 40px; height: 40px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             cursor: pointer;
-            z-index: 10;
-            color: var(--primary-dark);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: 0.2s;
+            z-index: 20;
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            transition: 0.3s;
         }
+        .modal-close:hover { background: var(--color-accent); color: white; transform: rotate(90deg); }
 
-        .modal-close:hover { background: #fff; transform: rotate(90deg); color: #e53e3e; }
-
-        /* تفاصيل المودال */
-        .modal-image-side {
-            width: 40%;
-            background-color: #f1f1f1;
+        /* يمين المودال (الصورة) */
+        .modal-img-side {
+            width: 45%;
+            background: #000;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .modal-img-bg {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            filter: blur(30px); opacity: 0.6;
         }
 
-        .modal-image-side img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .modal-img-main {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
         }
 
+        /* يسار المودال (المعلومات) */
         .modal-info-side {
-            width: 60%;
+            width: 55%;
             padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            text-align: right;
-            background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c49a6c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .modal-badge {
-            display: inline-block;
-            background: var(--accent-gold-light);
-            color: var(--primary-dark);
-            padding: 0.25rem 1rem;
+            background: var(--color-accent-light);
+            color: var(--color-primary-dark);
+            padding: 5px 15px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 1rem;
             width: fit-content;
+            margin-bottom: 1rem;
         }
 
-        .modal-title {
+        .modal-name {
             font-size: 2.5rem;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
             line-height: 1.2;
         }
 
-        .info-row {
+        .modal-data-row {
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #edf2f7;
+            border-bottom: 1px solid #eee;
         }
-        
-        .info-row:last-child { border-bottom: none; }
 
-        .info-icon {
+        .modal-icon {
             width: 50px; height: 50px;
-            background: rgba(26, 74, 99, 0.1);
-            color: var(--primary-light);
+            background: rgba(26, 60, 64, 0.05);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            color: var(--color-primary);
+            font-size: 1.5rem;
             margin-left: 1.5rem;
         }
 
-        .info-content label {
-            display: block;
-            font-size: 0.9rem;
-            color: #718096;
-            margin-bottom: 0.25rem;
-        }
+        .modal-label { display: block; font-size: 0.9rem; color: #999; margin-bottom: 5px; }
+        .modal-value { font-size: 1.8rem; font-weight: 700; color: var(--color-text-head); direction: ltr; text-align: right; }
 
-        .info-val {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            direction: ltr; /* للرقم */
-            text-align: right;
-        }
-
-        .call-btn {
-            display: inline-flex;
+        .modal-call-btn {
+            display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--success-green);
+            background: var(--color-primary);
             color: white;
+            padding: 1rem;
+            border-radius: var(--radius-md);
             font-size: 1.2rem;
             font-weight: 700;
-            padding: 1rem 3rem;
-            border-radius: 12px;
             margin-top: 1rem;
-            box-shadow: 0 4px 6px rgba(39, 103, 73, 0.3);
             transition: 0.3s;
-            text-decoration: none;
-            width: fit-content;
+            box-shadow: 0 10px 20px -5px rgba(26, 60, 64, 0.4);
         }
 
-        .call-btn:hover {
-            background-color: #225c41;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(39, 103, 73, 0.4);
-        }
+        .modal-call-btn:hover { background: var(--color-primary-dark); transform: translateY(-3px); }
 
-        /* رسالة لا توجد نتائج */
-        .no-results {
-            grid-column: 1 / -1;
+        /* ==================== الفوتر ==================== */
+        footer {
+            background: var(--color-primary-dark);
+            color: #ccc;
             text-align: center;
-            padding: 5rem 1rem;
-            display: none;
+            padding: 3rem 1rem;
+            border-top: 5px solid var(--color-accent);
+            margin-top: 4rem;
         }
         
-        .no-results h3 { color: var(--text-body); font-size: 1.5rem; opacity: 0.7; }
+        footer strong { color: white; font-size: 1.2rem; display: block; margin-bottom: 0.5rem; }
 
-        /* الفوتر */
-        footer {
-            background-color: var(--primary-dark);
+        /* زر العودة للأعلى */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px; left: 30px;
+            width: 50px; height: 50px;
+            background: var(--color-accent);
             color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            font-size: 0.9rem;
-            border-top: 4px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 900;
         }
+        .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-5px); background: #b0895c; }
 
-        /* ================= التجاوب (Mobile Responsive) ================= */
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
-            .modal-image-side { width: 100%; height: 300px; }
+        /* ==================== التجاوب (Media Queries) ==================== */
+        @media (max-width: 900px) {
+            header h1 { font-size: 2.5rem; }
+            .modal-card { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+            .modal-img-side { width: 100%; height: 300px; }
             .modal-info-side { width: 100%; padding: 1.5rem; }
-            .modal-title { font-size: 1.8rem; }
-            .info-val { font-size: 1.2rem; }
-            .call-btn { width: 100%; }
+            .modal-name { font-size: 1.8rem; }
+        }
+        
+        @media (max-width: 600px) {
+            .controls-wrapper { flex-direction: column; }
+            .search-container, .sort-container { width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-content">
-            <span class="subtitle">بسم الله الرحمن الرحيم</span>
-            <h1 class="amiri-font">دليل خطباء البحرين</h1>
-            <p style="opacity: 0.9; font-size: 1.1rem;">منصة للتواصل مع خطباء المنبر الحسيني</p>
+        <div class="header-container">
+            <span class="logo-text font-amiri">بسم الله الرحمن الرحيم</span>
+            <h1 class="font-amiri">دليل خطباء البحرين</h1>
+            <p>منصة التواصل مع خطباء المنبر الحسيني</p>
         </div>
     </header>
 
-    <div class="search-wrapper">
-        <div class="search-box">
-            <div class="search-icon">🔍</div>
+    <div class="controls-wrapper">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" class="search-input" placeholder="ابحث باسم الخطيب أو رقم الهاتف...">
         </div>
-    </div>
-
-    <div class="main-container">
-        <div id="khatibGrid" class="grid-layout">
-            </div>
         
-        <div id="noResults" class="no-results">
-            <h3>لا توجد نتائج مطابقة لبحثك</h3>
+        <div class="sort-container">
+            <select id="sortSelect" class="sort-select">
+                <option value="default">الترتيب الافتراضي</option>
+                <option value="asc">أبجدياً (أ - ي)</option>
+                <option value="desc">أبجدياً (ي - أ)</option>
+            </select>
+            <span class="sort-arrow">▼</span>
         </div>
     </div>
 
-    <div class="modal-overlay" id="khatibModal">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-close" id="closeModal">&times;</div>
+    <main class="main-content">
+        <div id="gridContainer" class="preachers-grid">
+            </div>
+
+        <div id="noResults" class="no-results">
+            <h3>عذراً، لا توجد نتائج مطابقة</h3>
+            <p>حاول البحث بكلمة أخرى أو تأكد من كتابة الاسم بشكل صحيح</p>
+        </div>
+    </main>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-close" onclick="closeModal()">✕</div>
             
-            <div class="modal-image-side">
-                <img id="modalImg" src="" alt="صورة الخطيب">
+            <div class="modal-img-side">
+                <div id="modalImgBg" class="modal-img-bg"></div>
+                <img id="modalImg" src="" alt="" class="modal-img-main">
             </div>
             
             <div class="modal-info-side">
-                <span class="modal-badge">خطيب حسيني</span>
-                <h2 class="modal-title amiri-font" id="modalName">الاسم هنا</h2>
+                <div class="modal-badge">بطاقة تعريفية</div>
+                <h2 id="modalName" class="modal-name font-amiri">--</h2>
                 
-                <div class="info-row">
-                    <div class="info-icon">📱</div>
-                    <div class="info-content">
-                        <label>رقم الهاتف المباشر</label>
-                        <div class="info-val" id="modalPhone">--</div>
+                <div class="modal-data-row">
+                    <div class="modal-icon">📱</div>
+                    <div>
+                        <span class="modal-label">رقم الهاتف المباشر</span>
+                        <div id="modalPhone" class="modal-value">--</div>
                     </div>
                 </div>
 
-                <div class="info-row" style="border:none;">
-                     <a href="#" id="modalCallBtn" class="call-btn">
-                        📞 اتصال الآن
-                     </a>
-                </div>
+                <a id="modalCallBtn" href="#" class="modal-call-btn">
+                    📞 اتصال الآن
+                </a>
             </div>
         </div>
     </div>
 
+    <div id="scrollTop" class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆</div>
+
     <footer>
-        <p class="amiri-font" style="font-size: 1.2rem; margin-bottom: 5px;">حوزة الغدير للعلوم الإسلامية 2025</p>
-        <p style="opacity: 0.6; font-size: 0.8rem;">تم التطوير لخدمة المنبر الحسيني</p>
+        <strong class="font-amiri">حوزة الغدير للعلوم الإسلامية 2025</strong>
+        <p>تم التطوير لخدمة المنبر الحسيني</p>
     </footer>
 
     <script>
-        // ================= البيانات =================
-        const baseImgUrl = "http://www.mahmodyyat.com";
-        const placeholderImg = "https://via.placeholder.com/400x500/1a4a63/ffffff?text=لا+توجد+صورة";
-        
-        // تم استخراج البيانات وتنظيفها وترتيبها
-        const khatibsData = [
+        // ==================== 1. البيانات (Data Structure) ====================
+        // تم استخراج وتنظيف البيانات من النص والمصدر المقدم بدقة
+        const baseURL = "http://www.mahmodyyat.com";
+        const placeholder = "https://via.placeholder.com/600x800/1a3c40/ffffff?text=لا+توجد+صورة";
+
+        const rawData = [
             { name: "الخطيب ملا محمود الساعي", phone: "33775779", img: "/up/1437/47/11.JPG" },
             { name: "الشيخ ياسين الجمري", phone: "39469231", img: "/up/1443/29/19.JPG" },
             { name: "الخطيب السيد هادي الغريفي", phone: "33548511", img: "/up/1443/77/01.JPG" },
@@ -681,115 +775,158 @@
             { name: "الخطيب ملا علي العريبي", phone: "38305331", img: "/up/1445/300/77s.JPG" }
         ];
 
-        // ================= التهيئة والمتغيرات =================
-        const grid = document.getElementById('khatibGrid');
-        const modal = document.getElementById('khatibModal');
+        // ==================== 2. تهيئة العناصر (Initialization) ====================
+        const gridContainer = document.getElementById('gridContainer');
         const searchInput = document.getElementById('searchInput');
-        const noResults = document.getElementById('noResults');
-
-        // عناصر المودال
+        const sortSelect = document.getElementById('sortSelect');
+        const noResultsMsg = document.getElementById('noResults');
+        const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modalImg');
+        const modalImgBg = document.getElementById('modalImgBg');
         const modalName = document.getElementById('modalName');
         const modalPhone = document.getElementById('modalPhone');
         const modalCallBtn = document.getElementById('modalCallBtn');
+        const scrollTopBtn = document.getElementById('scrollTop');
 
-        // ================= الوظائف =================
+        let currentData = [...rawData];
 
-        // توليد البطاقات مع خاصية التحميل الكسول (Lazy Loading)
-        function renderKhatibs(list) {
-            grid.innerHTML = '';
+        // ==================== 3. الوظائف الأساسية (Core Functions) ====================
+
+        // دالة العرض (Rendering)
+        function renderGrid(data) {
+            gridContainer.innerHTML = '';
             
-            if (list.length === 0) {
-                noResults.style.display = 'block';
+            if (data.length === 0) {
+                noResultsMsg.style.display = 'block';
                 return;
             } else {
-                noResults.style.display = 'none';
+                noResultsMsg.style.display = 'none';
             }
 
-            list.forEach(khatib => {
-                const imgUrl = khatib.img ? (baseImgUrl + khatib.img) : placeholderImg;
-                const phoneDisplay = khatib.phone ? khatib.phone : "غير متوفر";
-
-                const card = document.createElement('div');
-                card.className = 'khatib-card';
-                card.onclick = () => openModal(khatib);
+            data.forEach(item => {
+                const imgURL = item.img ? (baseURL + item.img) : placeholder;
+                const phoneDisplay = item.phone ? item.phone : "غير متوفر";
                 
-                // هيكلية البطاقة
+                // إنشاء عنصر البطاقة
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('role', 'button');
+                card.onclick = () => openModal(item);
+
+                // هيكلية البطاقة الداخلية
+                // نستخدم صورتين: واحدة في الخلفية ضبابية لملء الفراغ، وواحدة أمامية واضحة
                 card.innerHTML = `
-                    <div class="card-img-container">
-                        <img loading="lazy" src="${imgUrl}" alt="${khatib.name}" onerror="this.src='${placeholderImg}'">
-                        <div class="card-img-overlay"></div>
+                    <div class="card-img-wrapper">
+                        <div class="card-img-bg" style="background-image: url('${imgURL}')"></div>
+                        <img loading="lazy" class="card-img-front" src="${imgURL}" alt="${item.name}" onerror="this.src='${placeholder}'">
                     </div>
                     <div class="card-body">
-                        <h3 class="khatib-name">${khatib.name}</h3>
-                        <span class="khatib-phone-preview">📞 ${phoneDisplay}</span>
-                        <div class="view-btn">اضغط للتفاصيل ⬅</div>
+                        <div>
+                            <h3 class="card-title font-amiri">${item.name}</h3>
+                            <div class="card-phone">📞 ${phoneDisplay}</div>
+                        </div>
+                        <div class="card-btn">
+                            <span>اضغط للتفاصيل</span>
+                            ⬅
+                        </div>
                     </div>
                 `;
-                grid.appendChild(card);
+                gridContainer.appendChild(card);
             });
         }
 
-        // فتح النافذة المنبثقة
-        function openModal(khatib) {
-            const imgUrl = khatib.img ? (baseImgUrl + khatib.img) : placeholderImg;
+        // دالة فتح المودال (Open Modal)
+        function openModal(item) {
+            const imgURL = item.img ? (baseURL + item.img) : placeholder;
             
-            modalImg.src = imgUrl;
-            modalImg.onerror = function() { this.src = placeholderImg; };
-            
-            modalName.textContent = khatib.name;
-            modalPhone.textContent = khatib.phone ? khatib.phone : "غير متوفر";
-            
-            if (khatib.phone) {
-                modalCallBtn.href = `tel:${khatib.phone}`;
-                modalCallBtn.classList.remove('disabled');
+            // تحديث البيانات
+            modalImg.src = imgURL;
+            modalImg.onerror = function() { this.src = placeholder; };
+            modalImgBg.style.backgroundImage = `url('${imgURL}')`;
+            modalName.textContent = item.name;
+            modalPhone.textContent = item.phone ? item.phone : "غير متوفر";
+
+            // تحديث زر الاتصال
+            if(item.phone) {
+                modalCallBtn.href = `tel:${item.phone}`;
+                modalCallBtn.style.opacity = '1';
+                modalCallBtn.style.pointerEvents = 'auto';
                 modalCallBtn.innerHTML = "📞 اتصال مباشر";
-                modalCallBtn.style.pointerEvents = "auto";
-                modalCallBtn.style.opacity = "1";
             } else {
                 modalCallBtn.href = "#";
+                modalCallBtn.style.opacity = '0.5';
+                modalCallBtn.style.pointerEvents = 'none';
                 modalCallBtn.innerHTML = "🚫 لا يوجد رقم";
-                modalCallBtn.style.pointerEvents = "none";
-                modalCallBtn.style.opacity = "0.5";
             }
 
+            // إظهار النافذة
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // منع التمرير الخلفي
+            document.body.style.overflow = 'hidden'; // منع السكرول الخلفي
         }
 
-        // إغلاق النافذة المنبثقة
+        // دالة إغلاق المودال
         function closeModal() {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // ================= مستمعي الأحداث =================
-
-        // إغلاق عند الضغط على زر X
-        document.getElementById('closeModal').addEventListener('click', closeModal);
-
-        // إغلاق عند الضغط خارج المحتوى
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // إغلاق عند الضغط على ESC
+        // إغلاق المودال بزر ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
 
-        // البحث الفوري
+        // ==================== 4. منطق البحث والفرز (Filter & Sort) ====================
+
+        // البحث
         searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = khatibsData.filter(item => 
-                item.name.toLowerCase().includes(term) || 
-                (item.phone && item.phone.includes(term))
+            const val = e.target.value.toLowerCase().trim();
+            const filtered = rawData.filter(item => 
+                item.name.toLowerCase().includes(val) || 
+                (item.phone && item.phone.includes(val))
             );
-            renderKhatibs(filtered);
+            
+            // إعادة تطبيق الترتيب الحالي على النتائج المفلترة
+            applySort(sortSelect.value, filtered);
         });
 
-        // التشغيل الأولي
-        renderKhatibs(khatibsData);
+        // الترتيب
+        sortSelect.addEventListener('change', (e) => {
+            const currentSearchVal = searchInput.value.toLowerCase().trim();
+            // نأخذ القائمة المفلترة حالياً (أو الكاملة إذا لم يكن هناك بحث)
+            let listToSort = rawData.filter(item => 
+                item.name.toLowerCase().includes(currentSearchVal) || 
+                (item.phone && item.phone.includes(currentSearchVal))
+            );
+            
+            applySort(e.target.value, listToSort);
+        });
+
+        function applySort(sortType, list) {
+            let sortedList = [...list];
+            
+            if (sortType === 'asc') {
+                sortedList.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+            } else if (sortType === 'desc') {
+                sortedList.sort((a, b) => b.name.localeCompare(a.name, 'ar'));
+            } else {
+                // Default: no sorting (as per original array index)
+                // في حالة الرغبة بالعودة للترتيب الأصلي، نحتاج لإندكس أصلي أو نعتمد على ترتيب الفلتر
+            }
+            
+            renderGrid(sortedList);
+        }
+
+        // ==================== 5. زر الصعود للأعلى ====================
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        // ==================== 6. التشغيل الأولي ====================
+        renderGrid(rawData);
 
     </script>
 </body>
