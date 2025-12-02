@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدرس الفقهي الشامل: كتاب الخمس | منهاج الصالحين</title>
+    <style>
+        /* إعدادات المتغيرات والألوان */
+        :root {
+            --primary-color: #1a4d3e; /* أخضر إسلامي داكن */
+            --secondary-color: #8c7b50; /* ذهبي معتق */
+            --accent-color: #c0392b; /* أحمر للتنبيهات */
+            --bg-color: #fdfbf7; /* لون ورق قديم فاتح */
+            --text-color: #2c3e50;
+            --matn-bg: #f3efe6; /* خلفية المتن */
+            --sharh-bg: #ffffff; /* خلفية الشرح */
+            --border-radius: 8px;
+            --font-main: 'Amiri', 'Traditional Arabic', serif;
+            --font-head: 'Reem Kufi', sans-serif;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* التنسيق العام */
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-image: linear-gradient(to right, #fdfbf7 0%, #fff 50%, #fdfbf7 100%);
+        }
+
+        /* الهيدر */
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        /* القائمة الجانبية */
+        aside {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+
+        aside h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin-bottom: 10px;
+        }
+
+        aside ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        aside ul li a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* تصميم المتن والشرح */
+        .fiqh-block {
+            margin-bottom: 40px;
+            border: 1px solid #dcdcdc;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .matn-box {
+            background-color: var(--matn-bg);
+            padding: 25px;
+            border-bottom: 3px double var(--secondary-color);
+            position: relative;
+        }
+
+        .matn-box::before {
+            content: "المتن (نص المنهاج)";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--secondary-color);
+            color: white;
+            padding: 2px 10px;
+            font-size: 0.8em;
+            border-bottom-left-radius: 8px;
+        }
+
+        .matn-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #4a3b2a;
+            text-align: justify;
+        }
+
+        .sharh-box {
+            background-color: var(--sharh-bg);
+            padding: 25px;
+        }
+
+        .sharh-title {
+            color: var(--primary-color);
+            font-family: var(--font-head);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sharh-title::before {
+            content: "✍️";
+            margin-left: 10px;
+        }
+
+        /* الجداول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: right;
+        }
+
+        table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #e8f6f3;
+        }
+
+        /* المشجرات (CSS Org Chart) */
+        .tree {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            direction: ltr; /* اتجاه الشجرة لضبط الخطوط */
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s; 
+            display: flex;
+        }
+
+        .tree li {
+            float: left; text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s; 
+        }
+
+        /* رسم الخطوط */
+        .tree li::before, .tree li::after{
+            content: '';
+            position: absolute; top: 0; right: 50%;
+            border-top: 2px solid var(--secondary-color);
+            width: 50%; height: 20px;
+        }
+        .tree li::after{
+            right: auto; left: 50%;
+            border-left: 2px solid var(--secondary-color);
+        }
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+        .tree li:only-child{ padding-top: 0;}
+        .tree li:first-child::before, .tree li:last-child::after{
+            border: 0 none;
+        }
+        .tree li:last-child::before{
+            border-right: 2px solid var(--secondary-color);
+            border-radius: 0 5px 0 0;
+        }
+        .tree li:first-child::after{
+            border-radius: 5px 0 0 0;
+        }
+
+        /* الخط العمودي النازل */
+        .tree ul ul::before{
+            content: '';
+            position: absolute; top: 0; left: 50%;
+            border-left: 2px solid var(--secondary-color);
+            width: 0; height: 20px;
+        }
+
+        .tree li a {
+            border: 2px solid var(--primary-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--font-head);
+            font-size: 0.9em;
+            display: inline-block;
+            border-radius: 5px;
+            transition: all 0.5s;
+            background: white;
+            direction: rtl; /* إعادة الاتجاه للنص */
+        }
+
+        .tree li a:hover, .tree li a:hover+ul li a {
+            background: var(--primary-color);
+            color: white; 
+            border: 2px solid var(--primary-color);
+        }
+
+        /* الملاحظات والتنبيهات */
+        .note {
+            background-color: #fff3cd;
+            border-right: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .masala-tag {
+            display: inline-block;
+            background: #2980b9;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+
+        /* استجابة الشاشة */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .tree {
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>كتاب الخمس</h1>
+    <p>شرح تفصيلي، مهيكل، ومجدول وفق فتاوى السيد أبو القاسم الخوئي (قدس سره) في منهاج الصالحين</p>
+</header>
+
+<div class="container">
+    <aside>
+        <h3>فهرس الدرس</h3>
+        <ul>
+            <li><a href="#intro">📖 تعريف الخمس ومشروعيته</a></li>
+            <li><a href="#tree-map">🌳 الخريطة الذهنية الكلية</a></li>
+            <li><a href="#item1">١. غنائم دار الحرب</a></li>
+            <li><a href="#item2">٢. المعادن</a></li>
+            <li><a href="#item3">٣. الكنز</a></li>
+            <li><a href="#item4">٤. الغوص</a></li>
+            <li><a href="#item5">٥. المال الحلال المختلط بالحرام</a></li>
+            <li><a href="#item6">٦. الأرض التي يشتريها الذمي</a></li>
+            <li><a href="#item7">٧. أرباح المكاسب (أهم الأقسام)</a></li>
+            <li><a href="#distribution">💰 قسمة الخمس ومستحقوه</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section id="intro">
+            <h2>مقدمة في تشريع الخمس</h2>
+            <p>الخمس حق مالي فرضه الله تعالى في أموال محددة، وهو يختلف عن الزكاة في موارده ومصارفه. وقد استدل الفقهاء عليه بآية الغنيمة: ﴿وَاعْلَمُوا أَنَّمَا غَنِمْتُمْ مِنْ شَيْءٍ فَأَنَّ لِلَّهِ خُمُسَهُ وَلِلرَّسُولِ وَلِذِي الْقُرْبَىٰ...﴾ والروايات المتواترة عن أهل البيت (عليهم السلام).</p>
+        </section>
+
+        <hr>
+
+        <section id="tree-map">
+            <h2>🌳 الهيكلية العامة لما يجب فيه الخمس</h2>
+            <div class="tree">
+                <ul>
+                    <li>
+                        <a href="#">ما يجب فيه الخمس<br>(٧ موارد)</a>
+                        <ul>
+                            <li>
+                                <a href="#item1">الغنائم</a>
+                            </li>
+                            <li>
+                                <a href="#item2">المعادن</a>
+                            </li>
+                            <li>
+                                <a href="#item3">الكنز</a>
+                            </li>
+                            <li>
+                                <a href="#item4">الغوص</a>
+                            </li>
+                            <li>
+                                <a href="#item5">الحلال المختلط</a>
+                            </li>
+                            <li>
+                                <a href="#item6">أرض الذمي</a>
+                            </li>
+                            <li>
+                                <a href="#item7">أرباح المكاسب</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="item1" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١١٨٢</span>
+                <p class="matn-text">
+                    (الأول): ما يغنمه المسلمون من الكفار الذين يحل قتالهم في دار الحرب، من المال وغيره... ويشترط في وجوب الخمس فيه: أن لا يكون مغصوباً من مسلم أو غيره ممن هو محترم المال...
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">الشرح والتحليل</h3>
+                <p><strong>الغنيمة:</strong> هي كل ما يستولي عليه المسلمون من أموال الكفار في الحرب.</p>
+                <h4>الضوابط والشروط:</h4>
+                <ul>
+                    <li>✅ <strong>إذن الإمام:</strong> يشترط المشهور إذن الإمام (ع) أو نائبه الخاص، ولكن السيد الخوئي يرى وجوب الخمس حتى لو لم يكن بإذن الإمام (على رأي) أو في زمن الغيبة، فالغنيمة تخمس على كل حال.</li>
+                    <li>❌ <strong>المال المحترم:</strong> إذا وجد في الغنيمة مال لمسلم (كان مغصوباً عند الكفار)، فلا يُملك ولا يخمس، بل يجب رده لصاحبه.</li>
+                    <li>💰 <strong>النصاب:</strong> يجب أن تبلغ الغنيمة (٢٠ ديناراً ذهبياً) وهو ما يعادل نصاب الزكاة، وقيل لا يشترط النصاب في الغنيمة وهو الأحوط وجوباً عند السيد في بعض الموارد، لكن المشهور الاكتفاء بصدق الغنيمة.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="item2" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١١٨٨</span>
+                <p class="matn-text">
+                    (الثاني): المعادن: من الذهب، والفضة، والرصاص، والصفر، والحديد، والياقوت، والزبرجد، والفيروزج، والعقيق، والزئبق، والكبريت، والنفط، والقير، والغاز... وغيرها مما يصدق عليه اسم المعدن عرفاً.
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">التفصيل الفقهي للمعادن</h3>
+                <table class="table-striped">
+                    <thead>
+                        <tr>
+                            <th>العنصر</th>
+                            <th>الحكم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>تعريف المعدن</strong></td>
+                            <td>كل ما استخرج من الأرض وكان له قيمة وصدق عليه اسم المعدن عرفاً (سواء كان مائعاً كالنفط أو جامداً كالذهب).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>شرط النصاب</strong></td>
+                            <td>يجب أن تبلغ قيمته <strong>١٥ مثقالاً صيرفياً</strong> من الذهب المسكوك (الدينار)، أو ١٠٥ مثاقيل من الفضة. (تحديد السيد الخوئي: ما تبلغ قيمته نصاب الذهب في الزكاة).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الاستثناء</strong></td>
+                            <td>يستثنى منه "مؤونة الاستخراج والتصفية"، فيخمس الباقي بعد طرح التكاليف إذا بلغ النصاب.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="item3" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١١٩٥</span>
+                <p class="matn-text">
+                    (الثالث): الكنز: وهو المال المذخور في الأرض أو الجبل أو الشجر أو غيرها... سواء كان من الذهب أو الفضة المسكوكين أم غيرهما... ويعتبر في وجوب الخمس فيه بلوغ النصاب، وهو أدنى نصابي الذهب والفضة الزكويين ماليّة.
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">أحكام الكنز</h3>
+                <p>الكنز هو المال المدفون الذي لا يُعرف صاحبه.</p>
+                <div class="note">
+                    <strong>تنبيه هام:</strong> المعيار في النصاب هو "القيمة المالية" لأقل النصابين (الذهب أو الفضة). فإذا بلغت قيمة الكنز قيمة ٢٠ دينار ذهب أو ٢٠٠ درهم فضة (أيهما أقل سعراً في السوق الفعلي) وجب فيه الخمس.
+                </div>
+            </div>
+        </section>
+
+        <section id="item4" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١٢٠٥</span>
+                <p class="matn-text">
+                    (الرابع): ما أخرج من البحر بالغوص من الجوهر، واللؤلؤ، والمرجان، وغير ذلك... بشرط أن تبلغ قيمته ديناراً واحداً.
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">ما يستخرج من البحر</h3>
+                <ul>
+                    <li><strong>المعيار:</strong> الإخراج "غوصاً" (أي النزول تحت الماء)، أما ما قذفه البحر للشاطئ وأخذه الشخص من دون غوص، فلا يدخل في هذا القسم (بل يدخل في أرباح المكاسب).</li>
+                    <li><strong>النصاب:</strong> دينار شرعي واحد (ما يعادل مثقال شرعي من الذهب، تقريباً 3.456 جرام أو 4.25 جرام حسب التحقيق، والسيد الخوئي يرى الدينار الشرعي 3/4 المثقال الصيرفي).</li>
+                    <li><strong>السمك:</strong> لا خمس فيه بعنوان "الغوص" بل بعنوان "أرباح المكاسب" إن زاد عن المؤونة.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="item5" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١٢١٣</span>
+                <p class="matn-text">
+                    (الخامس): الحلال المختلط بالحرام على وجه لا يتميز، ولا يعرف صاحبه، ولا يعلم مقداره... فإنه يحل بإخراج خمسه، والباقي للمالك.
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">تحليل المال المختلط (التطهير المالي)</h3>
+                <p>هذه المسألة دقيقة جداً ولها صور متعددة، يوجزها الجدول التالي:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الحالة</th>
+                            <th>الحكم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>لا يعلم المقدار + لا يعلم الصاحب</strong></td>
+                            <td>📝 <strong>يجب الخمس:</strong> ويحل الباقي له (وهذا هو مورد الحديث هنا).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>يعلم المقدار + لا يعلم الصاحب</strong></td>
+                            <td>يتصدق بالمقدار الحرام عن صاحبه (بإذن الحاكم الشرعي).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>لا يعلم المقدار + يعلم الصاحب</strong></td>
+                            <td>يجب المصالحة مع الصاحب لترضيه.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>يعلم المقدار + يعلم الصاحب</strong></td>
+                            <td>يجب رد المال لصاحبه (ولا خمس هنا للتطهير، بل هو رد مظالم).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="item6" class="fiqh-block">
+            <div class="matn-box">
+                <span class="masala-tag">مسألة ١٢١٨</span>
+                <p class="matn-text">
+                    (السادس): الأرض التي اشتراها الذمي من المسلم، فإنه يجب فيها الخمس على المشهور... ووجوبه على الذمي، فإن شرط المسلم عليه أداءه لزم الشرط.
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">الشرح</h3>
+                <p>هذا حكم تعبدي خاص. الذمي (الكتابي الذي يعيش في حماية الدولة الإسلامية) إذا اشترى أرضاً من مسلم، وجب دفع خمس هذه الأرض (عين الأرض أو قيمتها). ويدفعه المشتري (الذمي)، وإن لم يدفعه فالواجب باقٍ في ذمة الأرض.</p>
+            </div>
+        </section>
+
+        <section id="item7" class="fiqh-block" style="border-color: var(--primary-color);">
+            <div class="matn-box" style="background: #eafaf1;">
+                <span class="masala-tag">مسألة ١٢١٩ (جوهر الخمس)</span>
+                <p class="matn-text">
+                    (السابع): ما يفضل عن مؤونة سنته له ولعياله من فوائد الصناعات والزراعات والتجارات، بل ومطلق الفوائد... وإن كانت من قبيل الهبات والهدايا والجوائز، ونماء الوقف الخاص...
+                </p>
+            </div>
+            <div class="sharh-box">
+                <h3 class="sharh-title">أرباح المكاسب (خمس عامة الناس)</h3>
+                <p>هذا القسم هو الذي يبتلى به عموم المكلفين في زماننا. كل ما يكتسبه الإنسان من مال وتمر عليه سنة ويزيد عن حاجته.</p>
+                
+                <h4>🔍 المصطلحات المفتاحية:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="note">
+                        <strong>١. الفائدة:</strong><br>
+                        كل ما يدخل في ملك الإنسان من كسب، تجارة، راتب، هدية، جائزة.
+                    </div>
+                    <div class="note" style="border-color: var(--accent-color);">
+                        <strong>٢. المؤونة:</strong><br>
+                        ما ينفقه الإنسان على نفسه وعياله خلال السنة (أكل، شرب، ملبس، مسكن، زواج، طبابة، زيارات، ضيوف) بما يليق بشأنه عرفاً دون إسراف أو تقتير.
+                    </div>
+                    <div class="note">
+                        <strong>٣. السنة الخمسية:</strong><br>
+                        تبدأ من حين الشروع في التكسب (للكاسب) أو من حين حصول الفائدة (لغير الكاسب كمن حصل على هدية).
+                    </div>
+                </div>
+
+                <h4>📋 أحكام تفصيلية في أرباح المكاسب:</h4>
+                <ul>
+                    <li><strong>رأس المال:</strong> إذا كان للإنسان رأس مال يتجر به، فإن كان ضرورياً لتحصيل مؤونته (بحيث لولاه لم يقدر على العيش بكرامة) فلا خمس فيه عند الحاجة، أما الزائد فيخمس.</li>
+                    <li><strong>المهر والإرث:</strong>
+                        <ul>
+                            <li><strong>المهر:</strong> لا خمس فيه.</li>
+                            <li><strong>الإرث:</strong> لا خمس فيه (إلا إذا كان إرثاً ممن لا يحتسب كابن العم البعيد جداً في رأي، أو كان المال الوارث يعلم أن الميت لم يخمسه).</li>
+                        </ul>
+                    </li>
+                    <li><strong>أداء الدين:</strong> الدين يُعد من المؤونة، فإذا استدان لمؤونته وسدد الدين من أرباح سنته، فهذا التسديد من المؤونة ولا خمس فيه.</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="distribution">
+            <h2>💰 قسمة الخمس (مصارفه)</h2>
+            <p>يقسم مال الخمس إلى سهمين متساويين:</p>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; background: #fff; border: 2px solid var(--primary-color); padding: 20px; border-radius: 8px; text-align: center;">
+                    <h3 style="color: var(--primary-color);">١. سهم الإمام (ع)</h3>
+                    <p>كان يُعطى للإمام المعصوم، وفي زمن الغيبة يُعطى لمرجع التقليد (نائب الإمام) أو يصرف بإذنه في حفظ بيضة الإسلام وترويج الشريعة والحوزات العلمية ومصالح المسلمين العامة.</p>
+                </div>
+
+                <div style="flex: 1; background: #fff; border: 2px solid var(--secondary-color); padding: 20px; border-radius: 8px; text-align: center;">
+                    <h3 style="color: var(--secondary-color);">٢. سهم السادة</h3>
+                    <p>يُعطى لفقراء السادة (الهاشميين المنتسبين لهاشم جد النبي ﷺ بالأب) ومساكينهم وأيتامهم وأبناء سبيلهم. ويشترط في المعطى له الفقر والإيمان.</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>ملاحظة في منهاج السيد الخوئي:</strong> الأحوط لزوماً مراجعة الحاكم الشرعي (المرجع) في كلا السهمين، أو الاستئذان منه في الصرف.
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    <p style="text-align: center; padding: 20px; color: #777;">تم إعداد هذا المحتوى التعليمي وفق فتاوى السيد الخوئي في "منهاج الصالحين" - الجزء الأول - كتاب الخمس.</p>
+</footer>
+
+</body>
+</html>
