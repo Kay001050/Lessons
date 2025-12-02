@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل خطباء المنبر الحسيني | حوزة الغدير</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* نظام الألوان - نمط إسلامي حديث */
+            --primary-dark: #0f2c3e;
+            --primary-light: #1a4a63;
+            --accent-gold: #c5a059;
+            --accent-gold-light: #e6c88a;
+            --bg-body: #f7f9fa;
+            --card-bg: #ffffff;
+            --text-heading: #1a202c;
+            --text-body: #4a5568;
+            --border-color: #e2e8f0;
+            --success-green: #276749;
+            
+            /* المسافات والأبعاد */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* تأسيس الصفحة */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .amiri-font { font-family: 'Amiri', serif; }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
+        ul { list-style: none; }
+
+        /* ================= الهيدر والهوية ================= */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #000000 100%);
+            color: white;
+            padding: 4rem 1.5rem 6rem; /* مساحة سفلية إضافية للبحث */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* زخرفة خلفية خفيفة */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c5a059' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.6;
+        }
+
+        .header-content { position: relative; z-index: 10; }
+
+        .subtitle {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* ================= مربع البحث العائم ================= */
+        .search-wrapper {
+            margin-top: -3.5rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            padding: 0.75rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            border: 2px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-heading);
+        }
+
+        .search-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            color: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-left: 5px;
+        }
+
+        /* ================= شبكة الخطباء ================= */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ================= تصميم البطاقة ================= */
+        .khatib-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .khatib-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-gold-light);
+        }
+
+        .card-img-container {
+            width: 100%;
+            padding-top: 125%; /* نسبة عرض 4:5 (مستطيل بورتريه) */
+            position: relative;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .card-img-container img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .khatib-card:hover .card-img-container img {
+            transform: scale(1.05);
+        }
+
+        /* تأثير الظل الداخلي على الصورة */
+        .card-img-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            opacity: 0.8;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            text-align: center;
+            background: white;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .khatib-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .khatib-phone-preview {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.8;
+            direction: ltr; /* لعرض الرقم بشكل صحيح */
+        }
+
+        .view-btn {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* ================= النافذة المنبثقة (Modal) ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 44, 62, 0.85); /* خلفية داكنة */
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 900px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: row; /* تخطيط أفقي */
+            transform: scale(0.95) translateY(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            color: var(--primary-dark);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        .modal-close:hover { background: #fff; transform: rotate(90deg); color: #e53e3e; }
+
+        /* تفاصيل المودال */
+        .modal-image-side {
+            width: 40%;
+            background-color: #f1f1f1;
+            position: relative;
+        }
+
+        .modal-image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .modal-info-side {
+            width: 60%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: right;
+            background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: var(--accent-gold-light);
+            color: var(--primary-dark);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .info-row:last-child { border-bottom: none; }
+
+        .info-icon {
+            width: 50px; height: 50px;
+            background: rgba(26, 74, 99, 0.1);
+            color: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-left: 1.5rem;
+        }
+
+        .info-content label {
+            display: block;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            direction: ltr; /* للرقم */
+            text-align: right;
+        }
+
+        .call-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--success-green);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 1rem 3rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(39, 103, 73, 0.3);
+            transition: 0.3s;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .call-btn:hover {
+            background-color: #225c41;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(39, 103, 73, 0.4);
+        }
+
+        /* رسالة لا توجد نتائج */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 5rem 1rem;
+            display: none;
+        }
+        
+        .no-results h3 { color: var(--text-body); font-size: 1.5rem; opacity: 0.7; }
+
+        /* الفوتر */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        /* ================= التجاوب (Mobile Responsive) ================= */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+            .modal-image-side { width: 100%; height: 300px; }
+            .modal-info-side { width: 100%; padding: 1.5rem; }
+            .modal-title { font-size: 1.8rem; }
+            .info-val { font-size: 1.2rem; }
+            .call-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <span class="subtitle">بسم الله الرحمن الرحيم</span>
+            <h1 class="amiri-font">دليل خطباء البحرين</h1>
+            <p style="opacity: 0.9; font-size: 1.1rem;">منصة للتواصل مع خطباء المنبر الحسيني</p>
+        </div>
+    </header>
+
+    <div class="search-wrapper">
+        <div class="search-box">
+            <div class="search-icon">🔍</div>
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث باسم الخطيب أو رقم الهاتف...">
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="khatibGrid" class="grid-layout">
+            </div>
+        
+        <div id="noResults" class="no-results">
+            <h3>لا توجد نتائج مطابقة لبحثك</h3>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="khatibModal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-close" id="closeModal">&times;</div>
+            
+            <div class="modal-image-side">
+                <img id="modalImg" src="" alt="صورة الخطيب">
+            </div>
+            
+            <div class="modal-info-side">
+                <span class="modal-badge">خطيب حسيني</span>
+                <h2 class="modal-title amiri-font" id="modalName">الاسم هنا</h2>
+                
+                <div class="info-row">
+                    <div class="info-icon">📱</div>
+                    <div class="info-content">
+                        <label>رقم الهاتف المباشر</label>
+                        <div class="info-val" id="modalPhone">--</div>
+                    </div>
+                </div>
+
+                <div class="info-row" style="border:none;">
+                     <a href="#" id="modalCallBtn" class="call-btn">
+                        📞 اتصال الآن
+                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="amiri-font" style="font-size: 1.2rem; margin-bottom: 5px;">حوزة الغدير للعلوم الإسلامية 2025</p>
+        <p style="opacity: 0.6; font-size: 0.8rem;">تم التطوير لخدمة المنبر الحسيني</p>
+    </footer>
+
+    <script>
+        // ================= البيانات =================
+        const baseImgUrl = "http://www.mahmodyyat.com";
+        const placeholderImg = "https://via.placeholder.com/400x500/1a4a63/ffffff?text=لا+توجد+صورة";
+        
+        // تم استخراج البيانات وتنظيفها وترتيبها
+        const khatibsData = [
+            { name: "الخطيب ملا محمود الساعي", phone: "33775779", img: "/up/1437/47/11.JPG" },
+            { name: "الشيخ ياسين الجمري", phone: "39469231", img: "/up/1443/29/19.JPG" },
+            { name: "الخطيب السيد هادي الغريفي", phone: "33548511", img: "/up/1443/77/01.JPG" },
+            { name: "الشيخ مهدي الكرزكاني", phone: "39977661", img: "/up/1443/123/31.JPG" },
+            { name: "الخطيب الشيخ علي الجدحفصي", phone: "33547598", img: "/up/1445/300/55.JPG" },
+            { name: "الخطيب السيد موسى البلادي", phone: "33700413", img: "/up/1442/06/10.JPG" },
+            { name: "الشيخ علي الطيار", phone: "39969686", img: "/up/1443/123/18.JPG" },
+            { name: "الخطيب ملا مهدي المنامي", phone: "34414916", img: "/up/1443/123/140.JPG" },
+            { name: "الشيخ حسين الخميس", phone: "", img: "/up/1437/38/13.JPG" },
+            { name: "الخطيب السيد صادق الغريفي", phone: "39447044", img: "/up/1443/58/25.JPG" },
+            { name: "الخطيب السيد هاشم الكربابادي", phone: "36991266", img: "/up/1443/60/35.JPG" },
+            { name: "الشيخ زهير البلادي", phone: "39878771", img: "/up/1442/08/03.JPG" },
+            { name: "الشيخ عبدالامير مال الله", phone: "39454414", img: "/up/1443/123/87.JPG" },
+            { name: "الشيخ عباس السماهيجي", phone: "39606073", img: "/up/1437/21/29.JPG" },
+            { name: "الشيخ رجائي البرباري", phone: "37775339", img: "/up/1443/24/01.JPG" },
+            { name: "الخطيب السيد مصطفى الكراني", phone: "33021402", img: "/up/1442/06/06.JPG" },
+            { name: "الشيخ محمد صالح القشعمي", phone: "36996673", img: "/up/1443/123/05.JPG" },
+            { name: "الخطيب ملا حسين المعلم", phone: "33231160", img: "/up/1442/12/11.JPG" },
+            { name: "الشيخ محمد الماضي", phone: "39452920", img: "/up/1436/237/12.JPG" },
+            { name: "الخطيب ملا سلمان جمعة الكراني", phone: "33730977", img: "/up/1443/123/127s.JPG" },
+            { name: "الخطيب ملا عباس ملا عطية الجمري", phone: "36652291", img: "/up/1436/235/14.JPG" },
+            { name: "الخطيب ملا عباس الجزيري", phone: "39649491", img: "/up/1443/84/07.JPG" },
+            { name: "الخطيب السيد مجاهد الخباز", phone: "", img: "/up/1436/233/14.JPG" },
+            { name: "الخطيب ملا حسين الدمستاني", phone: "33335538", img: "/up/1443/123/27.JPG" },
+            { name: "الخطيب ملا الياس المرزوق", phone: "39436644", img: "/up/1442/01/02s.JPG" },
+            { name: "الشيخ محمد الشيخ", phone: "39885884", img: "/up/1442/10/38.JPG" },
+            { name: "الخطيب ملا محمد الصفار", phone: "36994663", img: "/up/1442/09/18.JPG" },
+            { name: "الخطيب السيد مكي الوداعي", phone: "39450064", img: "/up/1443/28/08.JPG" },
+            { name: "الخطيب ملا عبدالنبي المعلم الكوري", phone: "33805801", img: "/up/1436/222/19.JPG" },
+            { name: "الشيخ علي عاشور", phone: "", img: "/up/1443/123/77.JPG" },
+            { name: "الشيخ عبدالكريم المعاميري", phone: "39405699", img: "/up/1443/123/128.JPG" },
+            { name: "الشيخ حسن الكوري", phone: "39634346", img: "/up/1443/123/150.JPG" },
+            { name: "الخطيب ملا ابراهيم الماجد", phone: "39636557", img: "/up/1443/123/107.JPG" },
+            { name: "الخطيب السيد علوي الشهركاني", phone: "39683872", img: "/up/1443/123/79.JPG" },
+            { name: "الخطيب السيد هاني المعلم", phone: "33933961", img: "/up/1443/123/45.JPG" },
+            { name: "الشيخ عبدالله الديهي", phone: "39832338", img: "/up/1443/38/03.JPG" },
+            { name: "الشيخ عيسى المؤمن", phone: "", img: "/up/1436/150/10.JPG" },
+            { name: "الشيخ بشار العالي", phone: "39601995", img: "/up/1436/148/11.JPG" },
+            { name: "الخطيب ملا عبدالحي آل قمبر", phone: "", img: "/up/1436/147/13.JPG" },
+            { name: "الشيخ محمد الرياش", phone: "39808689", img: "/up/1443/53/19.JPG" },
+            { name: "الشيخ علي القرقور", phone: "37787753", img: "/up/1443/27/01.JPG" },
+            { name: "الخطيب السيد عدنان الكراني", phone: "38397727", img: "/up/1442/10/53.JPG" },
+            { name: "الخطيب ملا عبدالجليل الشماع", phone: "39695560", img: "/up/1442/08/11.JPG" },
+            { name: "الشيخ ميثم السلمان", phone: "", img: "/up/1443/123/24.JPG" },
+            { name: "الشيخ زهير الخال", phone: "36334468", img: "/up/1443/123/56.JPG" },
+            { name: "الخطيب ملا علي أبو زهيرة", phone: "36947676", img: "/up/1442/09/17.JPG" },
+            { name: "الخطيب ملا محمد العباد", phone: "", img: "/up/1436/131/01.JPG" },
+            { name: "الخطيب السيد عبدالخالق الوداعي", phone: "39812122", img: "/up/1443/123/149.JPG" },
+            { name: "الشيخ منير المعتوق", phone: "33934044", img: "/up/1443/123/07.JPG" },
+            { name: "الخطيب السيد علي الخباز", phone: "39856668", img: "/up/1443/84/01.JPG" },
+            { name: "الخطيب ملا علي صالح البلادي", phone: "39855611", img: "/up/1445/211/09.JPG" },
+            { name: "الخطيب ملا حسن الصالح", phone: "33083787", img: "/up/1442/01/04s.JPG" },
+            { name: "الشيخ حسين البلادي", phone: "39545324", img: "/up/1443/84/02.JPG" },
+            { name: "الشيخ محمد المدوب", phone: "34008907", img: "/up/1443/123/110.JPG" },
+            { name: "الخطيب ملا مهند الحواج", phone: "", img: "/up/1436/107/07.JPG" },
+            { name: "الشيخ عبدالله الردحة", phone: "", img: "/up/1436/109/08.JPG" },
+            { name: "الشيخ محمد جعفر فرحان", phone: "33509704", img: "/up/1436/94/16.JPG" },
+            { name: "الشيخ مصطفى الموسى", phone: "", img: "/up/1436/93/13.JPG" },
+            { name: "الشيخ علي سديف", phone: "39423459", img: "/up/1443/84/06.JPG" },
+            { name: "الخطيب ملا عبدالستار الطويل", phone: "", img: "/up/1436/91/16.JPG" },
+            { name: "الخطيب الشيخ كامل الستري", phone: "39600586", img: "/up/1443/77/04.JPG" },
+            { name: "الخطيب ملا حبيب الدرازي", phone: "36433421", img: "/up/1442/08/10.JPG" },
+            { name: "الخطيب ملا جعفر فخر", phone: "39600561", img: "/up/1436/85/07.JPG" },
+            { name: "الخطيب ملا عبدالعزيز المحراي", phone: "39376668", img: "/up/1443/123/80.JPG" },
+            { name: "الخطيب الملا سعيد المعاتيق", phone: "", img: "/up/1436/71/19.JPG" },
+            { name: "الخطيب ملا عبدالرسول البقالي", phone: "", img: "/up/1436/69/10.JPG" },
+            { name: "الشيخ حميد الشملان", phone: "39450866", img: "/up/1445/300/50s.JPG" },
+            { name: "الشيخ ادريس العكري", phone: "33398001", img: "/up/1445/300/37.JPG" },
+            { name: "الشيخ عبدالمحسن الجمري", phone: "38814648", img: "/up/1436/63/16.JPG" },
+            { name: "الخطيب ملا عبدالله السني", phone: "33515900", img: "/up/1442/07/01.JPG" },
+            { name: "الشيخ صادق ربيع", phone: "39650794", img: "/up/1436/53/16.JPG" },
+            { name: "الشيخ كاظم درويش", phone: "33946456", img: "/up/1442/10/35.JPG" },
+            { name: "الشيخ حسين مال الله", phone: "39477742", img: "/up/1445/211/14.JPG" },
+            { name: "الشيخ احمد العطيش", phone: "33327557", img: "/up/1443/54/28.JPG" },
+            { name: "الشيخ ايمن البلادي", phone: "33304533", img: "/up/1445/300/28.JPG" },
+            { name: "الشيخ صادق الجمري", phone: "", img: "/up/1435/28/13.JPG" },
+            { name: "الخطيب الشيخ محمد المخلوق", phone: "39603043", img: "/up/1445/300/10.JPG" },
+            { name: "الشيخ عبدالامير بوجسام", phone: "39622950", img: "/up/1435/20/01.JPG" },
+            { name: "الخطيب السيد ياسر الساري", phone: "39676165", img: "/up/1443/35/03.JPG" },
+            { name: "الشيخ حسين علي يعقوب المعاميري", phone: "33172501", img: "/up/1443/84/15.JPG" },
+            { name: "الشيخ ابراهيم الحمران", phone: "39633736", img: "/up/1443/123/137.JPG" },
+            { name: "الشيخ جميل الباقري", phone: "39228759", img: "/up/1443/123/43.JPG" },
+            { name: "الشيخ محمد جواد الشهابي", phone: "39955125", img: "/up/1443/123/134.JPG" },
+            { name: "الخطيب ملا عبدالله بن ملا يوسف الجمري", phone: "36600103", img: "/up/1437/98/81.JPG" },
+            { name: "الشيخ ممدوح العالي", phone: "39111445", img: "/up/1442/09/08.JPG" },
+            { name: "الخطيب ملا جواد الدمستاني", phone: "34501015", img: "/up/1442/10/42.JPG" },
+            { name: "الشيخ علي البني", phone: "39072722", img: "/up/1443/123/78.JPG" },
+            { name: "الخطيب السيد فيصل القدمي", phone: "39668979", img: "/up/1437/128/02s.JPG" },
+            { name: "الخطيب السيد هادي درويش", phone: "", img: "/up/1443/123/144.JPG" },
+            { name: "الشيخ علي البيابي", phone: "541710927", img: "/up/1437/128/22s.JPG" },
+            { name: "الخطيب ملا علي البقال", phone: "", img: "/up/1437/128/28s.JPG" },
+            { name: "الشيخ محمد محسن العصفور", phone: "33846051", img: "/up/1437/128/36s.JPG" },
+            { name: "الخطيب السيد علي الدرازي", phone: "39691445", img: "/up/1437/128/42s.JPG" },
+            { name: "الشيخ حسن المالكي", phone: "34422602", img: "/up/1443/123/15.JPG" },
+            { name: "الشيخ هاني المقداد", phone: "39666511", img: "/up/1437/134/20.JPG" },
+            { name: "الشيخ جاسم الدمستاني", phone: "36500607", img: "/up/1445/211/04.JPG" },
+            { name: "الخطيب ملا علي جاسم", phone: "39245352", img: "/up/1437/143/13.JPG" },
+            { name: "الخطيب ملا عبدالله الملا", phone: "39144885", img: "/up/1442/10/39.JPG" },
+            { name: "الخطيب ملا محمد المرخي", phone: "33803885", img: "/up/1445/300/01s.JPG" },
+            { name: "الخطيب ملا جابر السهلاوي", phone: "39876532", img: "/up/1437/158/52s.JPG" },
+            { name: "الشيخ جاسم الحداد", phone: "33345528", img: "/up/1442/01/08s.JPG" },
+            { name: "الخطيب السيد هادي الوداعي", phone: "33135406", img: "/up/1441/53/04s.JPG" },
+            { name: "الخطيب ملا حسين داوود اشكلاني", phone: "39731464", img: "/up/1443/123/174.JPG" },
+            { name: "الخطيب ملا محمد الشيخ الديهي", phone: "39885884", img: "/up/1437/222/03s.JPG" },
+            { name: "الخطيب ملا محمود حبيل", phone: "39081401", img: "/up/1443/123/37.JPG" },
+            { name: "الشيخ جعفر الصائغ", phone: "39744472", img: "/up/1437/225/32s.JPG" },
+            { name: "الشيخ عمار الحداد", phone: "36669868", img: "/up/1443/123/116s.JPG" },
+            { name: "الخطيب ملا محمد الملا", phone: "33885409", img: "/up/1443/123/58.JPG" },
+            { name: "الشيخ محمود العجيمي", phone: "33759680", img: "/up/1443/123/03.JPG" },
+            { name: "الخطيب ملا حسن سلطان", phone: "66349422", img: "/up/1437/235/45s.JPG" },
+            { name: "الخطيب الشيخ أحمد المصلي", phone: "39807739", img: "/up/1445/300/58.JPG" },
+            { name: "ملا حسن الخنيزي", phone: "33396986", img: "/up/1443/123/19.JPG" },
+            { name: "الخطيب الشيخ هادي الساعي", phone: "36773889", img: "/up/1445/300/85.JPG" },
+            { name: "الخطيب الشيخ عبدعلي آل ضيف", phone: "36628222", img: "/up/1442/01/01s.JPG" },
+            { name: "الخطيب الشيخ علي الساعي", phone: "38801206", img: "/up/1443/123/153.JPG" },
+            { name: "الشيخ صادق القطان", phone: "36464674", img: "/up/1442/10/44.JPG" },
+            { name: "الشيخ رائد الستري", phone: "39911334", img: "/up/1443/123/40.JPG" },
+            { name: "الخطيب ملا هاني التوبلاني", phone: "34145099", img: "/up/1443/54/25.JPG" },
+            { name: "الشيخ محمد المعاميري", phone: "33846051", img: "/up/1442/10/50.JPG" },
+            { name: "الخطيب السيد أحمد الغريفي", phone: "39447044", img: "/up/1443/123/154.JPG" },
+            { name: "الخطيب ملا علي الفردان", phone: "36579997", img: "/up/1443/123/175.JPG" },
+            { name: "الخطيب وجيه البرباري", phone: "39273589", img: "/up/1443/123/84.JPG" },
+            { name: "الشيخ عمار تيسير", phone: "39647022", img: "/up/1443/84/03.JPG" },
+            { name: "الشيخ علي منصور سند", phone: "39124402", img: "/up/1438/176/01.JPG" },
+            { name: "الخطيب الشيخ سعيد الغزوي", phone: "", img: "/up/1438/180/01.JPG" },
+            { name: "الشيخ عبدالحكيم السندي", phone: "39457713", img: "/up/1442/09/12.JPG" },
+            { name: "الخطيب ملا سلام النطعي", phone: "39278780", img: "/up/1443/123/100.JPG" },
+            { name: "الخطيب ملا محمد مال الله", phone: "39477499", img: "/up/1443/123/138.JPG" },
+            { name: "الخطيب ملا صالح العليوات البرباري", phone: "39241378", img: "/up/1445/300/45s.JPG" },
+            { name: "الشيخ محمود طاهري", phone: "39188835", img: "/up/1443/123/20.JPG" },
+            { name: "الخطيب السيد أحمد الوداعي", phone: "33481384", img: "/up/1442/09/21.JPG" },
+            { name: "الشيخ ماهر رحمة النعيمي", phone: "33860008", img: "/up/1443/123/164.JPG" },
+            { name: "الخطيب السيد ميثم المحافظة", phone: "33727779", img: "/up/1443/28/01.JPG" },
+            { name: "الخطيب ملا صالح الشيخ", phone: "33139989", img: "/up/1439/113/01s.JPG" },
+            { name: "الخطيب الشيخ مسلم العرادي", phone: "39122140", img: "/up/1443/123/112.JPG" },
+            { name: "الخطيب ملا قاسم زين الدين", phone: "35034061", img: "/up/1442/07/10.JPG" },
+            { name: "الخطيب الشيخ أحمد جاسم الوادياني", phone: "33782401", img: "/up/1443/123/62.JPG" },
+            { name: "الخطيب الشيخ علي حسن الشغل", phone: "36062999", img: "/up/1443/123/76.JPG" },
+            { name: "الخطيب السيد شبر البوري", phone: "39464698", img: "/up/1439/166/08.JPG" },
+            { name: "الخطيب الشيخ حسن القيدوم", phone: "17400393", img: "/up/1439/191/10.JPG" },
+            { name: "الشيخ حسن العالي", phone: "39698799", img: "/up/1443/123/104.JPG" },
+            { name: "الخطيب الشيخ جعفر العرب", phone: "33063030", img: "/up/1440/119/01.JPG" },
+            { name: "الخطيب الشيخ جمال الخرفوش", phone: "33738738", img: "/up/1440/119/06.JPG" },
+            { name: "الخطيب ملا أحمد السباع", phone: "36201624", img: "/up/1440/184/01.JPG" },
+            { name: "الشيخ حامد عاشور", phone: "36441252", img: "/up/1442/10/51.JPG" },
+            { name: "الخطيب ملا يوسف السهلاوي", phone: "33455486", img: "/up/1443/123/120s.JPG" },
+            { name: "الخطيب ملا حسين العرب", phone: "33008197", img: "/up/1445/300/57.JPG" },
+            { name: "الخطيب ملا محمد العليوي", phone: "33493887", img: "/up/1443/123/26.JPG" },
+            { name: "الخطيب ملا محمود العويناتي", phone: "32209622", img: "/up/1443/123/124.JPG" },
+            { name: "الخطيب السيد حسين الهويدي", phone: "36147444", img: "/up/1442/06/01.JPG" },
+            { name: "الخطيب السيد يوسف الدرازي", phone: "36412366", img: "/up/1442/09/01.JPG" },
+            { name: "الشيخ غازي السماك", phone: "33273426", img: "/up/1442/10/52.JPG" },
+            { name: "الخطيب السيد حسن الموسوي", phone: "37118482", img: "/up/1442/10/59.JPG" },
+            { name: "الخطيب السيد ياسين الموسوي", phone: "39930939", img: "/up/1443/25/01.JPG" },
+            { name: "الشيخ حسين السندي", phone: "99864765", img: "/up/1443/28/04.JPG" },
+            { name: "الخطيب ملا علي جاسم الدرازي", phone: "39245352", img: "/up/1443/84/04.JPG" },
+            { name: "الخطيب السيد محمد السيد مكي الكراني", phone: "33341269", img: "/up/1443/84/09.JPG" },
+            { name: "الخطيب ملا علي السعيد", phone: "", img: "/up/1443/123/04.JPG" },
+            { name: "الشيخ إبراهيم الصفا", phone: "39443414", img: "/up/1443/123/67.JPG" },
+            { name: "الخطيب السيد أحمد الكربابادي", phone: "39869908", img: "/up/1443/123/21.JPG" },
+            { name: "ملا جابر الجريش", phone: "39998005", img: "/up/1443/123/22.JPG" },
+            { name: "الشيخ محمود العالي", phone: "", img: "/up/1443/123/23.JPG" },
+            { name: "الخطيب ملا جعفر التوبلاني", phone: "39885670", img: "/up/1443/123/28.JPG" },
+            { name: "الشيخ جعفر فرحان", phone: "39217740", img: "/up/1443/123/34.JPG" },
+            { name: "الشيخ جعفر الأمجدي", phone: "33615533", img: "/up/1443/123/59.JPG" },
+            { name: "الشيخ محمد سعيد الستري", phone: "39646654", img: "/up/1443/123/73.JPG" },
+            { name: "ملا حسين حبيب العالي", phone: "39693985", img: "/up/1443/123/129.JPG" },
+            { name: "الشيخ علي الجفيري", phone: "39298988", img: "/up/1443/123/142.JPG" },
+            { name: "الشيخ أحمد الساعي", phone: "36433362", img: "/up/1443/123/147.JPG" },
+            { name: "الخطيب الملا إيليا الجمري", phone: "33551199", img: "/up/1443/123/162.JPG" },
+            { name: "ملا حسين السباع", phone: "39177528", img: "/up/1443/123/167.JPG" },
+            { name: "الشيخ عيسى طرادة", phone: "39441455", img: "/up/1443/123/170.JPG" },
+            { name: "الخطيب ملا جعفر يحيى", phone: "36973993", img: "/up/1443/123/172.JPG" },
+            { name: "ملا أحمد الطعان", phone: "33889393", img: "/up/1443/123/180.JPG" },
+            { name: "الشيخ حسن بو رويس", phone: "39445841", img: "/up/1445/211/01.JPG" },
+            { name: "السيد محمد الكامل", phone: "37300787", img: "/up/1445/211/05.JPG" },
+            { name: "الخطيب ملا أحمد يتيم", phone: "33742209", img: "/up/1445/211/10.JPG" },
+            { name: "الشيخ حسين أبو رويس", phone: "", img: "/up/1445/300/06.JPG" },
+            { name: "الخطيب ملا عبدالله البوري", phone: "37739292", img: "/up/1445/300/15.JPG" },
+            { name: "الشيخ إبراهيم الحجي", phone: "33338922", img: "/up/1445/300/16.JPG" },
+            { name: "الخطيب ملا حسن يتيم", phone: "", img: "/up/1445/300/20.JPG" },
+            { name: "الشيخ عبدالله ملا يوسف الجمري", phone: "36600103", img: "/up/1445/300/23.JPG" },
+            { name: "الخطيب ملا علي الشملان", phone: "3226973", img: "/up/1445/300/26.JPG" },
+            { name: "الشيخ فاضل الحواج", phone: "33734985", img: "/up/1445/300/30.JPG" },
+            { name: "الخطيب ملا علي المرخي", phone: "66376629", img: "/up/1445/300/31.JPG" },
+            { name: "الخطيب السيد محمد الهاشمي", phone: "33005087", img: "/up/1445/300/46s.JPG" },
+            { name: "الشيخ علي عقيل راشد الدرازي", phone: "37170033", img: "/up/1445/300/79.JPG" },
+            { name: "الخطيب ملا علي العريبي", phone: "38305331", img: "/up/1445/300/77s.JPG" }
+        ];
+
+        // ================= التهيئة والمتغيرات =================
+        const grid = document.getElementById('khatibGrid');
+        const modal = document.getElementById('khatibModal');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        // عناصر المودال
+        const modalImg = document.getElementById('modalImg');
+        const modalName = document.getElementById('modalName');
+        const modalPhone = document.getElementById('modalPhone');
+        const modalCallBtn = document.getElementById('modalCallBtn');
+
+        // ================= الوظائف =================
+
+        // توليد البطاقات مع خاصية التحميل الكسول (Lazy Loading)
+        function renderKhatibs(list) {
+            grid.innerHTML = '';
+            
+            if (list.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            } else {
+                noResults.style.display = 'none';
+            }
+
+            list.forEach(khatib => {
+                const imgUrl = khatib.img ? (baseImgUrl + khatib.img) : placeholderImg;
+                const phoneDisplay = khatib.phone ? khatib.phone : "غير متوفر";
+
+                const card = document.createElement('div');
+                card.className = 'khatib-card';
+                card.onclick = () => openModal(khatib);
+                
+                // هيكلية البطاقة
+                card.innerHTML = `
+                    <div class="card-img-container">
+                        <img loading="lazy" src="${imgUrl}" alt="${khatib.name}" onerror="this.src='${placeholderImg}'">
+                        <div class="card-img-overlay"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="khatib-name">${khatib.name}</h3>
+                        <span class="khatib-phone-preview">📞 ${phoneDisplay}</span>
+                        <div class="view-btn">اضغط للتفاصيل ⬅</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // فتح النافذة المنبثقة
+        function openModal(khatib) {
+            const imgUrl = khatib.img ? (baseImgUrl + khatib.img) : placeholderImg;
+            
+            modalImg.src = imgUrl;
+            modalImg.onerror = function() { this.src = placeholderImg; };
+            
+            modalName.textContent = khatib.name;
+            modalPhone.textContent = khatib.phone ? khatib.phone : "غير متوفر";
+            
+            if (khatib.phone) {
+                modalCallBtn.href = `tel:${khatib.phone}`;
+                modalCallBtn.classList.remove('disabled');
+                modalCallBtn.innerHTML = "📞 اتصال مباشر";
+                modalCallBtn.style.pointerEvents = "auto";
+                modalCallBtn.style.opacity = "1";
+            } else {
+                modalCallBtn.href = "#";
+                modalCallBtn.innerHTML = "🚫 لا يوجد رقم";
+                modalCallBtn.style.pointerEvents = "none";
+                modalCallBtn.style.opacity = "0.5";
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع التمرير الخلفي
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ================= مستمعي الأحداث =================
+
+        // إغلاق عند الضغط على زر X
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+
+        // إغلاق عند الضغط خارج المحتوى
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // إغلاق عند الضغط على ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // البحث الفوري
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = khatibsData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                (item.phone && item.phone.includes(term))
+            );
+            renderKhatibs(filtered);
+        });
+
+        // التشغيل الأولي
+        renderKhatibs(khatibsData);
+
+    </script>
+</body>
+</html>
