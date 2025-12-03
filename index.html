@@ -3,138 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دروس حوزة الغدير - سنة ثانية</title>
+    <meta name="description" content="بوابة دروس حوزة الغدير - السنة الثانية - فقه، صرف، أدوات مساعدة">
+    <title>بوابة حوزة الغدير - السنة الثانية</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
     <style>
-        /* إعدادات الخطوط والألوان الأساسية */
+        /* --- المتغيرات اللونية ونظام التصميم --- */
         :root {
-            --primary-green: #2e7d32;   /* أخضر غامق حوزوي */
-            --light-green: #e8f5e9;     /* خلفية خضراء فاتحة جداً */
-            --accent-green: #4caf50;    /* أخضر ساطع للعناوين */
-            --text-dark: #333;
-            --white: #ffffff;
+            --primary-color: #1b5e20;      /* أخضر غامق وقور */
+            --primary-light: #2e7d32;      /* أخضر متوسط */
+            --accent-color: #d4af37;       /* ذهبي للعناوين والتمييز */
+            --bg-color: #f8f9fa;           /* رمادي فاتح جداً للخلفية */
+            --card-bg: #ffffff;            /* أبيض للبطاقات */
+            --text-main: #2c3e50;          /* كحلي غامق للنصوص */
+            --text-secondary: #607d8b;     /* رمادي للنصوص الفرعية */
+            --exam-color: #c62828;         /* أحمر للاختبارات */
+            --tool-color: #0277bd;         /* أزرق للأدوات */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.1);
+            --radius: 16px;
+        }
+
+        /* --- التنسيق العام --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-green);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#e8f5e9 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- الهيدر (رأس الصفحة) --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 60px 20px;
             text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 20px rgba(27, 94, 32, 0.2);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* تنسيق الحاوية الرئيسية */
-        .container {
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 600px;
-            width: 90%;
-            border-top: 5px solid var(--primary-green);
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            animation: rotateBg 60s linear infinite;
         }
 
-        /* تنسيق النصوص */
-        h1 {
-            color: var(--primary-green);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            line-height: 1.5;
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        p.description {
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        header p {
             font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* شريط الحالة (قيد الإنشاء) */
         .status-badge {
             display: inline-block;
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            border: 1px solid #ffeeba;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            border: 1px solid var(--accent-color);
+            color: #fff;
         }
 
-        /* تنسيق قائمة المواد */
-        .subjects-grid {
+        /* --- الحاوية الرئيسية --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        /* --- عناوين الأقسام --- */
+        .section-title {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            align-items: center;
             gap: 10px;
-            margin-top: 20px;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            color: var(--primary-color);
         }
 
-        .subject-tag {
-            background-color: var(--primary-green);
-            color: var(--white);
-            padding: 8px 16px;
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-icon {
+            background: var(--primary-light);
+            color: white;
+            width: 35px;
+            height: 35px;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- شبكة البطاقات --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- تصميم البطاقة --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none; /* لأن البطاقة ستكون داخل رابط أحياناً أو الرابط بداخلها */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-color);
+        }
+
+        .card-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        /* ألوان الأيقونات حسب النوع */
+        .type-fiqh .card-icon-box { background-color: #e8f5e9; color: var(--primary-color); }
+        .type-sarf .card-icon-box { background-color: #fff3e0; color: #ef6c00; }
+        .type-tool .card-icon-box { background-color: #e1f5fe; color: var(--tool-color); }
+        .type-exam .card-icon-box { background-color: #ffebee; color: var(--exam-color); }
+        .type-general .card-icon-box { background-color: #f3e5f5; color: #8e24aa; }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .card p {
             font-size: 0.95rem;
-            transition: transform 0.2s ease, background-color 0.2s;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex-grow: 1; /* يجعل الوصف يأخذ المساحة المتبقية */
         }
 
-        .subject-tag:hover {
-            transform: translateY(-2px);
-            background-color: var(--accent-green);
-            cursor: pointer;
+        .card-action {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: auto;
         }
 
-        /* تذييل الصفحة */
+        .card:hover .card-action {
+            color: var(--accent-color);
+        }
+
+        .tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .tag-minhaj1 { background: #e8f5e9; color: var(--primary-color); }
+        .tag-minhaj2 { background: #e0f2f1; color: #00695c; }
+        .tag-sarf { background: #fff3e0; color: #ef6c00; }
+
+        /* --- الفوتر --- */
         footer {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            color: #888;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 1px solid #e0e0e0;
+            margin-top: 60px;
+            background: white;
         }
 
+        /* --- أيقونات SVG --- */
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* --- تحسينات للموبايل --- */
+        @media (max-width: 600px) {
+            header { padding: 40px 20px; }
+            header h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
+    <header>
+        <div class="header-content">
+            <div class="logo-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+            </div>
+            <h1>بوابة حوزة الغدير</h1>
+            <p>دروس ومراجعات وأدوات السنة الثانية</p>
+            <div class="status-badge">نسخة تجريبية 2025</div>
+        </div>
+    </header>
+
     <div class="container">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
 
-        <h1>موقع تجريبي لعرض الدروس الملخصة والمنسقة بالذكاء الاصطناعي</h1>
-        
-        <p class="description">
-            مخصص لطلبة <strong>حوزة الغدير</strong> (السنة الثانية)
-        </p>
-
-        <div class="status-badge">
-            ⚠️ الصفحة قيد الإنشاء
+        <div class="section-title">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            </div>
+            <h2>الفقه (منهاج الصالحين)</h2>
         </div>
 
-        <h3>ستشمل المواد التالية:</h3>
-        
-        <div class="subjects-grid">
-            <span class="subject-tag">فقه</span>
-            <span class="subject-tag">نحو</span>
-            <span class="subject-tag">صرف</span>
-            <span class="subject-tag">أخلاق</span>
-            <span class="subject-tag">حاسبات</span>
-            <span class="subject-tag">تجويد</span>
-            <span class="subject-tag">عقائد</span>
-            <span class="subject-tag">أخرى</span>
+        <div class="grid">
+            <a href="1198-1215.html" class="card type-fiqh">
+                <span class="tag tag-minhaj1">منهاج 1</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3>مسائل الخمس</h3>
+                <p>المسائل المنتخبة من 1198 إلى 1215، أحكام الأرباح والفوائد.</p>
+                <div class="card-action">تصفح الدرس &leftarrow;</div>
+            </a>
+
+            <a href="5-exam.html" class="card type-exam">
+                <span class="tag tag-minhaj1">منهاج 1</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                </div>
+                <h3>اختبار مراجعة الخمس</h3>
+                <p>أسئلة تفاعلية لاختبار فهمك لمسائل الخمس في المنهاج.</p>
+                <div class="card-action">ابدأ الاختبار &leftarrow;</div>
+            </a>
+
+            <a href="العقد.html" class="card type-fiqh">
+                <span class="tag tag-minhaj2">منهاج 2</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <h3>مسائل شروط العقد</h3>
+                <p>دراسة تفصيلية لشروط المتعاقدين وأحكام البيع.</p>
+                <div class="card-action">تصفح الدرس &leftarrow;</div>
+            </a>
+
+            <a href="اختبار_العقد.html" class="card type-exam">
+                <span class="tag tag-minhaj2">منهاج 2</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </div>
+                <h3>اختبار شروط العقد</h3>
+                <p>مراجعة شاملة واختبار في مسائل المعاملات والعقود.</p>
+                <div class="card-action">ابدأ الاختبار &leftarrow;</div>
+            </a>
         </div>
 
-        <footer>
-            &copy; 2025 حوزة الغدير - المشروع التقني التجربي
-        </footer>
+        <div class="section-title">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            </div>
+            <h2>الصرف واللغة</h2>
+        </div>
+
+        <div class="grid">
+            <a href="noon.html" class="card type-sarf">
+                <span class="tag tag-sarf">صرف</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </div>
+                <h3>أحكام النون</h3>
+                <p>شرح مبسط لأحكام النون الساكنة والتنوين في علم الصرف.</p>
+                <div class="card-action">الذهاب للدرس &leftarrow;</div>
+            </a>
+
+            <a href="sarf-mushtaqat.html" class="card type-sarf">
+                <span class="tag tag-sarf">صرف</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3>المشتقات</h3>
+                <p>دروس في أوزان المشتقات الصرفية واستعمالاتها.</p>
+                <div class="card-action">الذهاب للدرس &leftarrow;</div>
+            </a>
+        </div>
+
+        <div class="section-title">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+            </div>
+            <h2>الأدوات والحاسبات الشرعية</h2>
+        </div>
+
+        <div class="grid">
+            <a href="حاسبة_الخمس.html" class="card type-tool">
+                <span class="tag tag-minhaj1">أدوات</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                </div>
+                <h3>حاسبة الخمس الحكمية</h3>
+                <p>أداة دقيقة لحساب الحقوق الشرعية بناءً على منهاج الصالحين ج١.</p>
+                <div class="card-action">فتح الحاسبة &leftarrow;</div>
+            </a>
+
+            <a href="حاسبة_السفر.html" class="card type-tool">
+                <span class="tag tag-minhaj1">أدوات</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                </div>
+                <h3>حاسبة السفر</h3>
+                <p>لحساب المسافة الشرعية وحد الترخص وقواعد الصلاة في السفر.</p>
+                <div class="card-action">فتح الحاسبة &leftarrow;</div>
+            </a>
+        </div>
+
+        <div class="section-title">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h2>مصادر عامة</h2>
+        </div>
+
+        <div class="grid">
+            <a href="خطباء.html" class="card type-general">
+                <span class="tag tag-minhaj2">البحرين</span>
+                <div class="card-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </div>
+                <h3>دليل خطباء المنبر الحسيني</h3>
+                <p>قائمة ودليل تواصل لخطباء المنبر في البحرين.</p>
+                <div class="card-action">عرض الدليل &leftarrow;</div>
+            </a>
+        </div>
+
     </div>
+
+    <footer>
+        <p>&copy; 2025 حوزة الغدير - المشروع التقني التجريبي</p>
+        <p style="font-size: 0.85rem; margin-top: 5px;">تم التطوير لخدمة طلبة العلم</p>
+    </footer>
 
 </body>
 </html>
