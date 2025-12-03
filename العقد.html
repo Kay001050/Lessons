@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل كتاب التجارة - شروط العقد</title>
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #159895;
+            --accent-color: #57c5b6;
+            --bg-color: #f0f4f8;
+            --text-color: #2c3e50;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 { margin: 0; font-size: 2.5em; }
+        h2 { border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; margin-top: 40px; color: var(--primary-color); }
+        h3 { color: var(--secondary-color); display: flex; align-items: center; gap: 10px; }
+
+        .masala-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-right: 5px solid var(--secondary-color);
+        }
+
+        .original-text {
+            background-color: #eef2f5;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border: 1px dashed #bdc3c7;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .original-text::before {
+            content: "📝 نص المسألة:";
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Tables Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover { background-color: #f1f1f1; }
+
+        /* Tree Structure Styling using Flexbox */
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .tree-node {
+            border: 2px solid var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: #fff;
+            text-align: center;
+            position: relative;
+            margin: 10px;
+            font-weight: bold;
+            min-width: 150px;
+        }
+
+        .tree-branch {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+        }
+
+        .tree-branch::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 2px;
+            height: 10px;
+            background: var(--secondary-color);
+        }
+
+        .connector-line {
+            width: 2px;
+            height: 20px;
+            background: var(--secondary-color);
+            margin: 0 auto;
+        }
+
+        /* Analysis Tags */
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .tag-def { background-color: #e3f2fd; color: #1565c0; } /* تعريف */
+        .tag-rule { background-color: #e8f5e9; color: #2e7d32; } /* حكم */
+        .tag-cond { background-color: #fff3e0; color: #ef6c00; } /* شرط */
+        .tag-warn { background-color: #ffebee; color: #c62828; } /* احتياط/إشكال */
+
+        .note-box {
+            background-color: #fff8e1;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        /* Qawaid Section */
+        .qawaid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .qaeida-card {
+            background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: var(--border-radius);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>📚 كتاب التجارة - تحليل شروط العقد</h1>
+        <p>تقسيم تحليلي وتشجير للمسائل من المقدمة إلى مسألة 61</p>
+    </header>
+
+    <section class="masala-card">
+        <h2>🏷️ المقدمة: حقيقة البيع والمعاوضة</h2>
+        <div class="original-text">
+            البيع هو : نقل المال إلى الغير بعوض، والمقصود بالعوض هو المال الذي يجعل بدلاً وخَلَفاً عن الآخر... (إلى آخر نص المقدمة)
+        </div>
+
+        <h3>🔍 التحليل التفصيلي والتشجير:</h3>
+        
+        <div class="tree-container">
+            <div class="tree-node" style="background-color: var(--primary-color); color: white;">المعاملات المالية</div>
+            <div class="connector-line"></div>
+            <div class="tree-branch">
+                <div style="display:flex; flex-direction:column; align-items:center;">
+                    <div class="tree-node">البيع (الماهية)</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-node" style="font-weight:normal; font-size:0.9em;">
+                        نقل المال للغير بعوض<br>
+                        (قصد العوضية والمعوضية)
+                    </div>
+                    <div class="connector-line"></div>
+                    <div class="tree-branch">
+                        <div class="tree-node tag-def">البائع: باذل المعوض</div>
+                        <div class="tree-node tag-def">المشتري: باذل العوض</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; align-items:center;">
+                    <div class="tree-node">المعاوضة المستقلة</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-node" style="font-weight:normal; font-size:0.9em;">
+                        مبادلة مال بمال<br>
+                        (بدون قصد البيع/الشراء)
+                    </div>
+                    <div class="connector-line"></div>
+                    <div class="tree-branch">
+                        <div class="tree-node tag-rule">معاملة صحيحة ولازمة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>📊 جدول الفروقات الجوهرية:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>وجه المقارنة</th>
+                    <th>البيع (Sale)</th>
+                    <th>المعاوضة المستقلة (Pure Exchange)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>القصد والنية</strong></td>
+                    <td>يشترط قصد العوضية والمعوضية (بيع وشراء)</td>
+                    <td>خالية من قصد العوضية والمعوضية (مجرد تبادل)</td>
+                </tr>
+                <tr>
+                    <td><strong>الأطراف</strong></td>
+                    <td>يتميز البائع عن المشتري</td>
+                    <td>لا تمييز اصطلاحي (كل منهما دافع وآخذ)</td>
+                </tr>
+                <tr>
+                    <td><strong>الأحكام المختصة</strong></td>
+                    <td>تثبت فيه (مثل خيار المجلس والحيوان)</td>
+                    <td>لا تثبت فيها أحكام البيع الخاصة</td>
+                </tr>
+                <tr>
+                    <td><strong>الأحكام العامة</strong></td>
+                    <td>تشملها (كحرمة الربا)</td>
+                    <td>تشملها (كحرمة الربا)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="masala-card">
+        <h2>🗣️ مسألة 51: صيغة العقد (الإيجاب والقبول)</h2>
+        <div class="original-text">
+            يعتبر في البيع الإيجاب والقبول، ويقع بكلّ لفظ دالّ على المقصود... (إلى آخر المسألة)
+        </div>
+
+        <h3>🧩 تفكيك المسألة:</h3>
+        <table>
+            <tr>
+                <td width="20%"><strong>موضوع المسألة</strong></td>
+                <td>أركان الصيغة اللفظية في البيع.</td>
+            </tr>
+            <tr>
+                <td><strong>الشرط الأساسي</strong></td>
+                <td>وجود الإيجاب والقبول بلفظ دال على المقصود.</td>
+            </tr>
+            <tr>
+                <td><strong>المرونة اللغوية</strong></td>
+                <td><span class="tag tag-rule">جائز</span> عدم الصراحة، عدم العربية، وجود اللحن (أخطاء نحوية) ما لم يخل بالمعنى العرفي.</td>
+            </tr>
+        </table>
+
+        <h3>🌳 تشجير الألفاظ والصيغ:</h3>
+        <div class="tree-container">
+            <div class="tree-node">صيغة العقد</div>
+            <div class="connector-line"></div>
+            <div class="tree-branch">
+                <div style="flex:1; text-align:center;">
+                    <div class="tree-node tag-cond">الإيجاب (من البائع غالباً)</div>
+                    <div class="tree-branch" style="justify-content:center;">
+                        <span class="tag tag-def">بعت</span>
+                        <span class="tag tag-def">ملّكت</span>
+                        <span class="tag tag-def">بادلت</span>
+                        <span class="tag tag-warn">بصيغة الشراء: اشتريت (جائز)</span>
+                    </div>
+                </div>
+                <div style="flex:1; text-align:center;">
+                    <div class="tree-node tag-cond">القبول (من المشتري غالباً)</div>
+                    <div class="tree-branch" style="justify-content:center;">
+                        <span class="tag tag-def">قبلت</span>
+                        <span class="tag tag-def">رضيت</span>
+                        <span class="tag tag-def">اشتريت</span>
+                        <span class="tag tag-warn">بصيغة البيع: بعت (جائز)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="masala-card">
+        <h2>🔄 مسألة 52: الاستيجاب (صيغة الأمر) والولاية</h2>
+        <div class="original-text">
+            إذا قال: (بعني فرسك بهذا الدينار) فقال المخاطب: (بعتك فرسي بهذا الدينار) صحّ...
+        </div>
+
+        <h3>📋 تحليل الحالات:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>الصورة (الفرضية)</th>
+                    <th>الوصف</th>
+                    <th>الحكم</th>
+                    <th>التعليل</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>الاستيجاب المفرد</strong></td>
+                    <td>المشتري يأمر: "بعني"، البائع ينفذ: "بعتك" (دون قبول لفظي لاحق من المشتري).</td>
+                    <td>✅ صح وترتب الأثر</td>
+                    <td>إذا كان العرف يفهم منه إعطاء السلطنة للبائع في النقل من الطرفين.</td>
+                </tr>
+                <tr>
+                    <td><strong>وحدة المتصرف</strong></td>
+                    <td>شخص واحد له حق التصرف في المالين (ولي على الطرفين أو وكيل عنهما).</td>
+                    <td>✅ صح وترتب الأثر</td>
+                    <td>لأنه يملك السلطة على العوضين فلا يحتاج لخطاب بين اثنين.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="masala-card">
+        <h2>⏱️ مسألة 53: الموالاة (التتابع الزمني)</h2>
+        <div class="original-text">
+            يعتبر في تحقّق العقد الموالاة بين الإيجاب والقبول فلو قال البائع: (بعت) فلم ‏يبادر المشتري...
+        </div>
+
+        <h3>🚦 معيار صحة العقد زمنياً:</h3>
+        <div class="tree-container">
+            <div class="tree-node">الموالاة بين الإيجاب والقبول</div>
+            <div class="connector-line"></div>
+            <div class="tree-branch">
+                <div class="tree-node" style="border-color: red;">
+                    ⛔ غير متحقق (باطل)
+                    <hr>
+                    تأخر القبول + انصراف البائع عن البيع قبل صدور القبول.
+                </div>
+                
+                <div class="tree-node" style="border-color: green;">
+                    ✅ متحقق (صحيح)
+                    <hr>
+                    تأخر القبول + البائع منتظر ولم ينصرف.
+                </div>
+
+                <div class="tree-node" style="border-color: green;">
+                    ✅ وسائل حديثة (هاتف/كتابة)
+                    <hr>
+                    تصح إذا بقي البائع على التزامه حتى وصول القبول.
+                </div>
+            </div>
+        </div>
+        <div class="note-box">
+            <strong>قاعدة مستفادة:</strong> الموالاة ليست مجرد تتابع زمني فوري، بل هي "بقاء الإيجاب فاعلاً في نفس الموجب حتى يلحقه القبول".
+        </div>
+    </section>
+
+    <section class="masala-card">
+        <h2>⚖️ مسألة 54: التطابق بين الإيجاب والقبول</h2>
+        <div class="original-text">
+            يعتبر التطابق بين الإيجاب والقبول في الثمن والمثمن، وفي سائر حدود البيع والعوضين...
+        </div>
+
+        <h3>💥 جدول صور الاختلاف وأحكامها:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>نوع الاختلاف</th>
+                    <th>مثال البائع (الإيجاب)</th>
+                    <th>مثال المشتري (القبول)</th>
+                    <th>الحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>في الثمن/المثمن</strong></td>
+                    <td>كتاب بدينار</td>
+                    <td>دفتر بدينار / كتاب بدرهم</td>
+                    <td>❌ لم يصح (بطلان)</td>
+                </tr>
+                <tr>
+                    <td><strong>في الشروط (تغاير)</strong></td>
+                    <td>بشرط خياطة قميصي</td>
+                    <td>بشرط خياطة عباءتي / بلا شرط</td>
+                    <td>❌ لم يصح (بطلان)</td>
+                </tr>
+                <tr>
+                    <td><strong>في الذمة (التعيين)</strong></td>
+                    <td>دينار في ذمتك</td>
+                    <td>دينار لي في ذمة زيد</td>
+                    <td>❌ لم يصح (بطلان)</td>
+                </tr>
+                <tr>
+                    <td><strong>التبعيض (كل و جزء)</strong></td>
+                    <td>الكتاب بدينار</td>
+                    <td>نصفه بنصف دينار</td>
+                    <td>⚠️ فيه إشكال (الأحوط الفساد)</td>
+                </tr>
+                <tr>
+                    <td><strong>التعارض (مطلق ومشروط)</strong></td>
+                    <td>بعتك بدينار (مطلق)</td>
+                    <td>اشتريت بشرط الخياطة (مشروط)</td>
+                    <td>⚠️ فيه إشكال (مراعاة الاحتياط)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="masala-card">
+        <h2>🤝 المعاطاة وبدائل اللفظ (مسائل 55 - 59)</h2>
+        <div class="original-text">
+            (مجموعة مسائل تتعلق بالعجز عن اللفظ، والبيع بالمعاطاة وشروطها)
+        </div>
+
+        <h3>🔀 التفريع الشجري لأنواع العقود غير اللفظية:</h3>
+        
+        <div class="tree-container">
+            <div class="tree-node">طرق إنشاء العقد</div>
+            <div class="connector-line"></div>
+            <div class="tree-branch">
+                
+                <div style="border:1px solid #ccc; padding:10px; border-radius:8px; margin:5px;">
+                    <h4>مسألة 55: العاجز (أخرس)</h4>
+                    <ul>
+                        <li><span class="tag tag-rule">البديل:</span> الإشارة أو الكتابة.</li>
+                        <li><span class="tag tag-rule">التوكيل:</span> يجوز له التوكيل.</li>
+                        <li><span class="tag tag-rule">الأولوية:</span> العقد المباشر بالإشارة يجزئ حتى مع القدرة على التوكيل.</li>
+                    </ul>
+                </div>
+
+                <div style="border:1px solid #ccc; padding:10px; border-radius:8px; margin:5px; flex:2;">
+                    <h4>مسألة 56-59: المعاطاة (الفعل)</h4>
+                    <table style="font-size:0.9em;">
+                        <tr>
+                            <td><strong>التعريف</strong></td>
+                            <td>إنشاء البيع بالإعطاء والأخذ (دون صيغة).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>نطاق المال</strong></td>
+                            <td>تصح في الخطير (الغالي) والحقير (الرخيص).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>صورها</strong></td>
+                            <td>إعطاء من الطرفين / إعطاء من طرف واحد (إذا كان العوض ذمياً).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>شروطها</strong></td>
+                            <td>نفس شروط البيع بالصيغة + ثبوت الخيارات.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الشرط فيها</strong></td>
+                            <td>يصح اشتراط الخيار ونحوه (أثناء التعاطي أو بالمقاولة المسبقة).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>شموليتها</strong></td>
+                            <td>تجري في الرهن والوقف، ⛔ لا تجري في النكاح، الطلاق، النذر.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="masala-card">
+        <h2>🔗 مسألة 60: التعليق في العقد</h2>
+        <div class="original-text">
+            لا يجوز تعليق البيع على أمر غير حاصل حين العقد سواء أعَلِمَ حصوله بعد ذلك...
+        </div>
+
+        <h3>🚦 حالات التعليق وحكمها:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>نوع المعلق عليه</th>
+                    <th>المثال</th>
+                    <th>حالة العلم/الجهل</th>
+                    <th>الحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>أمر مستقبلي (غير حاصل)</strong></td>
+                    <td>بعتك إذا هلّ الهلال / إذا ولد لي ولد</td>
+                    <td>سواء علم حصوله أم جهل</td>
+                    <td>⛔ باطل (لا يجوز)</td>
+                </tr>
+                <tr>
+                    <td><strong>أمر حالي (مجهول الحصول)</strong></td>
+                    <td>بعتك إن كان اليوم الجمعة</td>
+                    <td>جاهل باليوم</td>
+                    <td>⛔ باطل (لا يجوز)</td>
+                </tr>
+                <tr>
+                    <td><strong>أمر حالي (معلوم الحصول)</strong></td>
+                    <td>بعتك إن كان اليوم الجمعة</td>
+                    <td>عالم بأن اليوم جمعة</td>
+                    <td>✅ جائز (صحيح)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <strong>قاعدة:</strong> التنجيز شرط في العقد، والتعليق على المحقق المعلوم لا يقدح في التنجيز واقعاً.
+        </div>
+    </section>
+
+    <section class="masala-card">
+        <h2>🚫 مسألة 61: المقبوض بالعقد الفاسد</h2>
+        <div class="original-text">
+            إذا قبض المشتري ما اشتراه بالعقد الفاسد، فإن علم برضا البائع بالتصرّف فيه...
+        </div>
+
+        <h3>📉 مخطط مسار التعامل مع المقبوض فاسداً:</h3>
+        <div class="tree-container">
+            <div class="tree-node">قبض المال بعقد فاسد</div>
+            <div class="connector-line"></div>
+            <div class="tree-branch">
+                
+                <div style="text-align:center; margin:10px;">
+                    <div class="tree-node" style="background:#e8f5e9;">علم رضا المالك بالتصرف (مطلقاً)</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-node tag-rule">يجوز التصرف</div>
+                    <small>(حتى مع فساد العقد)</small>
+                </div>
+
+                <div style="text-align:center; margin:10px;">
+                    <div class="tree-node" style="background:#ffebee;">عدم العلم بالرضا / عدم الرضا</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-node tag-rule">وجوب الرد فوراً</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-branch">
+                        <div style="border:1px dashed red; padding:5px; border-radius:5px;">
+                            <strong>في حال التلف:</strong><br>
+                            - مثلي ⬅️ رد المثل<br>
+                            - قيمي ⬅️ رد القيمة
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align:center; margin:10px;">
+                    <div class="tree-node" style="background:#fff3e0;">باعه القابض لآخر</div>
+                    <div class="connector-line"></div>
+                    <div class="tree-node tag-cond">بيع فضولي</div>
+                    <small>(تتوقف صحته على إجازة المالك الأصلي)</small>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="note-box">
+            <strong>تنبيه:</strong> الجهل بالحكم الشرعي (أن العقد فاسد) لا يعفي من المسؤولية والضمان.
+        </div>
+    </section>
+
+    <section class="masala-card" style="border-right-color: var(--primary-color);">
+        <h2>💎 القواعد الفقهية المستفادة من الفصل</h2>
+        <div class="qawaid-grid">
+            <div class="qaeida-card">
+                <h3>1. العقود تابعة للقصود</h3>
+                <p>مستفادة من المقدمة ومسألة 51. اللفظ وسيلة للكشف عن القصد الباطني، والعبرة بالمعنى لا بخصوص اللفظ (ما لم يمنع اللحن من الظهور).</p>
+            </div>
+            <div class="qaeida-card">
+                <h3>2. أصالة اللزوم في المعاطاة</h3>
+                <p>مستفادة من مسألة 56 و 57. المعاطاة تفيد الملك وتخضع لشروط البيع اللفظي وخياراته.</p>
+            </div>
+            <div class="qaeida-card">
+                <h3>3. التطابق بين الإيجاب والقبول</h3>
+                <p>مستفادة من مسألة 54. العقد مركب من التزامين مرتبطين، فإذا اختلفا لم ينعقد الارتباط.</p>
+            </div>
+            <div class="qaeida-card">
+                <h3>4. ما يضمن بصحيحه يضمن بفاسده</h3>
+                <p>مستفادة من مسألة 61. اليد على المال المقبوض بعقد فاسد يد ضمان (تلف)، ويجب الرد.</p>
+            </div>
+            <div class="qaeida-card">
+                <h3>5. مبطلية التعليق</h3>
+                <p>مستفادة من مسألة 60. العقد يجب أن يكون منجزاً، والتعليق على المجهول أو المستقبل يبطله.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
