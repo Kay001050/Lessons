@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الحاسبة الفقهية للخمس | منهاج الصالحين</title>
+    <meta name="description" content="نظام حساب الخمس الشرعي وتحديد النصاب وفق فتاوى السيد السيستاني">
+    <meta name="theme-color" content="#1B4D3E">
+
+    <!-- الخطوط العربية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Kufi+Arabic:wght@200;400;600;800&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- المتغيرات اللونية والتصميمية --- */
+        :root {
+            --primary: #1B4D3E;       /* أخضر ملكي داكن */
+            --primary-hover: #143a2f;
+            --accent: #C5A059;        /* ذهبي تراثي */
+            --accent-light: #f0e6d2;
+            --bg-page: #F7F9F8;
+            --bg-card: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-light: #7F8C8D;
+            --border: #E0E0E0;
+            --success: #27AE60;
+            --danger: #C0392B;
+            --warning: #F39C12;
+            --radius: 16px;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 30px rgba(27, 77, 62, 0.08);
+            --font-head: 'Amiri', serif;
+            --font-body: 'Noto Kufi Arabic', sans-serif;
+        }
+
+        /* --- التأسيس --- */
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            margin: 0; padding: 0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- الهيدر --- */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2b22 100%);
+            color: white;
+            padding: 50px 20px 80px;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        header::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C5A059' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        .ayah-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            position: relative; z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.8rem; margin: 0;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative; z-index: 2;
+        }
+
+        /* --- الهيكل العام (Grid System) --- */
+        .app-container {
+            max-width: 1300px;
+            margin: -60px auto 0;
+            padding: 0 20px 50px;
+            display: grid;
+            grid-template-columns: 360px 1fr; /* العمود الجانبي والمحتوى */
+            gap: 30px;
+            position: relative; z-index: 10;
+        }
+
+        /* --- الشريط الجانبي (المحرك) --- */
+        .sidebar {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+            border-top: 5px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .sidebar-header {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.1rem; font-weight: 800; color: var(--primary);
+            margin-bottom: 25px; padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .price-input-group { margin-bottom: 25px; }
+        .price-label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: var(--text-main); }
+        
+        .input-wrapper { position: relative; }
+        .input-wrapper i {
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--accent); font-size: 1.1rem;
+        }
+        .input-wrapper input {
+            width: 100%; padding: 14px 50px 14px 15px;
+            border: 2px solid var(--border); border-radius: 10px;
+            font-family: 'Noto Kufi Arabic'; font-weight: 600; font-size: 1rem;
+            transition: 0.3s; background: #fdfdfd;
+        }
+        .input-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(27, 77, 62, 0.1);
+            background: #fff;
+        }
+
+        /* صندوق النتائج الحية للمعايير */
+        .live-standards {
+            background: var(--accent-light);
+            border-radius: 12px; padding: 20px;
+            border: 1px dashed var(--accent);
+        }
+        .std-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .std-row:last-child { border-bottom: none; }
+        .std-label { font-size: 0.85rem; color: #666; }
+        .std-value { font-family: var(--font-head); font-weight: bold; color: var(--primary); font-size: 1.2rem; }
+
+        /* --- منطقة المحتوى (Main) --- */
+        .tabs-wrapper {
+            display: flex; gap: 12px; margin-bottom: 25px;
+            overflow-x: auto; padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .tabs-wrapper::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            background: var(--bg-card); border: none;
+            padding: 15px 25px; border-radius: 50px;
+            font-family: var(--font-body); font-weight: 700; color: var(--text-light);
+            cursor: pointer; transition: all 0.3s; white-space: nowrap;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: var(--shadow-sm); border: 1px solid transparent;
+        }
+        .tab-btn:hover { background: #fff; transform: translateY(-2px); color: var(--primary); }
+        .tab-btn.active {
+            background: var(--primary); color: white;
+            box-shadow: 0 8px 20px rgba(27, 77, 62, 0.25);
+        }
+
+        .calculator-card {
+            background: var(--bg-card); border-radius: var(--radius);
+            padding: 40px; box-shadow: var(--shadow-lg);
+            display: none; animation: fadeInSlide 0.5s ease;
+        }
+        .calculator-card.active { display: block; }
+
+        /* رأس القسم */
+        .card-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 20px;
+        }
+        .card-title h2 { font-family: var(--font-head); font-size: 2.2rem; color: var(--primary); margin: 0; }
+        .card-title p { margin: 5px 0 0; color: var(--text-light); font-size: 0.9rem; }
+        .masala-ref {
+            background: var(--primary); color: white;
+            padding: 6px 15px; border-radius: 8px;
+            font-size: 0.8rem; font-weight: bold;
+        }
+
+        /* قسم المساعدة القابل للطي */
+        .help-section { margin-bottom: 30px; }
+        .help-trigger {
+            background: #f8f9fa; border: 1px solid var(--border);
+            width: 100%; padding: 12px; border-radius: 8px;
+            text-align: right; cursor: pointer; font-weight: bold; color: var(--primary);
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .help-trigger:hover { background: #eef2f5; }
+        .help-content {
+            display: none; padding: 20px; background: #fff;
+            border: 1px solid var(--border); border-top: none;
+            border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+            font-size: 0.95rem; color: #555; line-height: 1.8;
+        }
+        .help-content ul { padding-right: 20px; margin: 0; }
+        .help-content li { margin-bottom: 8px; }
+
+        /* نص الفتوى */
+        .fatwa-box {
+            background: #fefcf5; border-right: 5px solid var(--accent);
+            padding: 20px; margin-bottom: 30px; border-radius: 6px;
+            color: #5d5d5d; font-family: var(--font-head); font-size: 1.15rem;
+            line-height: 2; text-align: justify; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        /* الشبكة والنماذج */
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; }
+        .form-input {
+            width: 100%; padding: 15px; border: 1px solid var(--border);
+            border-radius: 10px; font-size: 1.1rem; transition: 0.3s;
+            background: #fafafa;
+        }
+        .form-input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.05); }
+
+        /* الأزرار */
+        .calc-btn {
+            width: 100%; background: linear-gradient(135deg, var(--primary), #143a2f);
+            color: white; border: none; padding: 18px;
+            border-radius: 12px; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; margin-top: 30px; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(27, 77, 62, 0.2);
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(27, 77, 62, 0.3); }
+
+        /* النتائج */
+        .result-container {
+            margin-top: 40px; border-radius: 12px; overflow: hidden; display: none;
+            border: 1px solid var(--border); animation: slideUp 0.4s ease;
+        }
+        .res-header {
+            padding: 20px; text-align: center; color: white;
+            font-family: var(--font-head); font-size: 1.4rem; font-weight: bold;
+        }
+        .bg-obligatory { background: var(--danger); } /* وجوب الخمس */
+        .bg-free { background: var(--success); }      /* لا خمس */
+        .bg-alert { background: var(--warning); color: #333; } /* تنبيه */
+
+        .res-body { padding: 35px; text-align: center; background: #fff; }
+        .amount-big {
+            font-family: var(--font-head); font-size: 3.5rem;
+            font-weight: 900; color: var(--primary); margin: 10px 0;
+            line-height: 1.2;
+        }
+        
+        .details-box {
+            text-align: right; background: #f8f9fa; padding: 20px;
+            border-radius: 10px; margin-top: 25px; font-size: 0.95rem;
+            border: 1px dashed #d1d5db;
+        }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+        .detail-row:last-child { border: none; margin: 0; padding: 0; }
+
+        /* خيارات الراديو المحسنة (Cards) */
+        .radio-group-container { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+        .radio-card { flex: 1; min-width: 150px; position: relative; }
+        .radio-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+        .radio-btn-style {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px; background: #fff; border: 2px solid var(--border);
+            border-radius: 12px; cursor: pointer; transition: 0.2s; height: 100%; gap: 10px;
+        }
+        .radio-btn-style i { font-size: 1.8rem; color: var(--text-light); transition: 0.2s; }
+        .radio-card input:checked + .radio-btn-style {
+            border-color: var(--primary); background: #f4fdf9; color: var(--primary);
+        }
+        .radio-card input:checked + .radio-btn-style i { color: var(--primary); }
+
+        /* --- التجاوب (Mobile Responsiveness) --- */
+        @media (max-width: 992px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                display: flex; flex-direction: column;
+            }
+            /* إصلاح تداخل القائمة الجانبية في الموبايل */
+            .sidebar {
+                position: static; /* إلغاء التثبيت في الموبايل */
+                order: -1; /* تظهر في الأعلى */
+                margin-bottom: 20px;
+                z-index: 1;
+            }
+            h1 { font-size: 2rem; }
+            .ayah-badge { font-size: 1rem; padding: 8px 15px; }
+        }
+
+        @keyframes fadeInSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; height: 0; } to { opacity: 1; height: auto; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- نافذة إبراء الذمة -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div style="background: white; padding: 40px; border-radius: 16px; max-width: 600px; text-align: center; border-top: 6px solid var(--accent);">
+                <div style="width: 70px; height: 70px; background: #fdf6e3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary);">
+                    <i class="fa-solid fa-balance-scale fa-2x"></i>
+                </div>
+                <h2 style="font-family: var(--font-head); margin-bottom: 15px; color: var(--primary);">إبراء ذمة وتنبيه شرعي</h2>
+                <p style="color: #555; font-size: 1rem; margin-bottom: 20px;">
+                    تمت برمجة هذه الحاسبة بناءً على فتاوى سماحة المرجع الديني الأعلى <strong>السيد علي الحسيني السيستاني (دام ظله)</strong>.
+                </p>
+                <p style="color: #555; font-size: 0.95rem; margin-bottom: 25px;">
+                    هذه الأداة مساعدة. في المسائل المعقدة أو الشكوك الكبيرة، يجب الرجوع للوكيل الشرعي المعتمد.
+                </p>
+                <button onclick="document.getElementById('modal').style.display='none'" style="background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1rem;">
+                    فهمت، توكلت على الله
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="ayah-badge">﴿وَاعْلَمُوا أَنَّمَا غَنِمْتُم مِّن شَيْءٍ فَأَنَّ لِلَّهِ خُمُسَهُ﴾</div>
+        <h1>الحاسبة الحكمية للخمس</h1>
+        <p style="opacity: 0.9; margin-top: 10px;">وفق  المعايير الفقهية لمنهاج الصالحين</p>
+    </header>
+
+    <div class="app-container">
+        
+        <!-- 1. الشريط الجانبي (محرك المعايير) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-sliders"></i>
+                <span>محرك المعايير الشرعية</span>
+            </div>
+
+            <div class="price-input-group">
+                <label class="price-label">سعر غرام الذهب (عيار 22 لدى السيستاني)</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-coins"></i>
+                    <input type="number" id="goldPrice" placeholder="السعر اليوم (مثلاً: 41)" oninput="updateStandards()">
+                </div>
+                <small style="color: #999; font-size: 0.75rem; margin-top: 5px; display: block;">* يفضل سعر الذهب الخالص لدقة حساب المثقال والدينار</small>
+            </div>
+
+            <div class="price-input-group">
+                <label class="price-label">سعر غرام الفضة (الخالص)</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-ring"></i>
+                    <input type="number" id="silverPrice" placeholder="السعر اليوم (مثلاً: 1)" oninput="updateStandards()">
+                </div>
+            </div>
+
+            <!-- القيم المحتسبة تظهر هنا بدلاً من النافذة المنبثقة -->
+            <div class="live-standards">
+                <div style="text-align:center; margin-bottom:15px; font-weight:bold; color:var(--primary);">
+                    <i class="fa-solid fa-calculator"></i> النصابات المحتسبة
+                </div>
+                
+                <div class="std-row">
+                    <span class="std-label">المثقال الصيرفي (4.64غ)</span>
+                    <span class="std-value" id="val_mithqal">0.00</span>
+                </div>
+                <div class="std-row">
+                    <span class="std-label">الدينار الشرعي (3.48غ)</span>
+                    <span class="std-value" id="val_dinar">0.00</span>
+                </div>
+                <div class="std-row">
+                    <span class="std-label">نصاب المعدن (15 مثقال)</span>
+                    <span class="std-value" id="val_nisab_mineral">0.00</span>
+                </div>
+                <div class="std-row">
+                    <span class="std-label">نصاب الغوص (1 دينار)</span>
+                    <span class="std-value" id="val_nisab_diving">0.00</span>
+                </div>
+            </div>
+            
+            <div style="margin-top:15px; font-size:0.8rem; color:#666; line-height:1.6; background:#f0f4f8; padding:10px; border-radius:8px;">
+                <i class="fa-solid fa-circle-info"></i> <strong>المعيار الفقهي:</strong><br>
+                الدينار الشرعي = 3.48 غرام (ثلاثة أرباع المثقال الصيرفي).<br>
+                المثقال الصيرفي = 4.64 غرام.<br>
+                الدرهم = 2.436 غرام (0.7 دينار).
+            </div>
+        </aside>
+
+        <!-- 2. المحتوى الرئيسي -->
+        <main>
+            
+            <div class="tabs-wrapper">
+                <button class="tab-btn active" onclick="switchTab('profits')"><i class="fa-solid fa-sack-dollar"></i> أرباح المكاسب</button>
+                <button class="tab-btn" onclick="switchTab('minerals')"><i class="fa-solid fa-gem"></i> المعادن</button>
+                <button class="tab-btn" onclick="switchTab('treasure')"><i class="fa-solid fa-box-open"></i> الكنز</button>
+                <button class="tab-btn" onclick="switchTab('diving')"><i class="fa-solid fa-water"></i> الغوص</button>
+                <button class="tab-btn" onclick="switchTab('mixed')"><i class="fa-solid fa-scale-unbalanced"></i> المال المختلط</button>
+            </div>
+
+            <!-- قسم الأرباح -->
+            <section id="calc-profits" class="calculator-card active">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h2>فاضل المؤونة (أرباح السنة)</h2>
+                        <p>ما زاد عن مؤونة السنة لك ولعيالك</p>
+                    </div>
+                    <span class="masala-ref">مسألة 1212</span>
+                </div>
+
+                <div class="help-section">
+                    <div class="help-trigger" onclick="toggleHelp('help-profits')">
+                        <span><i class="fa-regular fa-lightbulb"></i> أمثلة وتوضيحات لما يجب حسابه</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div id="help-profits" class="help-content">
+                        <ul>
+                            <li><strong>النقد:</strong> كل ما تملكه من كاش أو رصيد بنكي من أرباح هذه السنة (رواتب، أرباح تجارة).</li>
+                            <li><strong>البضائع:</strong> للمحلات التجارية، تُقوّم البضاعة بقيمتها الفعلية عند رأس السنة.</li>
+                            <li><strong>الديون لك:</strong> الرواتب المتأخرة أو الديون التي تتوقع سدادها.</li>
+                            <li><strong>يستثنى (يخصم):</strong> المهر، الإرث (إلا لمن يحتسبه)، أموال خمستها سابقاً، ديون صرفتها في المؤونة.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="fatwa-box">
+                    "يجب الخمس في ما يفضل عن مؤونة سنته له ولعياله مما يستفيده بصناعة أو زراعة أو تجارة... بل يتعلق الخمس بكل فائدة مملوكة".
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-group">
+                        <label>1. النقد المتوفر (كاش + بنك)</label>
+                        <input type="number" id="p_cash" class="form-input" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>2. قيمة البضائع / الأسهم</label>
+                        <input type="number" id="p_assets" class="form-input" placeholder="القيمة السوقية اليوم">
+                    </div>
+                    <div class="form-group">
+                        <label>3. ديون لك (مرجوة السداد)</label>
+                        <input type="number" id="p_loans" class="form-input" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:var(--danger)">4. (يُخصم) ديون عليك</label>
+                        <input type="number" id="p_debts" class="form-input" placeholder="ديون المؤونة أو التجارة">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:var(--success)">5. (يُخصم) مال مخمس/معفي</label>
+                        <input type="number" id="p_exempt" class="form-input" placeholder="مثل الإرث أو رأس المال المخمس">
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="calcProfits()">
+                    <i class="fa-solid fa-calculator"></i> تحليل وحساب الخمس
+                </button>
+
+                <div id="res-profits" class="result-container"></div>
+            </section>
+
+            <!-- قسم المعادن -->
+            <section id="calc-minerals" class="calculator-card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h2>خمس المعادن</h2>
+                        <p>الذهب، الفضة، الرصاص، النفط، وغيرها</p>
+                    </div>
+                    <span class="masala-ref">مسألة 1191</span>
+                </div>
+
+                <div class="fatwa-box">
+                    "يشترط في وجوب الخمس في المعدن النصاب، وهو قيمة (خمسة عشر مثقالاً صيرفياً من الذهب المسكوك)... بعد استثناء مؤونة الاستخراج".
+                </div>
+
+                <div class="calc-grid">
+                    <div class="form-group">
+                        <label>القيمة الإجمالية للمستخرج</label>
+                        <input type="number" id="m_val" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>مؤونة الاستخراج (تُخصم)</label>
+                        <input type="number" id="m_cost" class="form-input" placeholder="تكاليف الحفر والآلات">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcMinerals()">التحقق من النصاب والحساب</button>
+                <div id="res-minerals" class="result-container"></div>
+            </section>
+
+            <!-- قسم الكنز -->
+            <section id="calc-treasure" class="calculator-card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h2>خمس الكنز</h2>
+                    </div>
+                    <span class="masala-ref">مسألة 1195</span>
+                </div>
+                <div class="fatwa-box">
+                    "يشترط في وجوب الخمس فيه بلوغ النصاب، وهو أقل نصابي الذهب (15 دينار) والفضة (105 درهم) مالية".
+                </div>
+                <div class="calc-grid">
+                    <div class="form-group">
+                        <label>قيمة الكنز المكتشف</label>
+                        <input type="number" id="t_val" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>مؤونة الإخراج (تُخصم)</label>
+                        <input type="number" id="t_cost" class="form-input">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcTreasure()">التحقق من النصاب والحساب</button>
+                <div id="res-treasure" class="result-container"></div>
+            </section>
+
+            <!-- قسم الغوص -->
+            <section id="calc-diving" class="calculator-card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h2>ما أخرج بالغوص</h2>
+                        <p>اللؤلؤ، المرجان، العنبر</p>
+                    </div>
+                    <span class="masala-ref">مسألة 1198</span>
+                </div>
+                <div class="fatwa-box">
+                    "يعتبر في وجوب الخمس فيما يخرج بالغوص بلوغ النصاب، وهو قيمة دينار واحد (أي 3.48 غرام من الذهب تقريباً)".
+                </div>
+                <div class="calc-grid">
+                    <div class="form-group">
+                        <label>قيمة المستخرج</label>
+                        <input type="number" id="d_val" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>مؤونة الغوص (تُخصم)</label>
+                        <input type="number" id="d_cost" class="form-input">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcDiving()">التحقق من النصاب والحساب</button>
+                <div id="res-diving" class="result-container"></div>
+            </section>
+
+            <!-- قسم المال المختلط -->
+            <section id="calc-mixed" class="calculator-card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h2>الحلال المختلط بالحرام</h2>
+                        <p>تحديد الوظيفة: خمس أم صدقة أم رد؟</p>
+                    </div>
+                    <span class="masala-ref">مسألة 1205</span>
+                </div>
+
+                <div class="help-section">
+                    <div class="help-trigger" onclick="toggleHelp('help-mixed')">
+                        <span><i class="fa-solid fa-circle-question"></i> كيف أحدد حالتي؟</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div id="help-mixed" class="help-content">
+                        <p>يعتمد الحكم على 3 عوامل: هل المال متميز (معزول)؟ هل تعرف المقدار؟ هل تعرف المالك؟ أجب أدناه وسيحدد النظام وظيفتك.</p>
+                    </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:25px;">
+                    
+                    <div class="form-group">
+                        <label>1. هل المال الحرام متميز (تعرفه بعينه)؟</label>
+                        <div class="radio-group-container">
+                            <div class="radio-card">
+                                <input type="radio" name="mix_eye" value="yes" onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>نعم، متميز</span>
+                                </div>
+                            </div>
+                            <div class="radio-card">
+                                <input type="radio" name="mix_eye" value="no" checked onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                    <span>لا، مختلط</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. هل تعرف مقدار الحرام؟</label>
+                        <div class="radio-group-container">
+                            <div class="radio-card">
+                                <input type="radio" name="mix_amt" value="yes" onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-calculator"></i>
+                                    <span>أعرف المقدار</span>
+                                </div>
+                            </div>
+                            <div class="radio-card">
+                                <input type="radio" name="mix_amt" value="no" checked onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-question"></i>
+                                    <span>أجهل المقدار</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. هل تعرف المالك؟</label>
+                        <div class="radio-group-container">
+                            <div class="radio-card">
+                                <input type="radio" name="mix_own" value="yes" onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-user-check"></i>
+                                    <span>أعرف المالك</span>
+                                </div>
+                            </div>
+                            <div class="radio-card">
+                                <input type="radio" name="mix_own" value="no" checked onchange="resetMixed()">
+                                <div class="radio-btn-style">
+                                    <i class="fa-solid fa-user-slash"></i>
+                                    <span>أجهل المالك</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>المبلغ الإجمالي الموجود تحت يدك:</label>
+                        <input type="number" id="mix_total" class="form-input" placeholder="المبلغ الكلي">
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="calcMixed()">
+                    <i class="fa-solid fa-gavel"></i> تحديد الوظيفة الشرعية
+                </button>
+                <div id="res-mixed" class="result-container"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        /* --- المحرك الفقهي (JavaScript Logic) --- */
+
+        // الثوابت الشرعية الوزنية (بالغرام)
+        const CONSTANTS = {
+            MITHQAL_SAYRAFI: 4.64,  // المثقال الصيرفي
+            DINAR_SHARI: 3.48,      // الدينار الشرعي (0.75 * 4.64) - التصحيح المعتمد
+            DIRHAM_SHARI: 2.436,    // الدرهم (0.7 * 3.48)
+            
+            // النصابات (وحدات)
+            NISAB_MINERAL_UNITS: 15, // 15 مثقال صيرفي
+            NISAB_DIVING_UNITS: 1,   // 1 دينار
+            NISAB_KANZ_GOLD_UNITS: 20, // 20 دينار
+            NISAB_KANZ_SILVER_UNITS: 200 // 200 درهم (أو 105 مثقال)
+        };
+
+        // الحالة العامة
+        let state = {
+            goldPrice: 0,
+            silverPrice: 0,
+            thresholds: { mineral: 0, diving: 0, treasure: 0 }
+        };
+
+        // عند تحميل الصفحة
+        window.onload = function() {
+            // إبقاء النافذة المنبثقة ظاهرة
+        };
+
+        // تنسيق الأرقام
+        function fmt(num) {
+            return num ? num.toLocaleString('ar-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00';
+        }
+
+        // إظهار وإخفاء المساعدة
+        function toggleHelp(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'block';
+            }
+        }
+
+        // تحديث المعايير عند إدخال السعر
+        function updateStandards() {
+            state.goldPrice = parseFloat(document.getElementById('goldPrice').value) || 0;
+            state.silverPrice = parseFloat(document.getElementById('silverPrice').value) || 0;
+
+            // 1. قيمة المثقال الصيرفي (4.64 * سعر الذهب)
+            const valMithqal = state.goldPrice * CONSTANTS.MITHQAL_SAYRAFI;
+            
+            // 2. قيمة الدينار الشرعي (3.48 * سعر الذهب) - التعديل الجديد
+            const valDinar = state.goldPrice * CONSTANTS.DINAR_SHARI;
+
+            // 3. نصاب المعدن (15 مثقال صيرفي)
+            state.thresholds.mineral = valMithqal * CONSTANTS.NISAB_MINERAL_UNITS;
+
+            // 4. نصاب الغوص (1 دينار شرعي = 3.48 غرام ذهب)
+            // ملاحظة: بعض الفقهاء يقول دينار = مثقال في الغوص، لكن السيد يعتمد الدينار الشرعي المعروف (3.48) في أغلب الموارد،
+            // ولو افترضنا في مسألة الغوص تحديداً العودة للمثقال، فالأحوط الاعتماد على الأقل (الدينار) للإخراج.
+            // هنا سنعتمد الدينار الشرعي المصحح (3.48غ).
+            state.thresholds.diving = valDinar * CONSTANTS.NISAB_DIVING_UNITS;
+
+            // 5. نصاب الكنز
+            // نصاب الذهب: 20 دينار
+            const kanzGold = valDinar * CONSTANTS.NISAB_KANZ_GOLD_UNITS;
+            // نصاب الفضة: 200 درهم (الدرهم = 2.436 غرام فضة)
+            // القيمة = 200 * 2.436 * سعر الفضة
+            const kanzSilver = (CONSTANTS.NISAB_KANZ_SILVER_UNITS * CONSTANTS.DIRHAM_SHARI) * state.silverPrice;
+
+            // نأخذ الأقل منهما
+            if (state.goldPrice > 0 && state.silverPrice > 0) {
+                state.thresholds.treasure = Math.min(kanzGold, kanzSilver);
+            } else if (state.goldPrice > 0) {
+                state.thresholds.treasure = kanzGold;
+            } else if (state.silverPrice > 0) {
+                state.thresholds.treasure = kanzSilver;
+            } else {
+                state.thresholds.treasure = 0;
+            }
+
+            // تحديث العرض في الشريط الجانبي
+            document.getElementById('val_mithqal').innerText = fmt(valMithqal);
+            document.getElementById('val_dinar').innerText = fmt(valDinar);
+            document.getElementById('val_nisab_mineral').innerText = fmt(state.thresholds.mineral);
+            document.getElementById('val_nisab_diving').innerText = fmt(state.thresholds.diving);
+            // لا يوجد مكان لنصاب الكنز في العرض الحالي، يمكن إضافته أو الاكتفاء بما سبق
+        }
+
+        // التنقل بين التبويبات
+        function switchTab(tabId) {
+            document.querySelectorAll('.calculator-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.result-container').forEach(r => r.style.display = 'none');
+
+            document.getElementById('calc-' + tabId).classList.add('active');
+            // تفعيل الزر المناسب
+            const buttons = document.getElementsByClassName('tab-btn');
+            for(let btn of buttons) {
+                if(btn.getAttribute('onclick').includes(tabId)) btn.classList.add('active');
+            }
+        }
+
+        // عرض النتائج
+        function showResult(boxId, title, type, amount, msg, details) {
+            const box = document.getElementById(boxId);
+            const headerClass = type === 'obligatory' ? 'bg-obligatory' : (type === 'alert' ? 'bg-alert' : 'bg-free');
+            const icon = type === 'obligatory' ? '<i class="fa-solid fa-circle-exclamation"></i>' : (type === 'alert' ? '<i class="fa-solid fa-triangle-exclamation"></i>' : '<i class="fa-solid fa-check-circle"></i>');
+
+            let amountHtml = '';
+            if (amount !== null) {
+                amountHtml = `
+                    <div class="amount-big">${fmt(amount)}</div>
+                    <div style="font-size:0.9rem; color:#888;">المقدار الواجب (يُقسم نصفين)</div>
+                `;
+            }
+
+            box.innerHTML = `
+                <div class="res-header ${headerClass}">${icon} ${title}</div>
+                <div class="res-body">
+                    ${amountHtml}
+                    <p style="font-size:1.1rem; margin:15px 0; color:#444;">${msg}</p>
+                    ${details ? `<div class="details-box">${details}</div>` : ''}
+                </div>
+            `;
+            box.style.display = 'block';
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /* --- الدوال الحسابية --- */
+
+        // 1. الأرباح
+        function calcProfits() {
+            const cash = parseFloat(document.getElementById('p_cash').value) || 0;
+            const assets = parseFloat(document.getElementById('p_assets').value) || 0;
+            const loans = parseFloat(document.getElementById('p_loans').value) || 0;
+            const debts = parseFloat(document.getElementById('p_debts').value) || 0;
+            const exempt = parseFloat(document.getElementById('p_exempt').value) || 0;
+
+            const total = cash + assets + loans;
+            const deduct = debts + exempt;
+            const net = total - deduct;
+
+            if (net > 0) {
+                const khums = net * 0.2;
+                const details = `
+                    <div class="detail-row"><span>المجموع:</span> <span>${fmt(total)}</span></div>
+                    <div class="detail-row"><span>الخصومات:</span> <span style="color:var(--danger)">-${fmt(deduct)}</span></div>
+                    <div class="detail-row"><span>الفاضل (الصافي):</span> <span style="font-weight:bold">${fmt(net)}</span></div>
+                `;
+                showResult('res-profits', 'يجب إخراج الخمس', 'obligatory', khums, 'لديك فائض عن مؤونة السنة يجب تخميسه.', details);
+            } else {
+                showResult('res-profits', 'لا خمس عليك', 'free', null, 'مجموع الديون والمستثنيات يستغرق الأرباح، أو لا يوجد فائض.', null);
+            }
+        }
+
+        // 2. المعادن
+        function calcMinerals() {
+            if(!state.goldPrice) return alert('يرجى إدخال سعر الذهب في القائمة الجانبية');
+            const val = parseFloat(document.getElementById('m_val').value) || 0;
+            const cost = parseFloat(document.getElementById('m_cost').value) || 0;
+            const net = val - cost;
+            const nisab = state.thresholds.mineral;
+
+            if(net >= nisab) {
+                showResult('res-minerals', 'يجب الخمس (بلغ النصاب)', 'obligatory', net * 0.2, 
+                    `تجاوز الصافي قيمة 15 مثقال صيرفي (${fmt(nisab)}).`, 
+                    `<div class="detail-row"><span>الصافي:</span> <span>${fmt(net)}</span></div>`
+                );
+            } else {
+                showResult('res-minerals', 'لم يبلغ النصاب', 'free', null, 
+                    `الصافي أقل من النصاب (${fmt(nisab)}). يدخل المبلغ في أرباح السنة ويخمس عند رأس السنة إن بقي.`, null);
+            }
+        }
+
+        // 3. الكنز
+        function calcTreasure() {
+            if(!state.thresholds.treasure) return alert('أدخل أسعار الذهب والفضة لتحديد النصاب');
+            const val = parseFloat(document.getElementById('t_val').value) || 0;
+            const cost = parseFloat(document.getElementById('t_cost').value) || 0;
+            const net = val - cost;
+            const nisab = state.thresholds.treasure;
+
+            if(net >= nisab) {
+                showResult('res-treasure', 'يجب خمس الكنز', 'obligatory', net * 0.2, 
+                    `تجاوز المال أقل النصابين (${fmt(nisab)}).`, null);
+            } else {
+                showResult('res-treasure', 'لم يبلغ النصاب', 'free', null, 'يدخل في أرباح السنة.', null);
+            }
+        }
+
+        // 4. الغوص
+        function calcDiving() {
+            if(!state.goldPrice) return alert('أدخل سعر الذهب');
+            const val = parseFloat(document.getElementById('d_val').value) || 0;
+            const cost = parseFloat(document.getElementById('d_cost').value) || 0;
+            const net = val - cost;
+            const nisab = state.thresholds.diving;
+
+            if(net >= nisab) {
+                showResult('res-diving', 'يجب خمس الغوص', 'obligatory', net * 0.2, 
+                    `تجاوز الصافي قيمة دينار شرعي (${fmt(nisab)}).`, null);
+            } else {
+                showResult('res-diving', 'لم يبلغ النصاب', 'free', null, 'يدخل في أرباح السنة.', null);
+            }
+        }
+
+        // 5. المختلط
+        function resetMixed() { document.getElementById('res-mixed').style.display = 'none'; }
+        function calcMixed() {
+            const eye = document.querySelector('input[name="mix_eye"]:checked').value;
+            const amt = document.querySelector('input[name="mix_amt"]:checked').value;
+            const own = document.querySelector('input[name="mix_own"]:checked').value;
+            const total = parseFloat(document.getElementById('mix_total').value) || 0;
+
+            if(eye === 'yes') {
+                showResult('res-mixed', 'ليس مالاً مختلطاً', 'alert', null, 'المال متميز: يجب رد الحرام لمالكه أو التصدق به (رد مظالم) إن جهلت المالك.', null);
+                return;
+            }
+
+            // مختلط
+            if(amt === 'yes' && own === 'yes') {
+                showResult('res-mixed', 'دفع المال للمالك', 'alert', null, 'تعرف المقدار والمالك: يجب إيصال المال لصاحبه فوراً.', null);
+            } else if(amt === 'yes' && own === 'no') {
+                showResult('res-mixed', 'تصدق بالمقدار', 'alert', null, 'تعرف المقدار وتجهل المالك: تصدق بمقدار الحرام بإذن الحاكم الشرعي.', null);
+            } else if(amt === 'no' && own === 'yes') {
+                showResult('res-mixed', 'واجب المصالحة', 'alert', null, 'تجهل المقدار وتعرف المالك: يجب مصالحة المالك لترضيته.', null);
+            } else {
+                // مجهول المقدار والمالك
+                showResult('res-mixed', 'حلال بإخراج الخمس', 'obligatory', total * 0.2, 'هذا هو المال المختلط الذي يطهر بالتخميس.', null);
+            }
+        }
+
+    </script>
+</body>
+</html>
