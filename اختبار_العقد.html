@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبار التقييمي: كتاب التجارة (شروط العقد)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #c0392b;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --bg-color: #ecf0f1;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --font-main: 'Amiri', 'Traditional Arabic', serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.5em; }
+        p.subtitle { opacity: 0.9; font-size: 1.2em; margin-top: 10px; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .filter-controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            background: #fff;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-family: var(--font-main);
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-right: 5px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .q-number {
+            font-weight: bold;
+            color: var(--accent-color);
+            background: #fae5e3;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .q-type {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .q-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* MCQ Styles */
+        .options-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: block;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background: #e2e6ea;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + span {
+            font-weight: bold;
+        }
+        
+        .option-label.selected {
+            border-color: var(--primary-color);
+            background-color: #eaf2f8;
+        }
+
+        .option-label.correct {
+            background-color: #d4edda;
+            border-color: var(--success-color);
+            color: #155724;
+        }
+
+        .option-label.wrong {
+            background-color: #f8d7da;
+            border-color: var(--accent-color);
+            color: #721c24;
+        }
+
+        /* Written/Textarea Styles */
+        textarea.written-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 1.1em;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 15px;
+        }
+
+        /* Action Buttons */
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-hint { background-color: var(--warning-color); color: #fff; }
+        .btn-answer { background-color: var(--primary-color); color: #fff; }
+        .btn-hint:hover { background-color: #d35400; }
+        .btn-answer:hover { background-color: #34495e; }
+
+        /* Feedback Sections */
+        .feedback-box, .hint-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .hint-box {
+            background-color: #fef9e7;
+            border-right: 4px solid var(--warning-color);
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .feedback-box {
+            background-color: #e8f6f3;
+            border-right: 4px solid var(--success-color);
+            color: #2c3e50;
+        }
+        
+        .written-answer {
+            background-color: #e8f4f8;
+            border-right: 4px solid #2980b9;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+            white-space: pre-line;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .q-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .actions { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>اختبار كتاب التجارة</h1>
+    <p class="subtitle">الفصل الأول: شروط العقد | تركيز على المسائل (51، 53، 54، 60، 61)</p>
+    <p style="font-size: 0.9em; margin-top:5px;">أسئلة منوعة: اختيار متعدد، تطبيقات فقهية، وشرح مفاهيم</p>
+</header>
+
+<div class="container">
+    <div class="filter-controls">
+        <button class="filter-btn active" onclick="filterQuestions('all')">الكل</button>
+        <button class="filter-btn" onclick="filterQuestions('mcq')">اختيار متعدد</button>
+        <button class="filter-btn" onclick="filterQuestions('scenario')">تطبيقات ومسائل</button>
+        <button class="filter-btn" onclick="filterQuestions('written')">شرح ومفاهيم</button>
+    </div>
+
+    <div id="quiz-area">
+        <div style="text-align: center; padding: 50px;">جاري تحميل الأسئلة...</div>
+    </div>
+</div>
+
+<script>
+    // Database of Questions strictly based on the provided text
+    const questionsDB = [
+        // --- مقدمة البيع ---
+        {
+            id: 1,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'عرّف الماتن "البيع" بأنه:',
+            options: [
+                'مبادلة مال بمال مطلقاً',
+                'نقل المال إلى الغير بعوض',
+                'تمليك عين بعوض مالي',
+                'نقل ذمة إلى ذمة أخرى'
+            ],
+            correctIndex: 1,
+            hint: 'راجع تعريف البيع في بداية الفصل: "البيع هو: نقل المال إلى الغير بعوض..."',
+            explanation: 'البيع هو نقل المال إلى الغير بعوض، ويتقوم بقصد العوضية والمعوضية.'
+        },
+        {
+            id: 2,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'ما الفرق بين البيع وبين المعاوضة المستقلة بين مالين؟',
+            options: [
+                'لا فرق بينهما في الأحكام',
+                'البيع يشترط فيه النقد والمعاوضة لا تشترط',
+                'البيع يتقوم بقصد العوضية والمعوضية، والمعاوضة المستقلة خالية من هذا القصد',
+                'المعاوضة المستقلة باطلة والبيع صحيح'
+            ],
+            correctIndex: 2,
+            hint: 'النص: "وأمّا المعاوضة بين المالين من دون قصد العوضيّة والمعوَّضيّة فهي معاملة مستقلّة صحيحة..."',
+            explanation: 'الفرق الجوهري هو القصد؛ فالبيع فيه قصد العوضية (أحدهما أصل والآخر بدل)، أما المعاوضة المستقلة فهي مبادلة دون هذا القصد.'
+        },
+        {
+            id: 3,
+            type: 'written',
+            category: 'written',
+            text: 'هل تترتب أحكام البيع الخاصة (مثل خيار المجلس) على المعاوضة المستقلة؟ ولماذا؟',
+            hint: 'النص: "ولا تترتّب عليها الأحكام المختصّة بالبيع كخياري المجلس والحيوان..."',
+            answer: 'لا، لا تترتب عليها الأحكام المختصة بالبيع مثل خياري المجلس والحيوان. ولكن تترتب عليها الأحكام التي تشمل مطلق المعاوضات كحرمة الربا.'
+        },
+
+        // --- مسألة 51 (صيغة العقد) ---
+        {
+            id: 4,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'في مسألة 51: هل تشترط "العربية" في صيغة عقد البيع؟',
+            options: [
+                'نعم، تشترط العربية مع القدرة',
+                'نعم، تشترط مطلقاً',
+                'لا، لا تشترط العربية',
+                'تشترط في العقود الخطيرة فقط'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 51: "... ولا تشترط فيه العربيّة..."',
+            explanation: 'صريح المسألة 51 أنه لا تشترط العربية في عقد البيع.'
+        },
+        {
+            id: 5,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'حكم "اللّحن" (الخطأ النحوي أو الصرفي) في صيغة البيع:',
+            options: [
+                'يبطل العقد مطلقاً',
+                'لا يقدح إذا لم يمنع من ظهوره في المعنى المقصود عند العقلاء',
+                'يقدح في المادة دون الهيئة',
+                'يقدح في الهيئة دون المادة'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 51: "كما لا يقدح فيه اللحن في المادّة أو الهيئة إذا لم ‏يمنع من ظهوره في المعنى المقصود..."',
+            explanation: 'اللحن لا يضر بصحة العقد طالما أن اللفظ دال على المعنى المقصود عند أبناء المحاورة.'
+        },
+        {
+            id: 6,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 51): قال المشتري للبائع "بعت" وقال البائع "اشتريت". هل يصح العقد؟',
+            options: [
+                'لا يصح، لأن البائع يجب أن يقول "بعت"',
+                'لا يصح، لاختلاف الصيغ المتعارفة',
+                'يصح، يجوز إنشاء الإيجاب بألفاظ الشراء والقبول بألفاظ البيع',
+                'يصح بشرط أن يكونا جاهلين باللغة'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 51: "ويجوز إنشاء الإيجاب بمثل: (اشتريت)... وإنشاء القبول بمثل: (شريت) و(بعت)..."',
+            explanation: 'تجوز المعاوضة في الألفاظ، فينشئ المشتري الإيجاب بلفظ اشتريت، وينشئ البائع القبول بلفظ بعت.'
+        },
+
+        // --- مسألة 52 (صيغة الأمر) ---
+        {
+            id: 7,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 52): قال زيد لعمرو: "بعني فرسك بدينار"، فقال عمرو: "بعتك فرسي بدينار". هل ينعقد البيع؟',
+            options: [
+                'لا، حتى يقول زيد "قبلت" بعد ذلك',
+                'نعم، ويترتب الأثر بلا حاجة لضم القبول إذا فُهم منه التوكيل أو السلطنة',
+                'لا، لأن صيغة الأمر لا تصلح في العقود',
+                'نعم، بشرط أن يكونا في مجلس واحد فقط'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 52: "صحّ وترتّب الأثر عليه بلا حاجة إلى ضمّ القبول من الآمر إذا كان المتفاهم منه عرفاً إعطاء السلطنة..."',
+            explanation: 'يصح العقد إذا كان المفهوم العرفي من الأمر إعطاء السلطنة للمخاطب في النقل.'
+        },
+
+        // --- مسألة 53 (الموالاة - مهمة) ---
+        {
+            id: 8,
+            type: 'written',
+            category: 'written',
+            text: 'اشرح مفهوم "الموالاة" المعتبرة في العقد كما ورد في مسألة 53، وما حكم لو تأخر القبول حتى انصرف البائع؟',
+            hint: 'مسألة 53: "يعتبر في تحقّق العقد الموالاة... فلو قال البائع: (بعت) فلم ‏يبادر المشتري إلى القبول حتّى انصرف..."',
+            answer: 'الموالاة تعني التتابع العرفي بين الإيجاب والقبول. فلو قال البائع "بعت" وتأخر المشتري حتى انصرف البائع (تغيرت نيته أو حالته العقدية) لم يتحقق العقد. أما إذا لم ينصرف وكان ينتظر القبول فقبل، صح العقد.'
+        },
+        {
+            id: 9,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تعتبر "وحدة المجلس" شرطاً في صحة البيع (م 53)؟',
+            options: [
+                'نعم، لابد أن يكونا في مكان واحد',
+                'لا تعتبر، فيصح التعاقد بالتليفون',
+                'تعتبر في البيع اللفظي فقط',
+                'تعتبر عند اختلاف البلدان'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 53: "كما أنّه لا تعتبر وحدة المجلس فلو تعاقدا بالتليفون... صحّ."',
+            explanation: 'لا تشترط وحدة المجلس المادية، فالمكالمة الهاتفية تحقق الربط المطلوب للعقد.'
+        },
+        {
+            id: 10,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 53): أرسل شخص رسالة (مكاتبة) يعرض بيع بضاعته، فقبل المشتري بعد وصول الرسالة بأيام، وكان البائع لا يزال على عزمه ولم ينصرف.',
+            options: [
+                'العقد باطل لفوات الموالاة الفورية',
+                'العقد باطل لعدم حضور المجلس',
+                'العقد صحيح',
+                'العقد موقوف على إجازة جديدة'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 53: "وهكذا في المعاملة بالمكاتبة (المراسلة)، فإنّها تصحّ إن لم ‏ينصرف البائع عن بيعه حتّى قَبِلَ المشتري."',
+            explanation: 'المعاملة بالمراسلة صحيحة بشرط بقاء البائع على إيجابه (عدم الانصراف) حين صدور القبول.'
+        },
+
+        // --- مسألة 54 (التطابق - مهمة جداً) ---
+        {
+            id: 11,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'يشترط التطابق بين الإيجاب والقبول في (م 54):',
+            options: [
+                'الثمن والمثمن فقط',
+                'الشروط فقط',
+                'الثمن والمثمن وسائر حدود البيع والشروط',
+                'مجرد الرضا النفسي'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 54: "يعتبر التطابق بين الإيجاب والقبول في الثمن والمثمن، وفي سائر حدود البيع والعوضين..."',
+            explanation: 'يجب أن يكون القبول مرآة للإيجاب في كل التفاصيل (العوضين، الشروط، القيود).إذا اختلفا لم ينعقد.'
+        },
+        {
+            id: 12,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 54): قال البائع: "بعتك الكتاب بدينار بشرط خياطة قميصي"، فقال المشتري: "قبلت بلا شرط".',
+            options: [
+                'ينعقد البيع ويبطل الشرط',
+                'ينعقد البيع مشروطاً رغماً عن المشتري',
+                'لا ينعقد مشروطاً بلا إشكال، وفي انعقاده مطلقاً إشكال (فلا يترك الاحتياط)',
+                'يصح البيع ويضمن المشتري قيمة الخياطة'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 54: "...فإنّه لا ينعقد مشروطاً بلا إشكال وفي انعقاده مطلقاً وبلا شرط إشكال فلا يترك مراعاة مقتضى الاحتياط فيه."',
+            explanation: 'بسبب عدم التطابق، العقد المشروط لم يقع قطعاً، أما وقوعه مطلقاً (بدون شرط) ففيه إشكال فالأحوط وجوباً ترتيب آثار البطلان أو التراضي من جديد.'
+        },
+        {
+            id: 13,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 54): قال "بعتك الكتاب بدينار"، فقال المشتري "اشتريت نصفه بنصف دينار". الحكم هو:',
+            options: [
+                'يصح البيع في النصف',
+                'يبطل البيع في النصف',
+                'في الصحة إشكال، ولا يترك الاحتياط',
+                'يصح البيع ويجبر على شراء النصف الآخر'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 54: "...ولو قال: (بعتك هذا الكتاب بدينار ) فقال: (اشتريت كلّ نصف منه بنصف دينار) ففي الصحّة إشكال..."',
+            explanation: 'هنا يوجد عدم تطابق في كيفية الصفقة (الكل مقابل التبعيض)، فالحكم هو الإشكال والاحتياط.'
+        },
+        {
+            id: 14,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 54): قال البائع "بعتك الكتاب بدينار في ذمتك"، فقال المشتري "اشتريته بدينار لي في ذمة زيد".',
+            options: [
+                'يصح العقد وتنتقل الذمة',
+                'لا يصح العقد للاختلاف في العوض',
+                'يصح مع خيار المجلس',
+                'يصح إذا قبل زيد'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 54: "...لم ‏يصحّ العقد، وكذا في نحو ذلك من أنحاء الاختلاف..."',
+            explanation: 'هذا اختلاف في ماهية الثمن (دينار في ذمة المشتري vs دينار في ذمة أجنبي)، فلا يقع التطابق.'
+        },
+
+        // --- مسألة 55 (الإشارة والكتابة) ---
+        {
+            id: 15,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل يجوز العقد بالإشارة أو الكتابة للأخرس؟ (م 55)',
+            options: [
+                'لا، يجب عليه التوكيل',
+                'نعم، تقوم مقام اللفظ',
+                'نعم، بشرط تعذر التوكيل',
+                'تقوم الإشارة فقط دون الكتابة'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 55: "إذا تعذّر اللفظ لخَرَس ونحوه قامت الإشارة أو الكتابة مقامه وإن تمكّن من التوكيل..."',
+            explanation: 'الإشارة والكتابة تجزئان عن اللفظ للمعذور، حتى لو كان قادراً على توكيل من يتكلم عنه.'
+        },
+        {
+            id: 16,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل يجوز العقد بالكتابة للقادر على اللفظ (غير الأخرس)؟ (م 55)',
+            options: [
+                'لا يجوز مطلقاً',
+                'يجوز',
+                'فيه إشكال',
+                'مكروه'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 55: "...بل يجوز العقد بكلٍّ منهما حتّى مع التمكّن من اللفظ."',
+            explanation: 'الماتن جوّز العقد بالكتابة أو الإشارة حتى للمتمكن من اللفظ.'
+        },
+
+        // --- مسألة 56-59 (المعاطاة) ---
+        {
+            id: 17,
+            type: 'written',
+            category: 'written',
+            text: 'عرّف "البيع بالمعاطاة" كما ورد في مسألة 56.',
+            hint: 'مسألة 56: "بأن ينشئ البائع البيع بإعطائه المبيع إلى المشتري، وينشئ المشتري القبول بإعطاء الثمن..."',
+            answer: 'هي أن ينشئ البائع البيع بإعطائه المبيع، وينشئ المشتري القبول بإعطاء الثمن، دون صيغة لفظية.'
+        },
+        {
+            id: 18,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تصح المعاطاة في "المال الخطير" (ذي القيمة العالية)؟ (م 56)',
+            options: [
+                'لا، تختص بالمحقرات',
+                'نعم، لا فرق بين الخطير والحقير',
+                'تصح مع الكراهة',
+                'تصح بشرط الكتابة'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 56: "...ولا فرق في صحّتها بين المال الخطير والحقير..."',
+            explanation: 'المعاطاة تشمل جميع الأموال بغض النظر عن قيمتها.'
+        },
+        {
+            id: 19,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تثبت الخيارات (كخيار الحيوان والمجلس) في بيع المعاطاة؟ (م 57)',
+            options: [
+                'لا، لأنها بيع قاصر',
+                'نعم، تثبت جميع الخيارات على نحو ثبوتها في البيع بالصيغة',
+                'يثبت خيار العيب فقط',
+                'تثبت إذا اشترطت فقط'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 57: "كما يثبت فيها جميع الخيارات... على نحو ثبوتها في البيع بالصيغة..."',
+            explanation: 'حكم المعاطاة حكم البيع اللفظي في ثبوت الخيارات.'
+        },
+        {
+            id: 20,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'أي من العقود التالية لا تجري فيه المعاطاة؟ (م 58)',
+            options: [
+                'الإجارة',
+                'الرهن',
+                'النكاح',
+                'الوقف'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 58: "...نعم لا تجري في موارد خاصّة، كالنكاح والطلاق والنذر واليمين والعهد."',
+            explanation: 'النكاح من الموارد التي استثناها الماتن من جريان المعاطاة.'
+        },
+        {
+            id: 21,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 59): تبادل شخصان المال بنية البيع (معاطاة) وقال أحدهما أثناء التعاطي "لي الخيار لمدة سنة" وقبل الآخر.',
+            options: [
+                'يبطل الشرط ويصح البيع لازماً',
+                'يبطل البيع والشرط',
+                'يصح الشرط ويكون البيع خيارياً',
+                'تتحول المعاطاة إلى عقد فاسد'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 59: "...صحّ شرط الخيار، وكان البيع خياريّاً..."',
+            explanation: 'البيع المعاطاتي قابل للشرط، فإذا صرح بالشرط أثناء التعاطي أو بنيا عليه صح.'
+        },
+
+        // --- مسألة 60 (التعليق - مهمة) ---
+        {
+            id: 22,
+            type: 'written',
+            category: 'written',
+            text: 'ما حكم تعليق البيع على أمر "مجهول الحصول" حال العقد؟ (م 60)',
+            hint: 'مسألة 60: "ولا على أمر مجهول الحصول حال العقد... مع جهله بذلك..."',
+            answer: 'لا يجوز تعليق البيع على أمر مجهول الحصول حال العقد (مثل: بعتك إن كان اليوم الجمعة وهو شاك). أما لو كان عالماً بحصوله (يعلم أنه الجمعة) جاز.'
+        },
+        {
+            id: 23,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 60): قال البائع: "بعتك سيارتي إذا نزل المطر غداً".',
+            options: [
+                'البيع صحيح',
+                'البيع باطل (للتعليق على مستقبل غير حاصل)',
+                'البيع موقوف',
+                'البيع صحيح مع الخيار'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 60: "لا يجوز تعليق البيع على أمر غير حاصل حين العقد سواء أعَلِمَ حصوله بعد ذلك..."',
+            explanation: 'التعليق على أمر مستقبل (لم يحصل حين العقد) يبطل البيع، حتى لو كان معلوم الحصول لاحقاً (كطلوع الهلال).'
+        },
+        {
+            id: 24,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 60): قال: "بعتك إن كان اليوم يوم الجمعة" وهو يعلم يقيناً أن اليوم جمعة.',
+            options: [
+                'البيع باطل للتعليق الصوري',
+                'البيع جائز وصحيح',
+                'البيع مكروه',
+                'باطل لأنه تعليق'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 60: "...أمّا مع علمه به فجائز."',
+            explanation: 'التعليق على أمر حالي معلوم الوجود لا يضر بصحة العقد (لأنه تعليق صوري، والواقع منجز).'
+        },
+
+        // --- مسألة 61 (المقبوض بالعقد الفاسد - مهمة جداً) ---
+        {
+            id: 25,
+            type: 'written',
+            category: 'written',
+            text: 'ما هو الواجب على المشتري إذا قبض ما اشتراه بعقد فاسد؟ (م 61)',
+            hint: 'مسألة 61: "...وإلّا وجب عليه ردّه إلى البائع..."',
+            answer: 'يجب عليه رده إلى البائع فوراً، إلا إذا علم برضا البائع بالتصرف فيه حتى مع فساد العقد.'
+        },
+        {
+            id: 26,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 61): تلف المبيع (المقبوض بعقد فاسد) عند المشتري بدون تفريط منه. هل يضمن؟',
+            options: [
+                'لا يضمن لأنه لم يفرط (يد أمانة)',
+                'يضمن نصف القيمة',
+                'يجب عليه رد مثله إن كان مثلياً وقيمته إن كان قيمياً',
+                'يضمن الثمن المسمى في العقد فقط'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 61: "وإذا تلف - ولو من دون تفريط - وجب عليه ردّ مثله إن كان مثليّاً وقيمته إن كان قيميّاً..."',
+            explanation: 'يده يد ضمان (ما يضمن بصحيحه يضمن بفاسده)، فيضمن البدل (المثل أو القيمة) حتى لو لم يقصر في الحفظ.'
+        },
+        {
+            id: 27,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'في مسألة 61، إذا كان البائع مجهولاً (في المقبوض بالعقد الفاسد)، كيف يتصرف المشتري؟',
+            options: [
+                'يتملك المال',
+                'يجري عليه حكم المال المجهول مالكه',
+                'ينتظر ظهور المالك للأبد',
+                'يرده إلى الحاكم الشرعي فوراً'
+            ],
+            correctIndex: 1,
+            hint: 'مسألة 61: "وإذا كان المالك مجهولاً جرى عليه حكم المال المجهول مالكه..."',
+            explanation: 'يطبق عليه أحكام مجهول المالك (الفحص واليأس والصدقة بإذن الحاكم.. الخ).'
+        },
+        {
+            id: 28,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'لو باع المشتري السلعة التي قبضها بعقد فاسد لطرف ثالث، فما حكم هذا البيع الثاني؟ (م 61)',
+            options: [
+                'باطل تماماً',
+                'صحيح ولازم',
+                'يكون بيعاً فضولياً تتوقف صحته على إجازة المالك الأصلي',
+                'صحيح مع الإثم'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 61: "ولو باع أحدهما ما قبضه كان البيع فضوليّاً وتوقّفت صحّته على إجازة المالك..."',
+            explanation: 'لأنه تصرف في مال الغير بدون إذن صحيح (لفساد العقد الأول)، فيكون فضولياً.'
+        },
+        {
+            id: 29,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل يفرق في ضمان المقبوض بالعقد الفاسد بين الجاهل بالحكم والعالم به؟ (م 61)',
+            options: [
+                'نعم، الجاهل لا يضمن',
+                'نعم، العالم يضمن الضعف',
+                'لا فرق في جميع ذلك بين العلم والحكم والجهل به',
+                'الجاهل يضمن المثل فقط'
+            ],
+            correctIndex: 2,
+            hint: 'مسألة 61: "ولا فرق في جميع ذلك بين العلم بالحكم والجهل به..."',
+            explanation: 'الضمان في الأموال لا يسقط بالجهل بالحكم الشرعي.'
+        },
+
+        // --- أسئلة إضافية منوعة للوصول للعدد المطلوب ---
+        {
+            id: 30,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'من هو "باذل المعوَّض" في تعريف البيع؟',
+            options: ['المشتري', 'البائع', 'الوسيط', 'الحاكم'],
+            correctIndex: 1,
+            hint: 'المقدمة: "وباذل المعوَّض هو البائع..."',
+            explanation: 'البائع هو الذي يبذل السلعة (المعوَّض)، والمشتري يبذل الثمن (العوض).'
+        },
+        {
+            id: 31,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'من هو "باذل العوض" في تعريف البيع؟',
+            options: ['المشتري', 'البائع', 'الوكيل', 'الفضولي'],
+            correctIndex: 0,
+            hint: 'المقدمة: "...وباذل العوض هو المشتري..."',
+            explanation: 'المشتري هو الذي يدفع الثمن (العوض).'
+        },
+        {
+            id: 32,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'الغالب في العوض في هذه الأزمنة أن يكون:',
+            options: ['من الأمتعة', 'من النقود', 'من المنافع', 'من الحقوق'],
+            correctIndex: 1,
+            hint: 'المقدمة: "والغالب فيه في هذه الأزمنة أن يكون من النقود..."',
+            explanation: 'النص صريح بأن الغالب في العوض (الثمن) كونه نقوداً.'
+        },
+        {
+            id: 33,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'قال: "ملكتك الكتاب بدينار"، فقال الآخر "قبلت". (م 51)',
+            options: ['يصح البيع', 'لا يصح لعدم لفظ "بعت"', 'يصح هبة معوضة لا بيعاً', 'باطل'],
+            correctIndex: 0,
+            hint: 'مسألة 51: "مثل... (ملّكت)... في الإيجاب..."',
+            explanation: 'لفظ التمليك يصح به إيجاب البيع.'
+        },
+        {
+            id: 34,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'قال: "بادلتك الكتاب بدينار"، فقال "رضيت". (م 51)',
+            options: ['يصح البيع', 'لا يصح', 'يتحول لمعاوضة', 'باطل'],
+            correctIndex: 0,
+            hint: 'مسألة 51: "ومثل... (رضيت)... ونحوها في القبول"',
+            explanation: 'لفظ المبادلة في الإيجاب والرضا في القبول ألفاظ صحيحة للعقد.'
+        },
+        {
+            id: 35,
+            type: 'written',
+            category: 'written',
+            text: 'هل تصح المعاطاة إذا أعطى المشتري الثمن ولم يعط البائع السلعة (كانت ديناً مثلاً)؟ (م 56)',
+            hint: 'مسألة 56: "وقد تحصل... بإعطاء المشتري الثمن وأخذ البائع له بلا إعطاء منه..."',
+            answer: 'نعم تصح، كما لو كان المثمن كلياً في الذمة، فيكفي إعطاء طرف واحد.'
+        },
+        {
+            id: 36,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تجري المعاطاة في الرهن؟ (م 58)',
+            options: ['لا تجري', 'تجري', 'تجري بإذن الحاكم', 'خلاف المشهور'],
+            correctIndex: 1,
+            hint: 'مسألة 58: "تجــري المعاطــاة في غير البيــع... حتّى الرهن والوقف"',
+            explanation: 'الرهن من العقود التي تصح بالمعاطاة عند الماتن.'
+        },
+        {
+            id: 37,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تجري المعاطاة في الوقف؟ (م 58)',
+            options: ['لا تجري', 'تجري', 'تجري في المسجد فقط', 'لا تجري في العقار'],
+            correctIndex: 1,
+            hint: 'مسألة 58: "...حتّى الرهن والوقف..."',
+            explanation: 'الوقف يصح بالمعاطاة.'
+        },
+        {
+            id: 38,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تجري المعاطاة في الطلاق؟ (م 58)',
+            options: ['نعم', 'لا', 'نعم في الخلع', 'نعم بالكتابة'],
+            correctIndex: 1,
+            hint: 'مسألة 58: "...نعم لا تجري في موارد خاصّة، كالنكاح والطلاق..."',
+            explanation: 'الطلاق لا يقع بالمعاطاة.'
+        },
+        {
+            id: 39,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل تجري المعاطاة في النذر؟ (م 58)',
+            options: ['نعم', 'لا', 'نعم في نذر الصدقة', 'نعم في غير المعين'],
+            correctIndex: 1,
+            hint: 'مسألة 58: "...والنذر واليمين والعهد."',
+            explanation: 'النذر من الإيقاعات التي لا تقع بالمعاطاة (تحتاج صيغة).'
+        },
+        {
+            id: 40,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 54): قال "بعتك الكتاب بدينار بشرط خياطة ثوبي"، فقال المشتري "اشتريت الكتاب بدينار بشرط خياطة عباءتك".',
+            options: ['يصح', 'لا يصح', 'يصح ويبطل الشرط', 'يصح بالخيار'],
+            correctIndex: 1,
+            hint: 'مسألة 54: "...أو بشرط أن أخيط عباءتك... لم يصح العقد"',
+            explanation: 'اختلاف جنس الشرط (ثوب vs عباءة) يمنع التطابق ويبطل العقد.'
+        },
+        {
+            id: 41,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'تطبيق (م 60): قال "بعتك إذا ولد لي ولد ذكر".',
+            options: ['باطل', 'صحيح', 'موقوف', 'صحيح مع الخيار'],
+            correctIndex: 0,
+            hint: 'مسألة 60: "...أم جهل حصوله كما لو قال: (بعتك إذا ولد لي ولد ذكر)..."',
+            explanation: 'التعليق على أمر مجهول الحصول (مستقبل) يبطل البيع.'
+        },
+        {
+            id: 42,
+            type: 'written',
+            category: 'written',
+            text: 'ما معنى "عدم الانصراف" في مسألة الموالاة (م 53)؟',
+            hint: 'مسألة 53: "...فلم ‏يبادر المشتري إلى القبول حتّى انصرف البائع عن البيع..."',
+            answer: 'هو أن يبقى البائع على نيته ورضاه بالعقد حين صدور القبول من المشتري، فلو أعرض أو غير رأيه قبل القبول بطل.'
+        },
+        {
+            id: 43,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل يصح الإيجاب بلفظ "شريت"؟ (م 51)',
+            options: ['نعم', 'لا', 'فقط للقبول', 'مكروه'],
+            correctIndex: 2,
+            hint: 'مسألة 51: "...وإنشاء القبول بمثل: (شريت)..."',
+            explanation: 'ذكر الماتن "شريت" في أمثلة القبول، ولكن في اللغة شريت تأتي بمعنى بعت، ولكن حسب نص المسألة ذكرت في القبول.'
+        },
+         {
+            id: 44,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'في مسألة 51، هل يصح الإيجاب بلفظ "ابتعت"؟',
+            options: ['نعم', 'لا، هي للقبول', 'نعم مع النية', 'خلاف الاحتياط'],
+            correctIndex: 0,
+            hint: 'مسألة 51: "ويجوز إنشاء الإيجاب بمثل: (اشتريت) و(ابتعت)..."',
+            explanation: 'نعم، يجوز إنشاء الإيجاب بلفظ ابتعت (مع أن أصلها للمشتري) إذا قصد بها الإيجاب.'
+        },
+        {
+            id: 45,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'حكم رد "المثل" في المثلي و "القيمة" في القيمي عند تلف المقبوض بالعقد الفاسد (م 61):',
+            options: ['واجب', 'مستحب', 'جائز', 'حسب تراضي الطرفين'],
+            correctIndex: 0,
+            hint: 'مسألة 61: "...وجب عليه ردّ مثله إن كان مثليّاً وقيمته إن كان قيميّاً..."',
+            explanation: 'الحكم هو الوجوب.'
+        },
+        {
+            id: 46,
+            type: 'scenario',
+            category: 'scenario',
+            text: 'شخص أخذ سلعة من بائع بعقد فاسد، وعلم أن البائع راضٍ بتصرفه فيها حتى لو كان العقد فاسداً (م 61).',
+            options: ['يحرم التصرف', 'جاز له التصرف', 'يجب الرد فوراً', 'يضمن القيمة فوراً'],
+            correctIndex: 1,
+            hint: 'مسألة 61: "...فإن علم برضا البائع بالتصرّف فيه حتّى مع فساد العقد جاز له التصرّف فيه..."',
+            explanation: 'الرضا القلبي المطلق (غير المقيد بصحة العقد) يبيح التصرف.'
+        },
+        {
+            id: 47,
+            type: 'written',
+            category: 'written',
+            text: 'كيف يتحقق الإيجاب والقبول في المعاطاة من جهة البائع والمشتري؟ (م 56)',
+            hint: 'مسألة 56',
+            answer: 'البائع ينشئ البيع بإعطاء المبيع، والمشتري ينشئ القبول بإعطاء الثمن.'
+        },
+        {
+            id: 48,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'لو قال "بعتك هذا الدفتر بدينار" فقال "اشتريت هذا الكتاب بدرهم" (م 54).',
+            options: ['يصح', 'لا يصح', 'يصح مع خيار الغبن', 'يصح بالمعاطاة'],
+            correctIndex: 1,
+            hint: 'مسألة 54: "...أو هذا الكتاب بدرهم... لم يصح العقد"',
+            explanation: 'اختلاف الجنس (دفتر vs كتاب) أو الثمن (دينار vs درهم) يبطل العقد.'
+        },
+        {
+            id: 49,
+            type: 'mcq',
+            category: 'mcq',
+            text: 'هل يجوز لمن تعذر عليه اللفظ أن يوكل غيره؟ (م 55)',
+            options: ['نعم', 'لا، يجب أن يباشر بالإشارة', 'لا، يسقط عنه البيع', 'فقط في النكاح'],
+            correctIndex: 0,
+            hint: 'مسألة 55: "...وإن تمكّن من التوكيل..."',
+            explanation: 'يجوز له التوكيل، ويجوز له أيضاً المباشرة بالإشارة.'
+        },
+        {
+            id: 50,
+            type: 'written',
+            category: 'written',
+            text: 'ختاماً: لخص قاعدة "ما يضمن بصحيحه يضمن بفاسده" كما تظهر في مسألة 61.',
+            hint: 'مسألة 61',
+            answer: 'تظهر في حكم الماتن بوجوب رد المال المقبوض بالعقد الفاسد، وضمانه بالمثل أو القيمة عند التلف، لأن البيع الصحيح يوجب الضمان (الثمن)، ففاسده يوجب الضمان (المثل أو القيمة).'
+        }
+    ];
+
+    // Helper functions
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // Initialize Quiz
+    function initQuiz() {
+        // Shuffle questions initially
+        // shuffleArray(questionsDB); // Optional: Un-comment to shuffle all questions every reload
+        filterQuestions('all');
+    }
+
+    function filterQuestions(filter) {
+        const quizArea = document.getElementById('quiz-area');
+        quizArea.innerHTML = '';
+        
+        // Update active button state
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.filter-btn[onclick="filterQuestions('${filter}')"]`).classList.add('active');
+
+        const filteredQuestions = filter === 'all' 
+            ? questionsDB 
+            : questionsDB.filter(q => q.category === filter);
+
+        if(filteredQuestions.length === 0) {
+            quizArea.innerHTML = '<div style="text-align:center; padding:20px;">لا توجد أسئلة في هذا القسم حالياً.</div>';
+            return;
+        }
+
+        filteredQuestions.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `q-card-${q.id}`;
+            
+            let typeLabel = '';
+            if(q.type === 'mcq') typeLabel = 'اختيار متعدد';
+            else if(q.type === 'scenario') typeLabel = 'تطبيق / مسألة';
+            else if(q.type === 'written') typeLabel = 'شرح / كتابة';
+
+            let contentHTML = `
+                <div class="q-header">
+                    <span class="q-number">سؤال ${index + 1}</span>
+                    <span class="q-type">${typeLabel}</span>
+                </div>
+                <div class="q-text">${q.text}</div>
+            `;
+
+            if (q.type === 'mcq' || q.type === 'scenario') {
+                contentHTML += `<div class="options-grid">`;
+                q.options.forEach((opt, optIndex) => {
+                    contentHTML += `
+                        <label class="option-label" id="opt-${q.id}-${optIndex}" onclick="selectOption(${q.id}, ${optIndex})">
+                            <input type="radio" name="q-${q.id}" value="${optIndex}">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+                contentHTML += `</div>`;
+            } else if (q.type === 'written') {
+                contentHTML += `
+                    <textarea class="written-input" placeholder="اكتب إجابتك هنا..."></textarea>
+                `;
+            }
+
+            // Buttons
+            contentHTML += `
+                <div class="actions">
+                    ${(q.type === 'mcq' || q.type === 'scenario') ? `<button class="btn btn-answer" onclick="checkAnswer(${q.id})">تحقق من الإجابة</button>` : ''}
+                    <button class="btn btn-answer" onclick="toggleAnswer(${q.id})">${q.type === 'written' ? 'عرض الجواب النموذجي' : 'عرض الشرح والجواب'}</button>
+                    <button class="btn btn-hint" onclick="toggleHint(${q.id})">عرض التلميح (النص)</button>
+                </div>
+            `;
+
+            // Hidden Boxes
+            contentHTML += `
+                <div id="hint-${q.id}" class="hint-box">
+                    <strong>تلميح من نص المسألة:</strong><br>${q.hint}
+                </div>
+            `;
+
+            if (q.type === 'mcq' || q.type === 'scenario') {
+                contentHTML += `
+                    <div id="feedback-${q.id}" class="feedback-box"></div>
+                `;
+            } else {
+                 contentHTML += `
+                    <div id="answer-${q.id}" class="written-answer">
+                        <strong>الجواب الصحيح:</strong><br>${q.answer}
+                    </div>
+                `;
+            }
+
+            card.innerHTML = contentHTML;
+            quizArea.appendChild(card);
+        });
+    }
+
+    // Logic Functions
+    window.selectOption = function(qId, optIndex) {
+        // Visual selection
+        const labels = document.querySelectorAll(`#q-card-${qId} .option-label`);
+        labels.forEach(l => l.classList.remove('selected'));
+        document.getElementById(`opt-${qId}-${optIndex}`).classList.add('selected');
+    };
+
+    window.checkAnswer = function(qId) {
+        const q = questionsDB.find(x => x.id === qId);
+        const selectedInput = document.querySelector(`input[name="q-${qId}"]:checked`);
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+
+        if (!selectedInput) {
+            alert('الرجاء اختيار إجابة أولاً.');
+            return;
+        }
+
+        const selectedIndex = parseInt(selectedInput.value);
+        const labels = document.querySelectorAll(`#q-card-${qId} .option-label`);
+
+        // Reset styles
+        labels.forEach(l => {
+            l.classList.remove('correct', 'wrong');
+            l.style.pointerEvents = 'none'; // Lock options
+        });
+
+        if (selectedIndex === q.correctIndex) {
+            document.getElementById(`opt-${qId}-${selectedIndex}`).classList.add('correct');
+            feedbackBox.innerHTML = `<strong>أحسنت! إجابة صحيحة.</strong><br>${q.explanation}`;
+            feedbackBox.style.display = 'block';
+            feedbackBox.style.borderColor = 'var(--success-color)';
+            feedbackBox.style.backgroundColor = '#d4edda';
+        } else {
+            document.getElementById(`opt-${qId}-${selectedIndex}`).classList.add('wrong');
+            document.getElementById(`opt-${qId}-${q.correctIndex}`).classList.add('correct');
+            feedbackBox.innerHTML = `<strong>خطأ.</strong> الإجابة الصحيحة موضحة باللون الأخضر.<br><strong>الشرح:</strong> ${q.explanation}`;
+            feedbackBox.style.display = 'block';
+            feedbackBox.style.borderColor = 'var(--accent-color)';
+            feedbackBox.style.backgroundColor = '#f8d7da';
+        }
+    };
+
+    window.toggleHint = function(qId) {
+        const hintBox = document.getElementById(`hint-${qId}`);
+        hintBox.style.display = (hintBox.style.display === 'block') ? 'none' : 'block';
+    };
+
+    window.toggleAnswer = function(qId) {
+        const q = questionsDB.find(x => x.id === qId);
+        if (q.type === 'written') {
+            const ansBox = document.getElementById(`answer-${qId}`);
+            ansBox.style.display = (ansBox.style.display === 'block') ? 'none' : 'block';
+        } else {
+            // For MCQ, just simulate checking or showing the feedback box with explanation
+            const feedbackBox = document.getElementById(`feedback-${qId}`);
+            feedbackBox.innerHTML = `<strong>الإجابة الصحيحة هي الخيار رقم (${q.correctIndex + 1}).</strong><br><strong>الشرح:</strong> ${q.explanation}`;
+            feedbackBox.style.display = 'block';
+            
+            // Highlight correct one visually if not already done
+            const labels = document.querySelectorAll(`#q-card-${qId} .option-label`);
+            labels.forEach(l => l.classList.remove('correct'));
+            document.getElementById(`opt-${qId}-${q.correctIndex}`).classList.add('correct');
+        }
+    };
+
+    // Run
+    initQuiz();
+</script>
+
+</body>
+</html>
