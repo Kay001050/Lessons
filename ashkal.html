@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>تطبيقات المنطق: المنهج الحوزوي (النسخة الكاملة)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['Amiri', 'serif'],
+              sans: ['Reem Kufi', 'sans-serif'],
+            },
+            colors: {
+              'islamic-green': '#1a4d2e',
+              'islamic-gold': '#d4af37',
+              'paper': '#fdfbf7',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #f4f4f9;
+      }
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      .rotate-y-180 {
+        transform: rotateY(180deg);
+      }
+      /* Custom Scrollbar for card content */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.05); 
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2); 
+        border-radius: 10px;
+      }
+      .dir-ltr {
+        direction: ltr;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useMemo, useEffect } = React;
+
+      // ==========================================
+      // Types & Enums (Simulated in JS)
+      // ==========================================
+      const Figure = {
+        First: 1,
+        Second: 2,
+        Third: 3,
+        Fourth: 4
+      };
+
+      const Category = {
+        Aqeedah: "عقائد",
+        Fiqh: "فقه",
+        Politics: "سياسة ومقاومة",
+        Ethics: "أخلاق وعرفان",
+        Logic: "منطق صرف",
+        History: "تاريخ"
+      };
+
+      // ==========================================
+      // DATA GENERATION
+      // ==========================================
+      const generateId = () => Math.random().toString(36).substr(2, 9);
+
+      const createSyllogism = (fig, code, cat, minor, major, res, valid, expl) => ({
+        id: generateId(),
+        figure: fig,
+        moodCode: code,
+        category: cat,
+        minorPremise: minor,
+        majorPremise: major,
+        result: res,
+        isValid: valid,
+        explanation: expl
+      });
+
+      const syllogisms = [
+        /* ================= الشكل الأول (الأشرف) ================= */
+        createSyllogism(Figure.First, 'AA', Category.Politics, 
+          'الكيان الصهيوني غاصبٌ', 
+          'كل غاصبٍ تجبُ مقاومتهُ شرعاً وعقلاً', 
+          'الكيان الصهيوني تجبُ مقاومتهُ', 
+          true, 
+          'الشكل الأول: الأوسط (غاصب) محمول في الصغرى موضوع في الكبرى. تحقق الشرطان: إيجاب الصغرى وكلية الكبرى.'
+        ),
+        createSyllogism(Figure.First, 'AA', Category.Aqeedah,
+          'كل إمامٍ معصومٌ',
+          'كل معصومٍ قولهُ حجةٌ مطلقة',
+          'كل إمامٍ قولهُ حجةٌ مطلقة',
+          true,
+          'قياس من الشكل الأول، بديهي الإنتاج لتوفر الشروط.'
+        ),
+        createSyllogism(Figure.First, 'AE', Category.Fiqh,
+          'كل غيبةٍ ظلمٌ للمؤمن',
+          'لا شيء من الظلمِ بمقبولٍ عند الله',
+          'لا شيء من الغيبةِ بمقبولٍ عند الله',
+          true,
+          'الصغرى موجبة، الكبرى سالبة كُلية. الإنتاج سالب كُلي.'
+        ),
+        createSyllogism(Figure.First, 'AI', Category.Aqeedah,
+          'بعض الصحابةِ خالفوا أمر النبي (ص) في رزية الخميس',
+          'كل من خالفَ أمر النبي (ص) فقد عصى',
+          'بعض الصحابةِ عصوا',
+          true,
+          'النتيجة تتبع أخس المقدمتين (الجزئية). إثبات أن الصحبة لا تعني العصمة.'
+        ),
+        createSyllogism(Figure.First, 'EA', Category.Logic,
+          'لا شيء من البدعةِ بدينٍ',
+          'كل دينٍ يُحترم',
+          'عقيم (اختلال شرط إيجاب الصغرى)',
+          false,
+          'الشكل الأول يشترط إيجاب الصغرى، وهنا الصغرى سالبة (لا شيء من...). فلا ينتج يقيناً.'
+        ),
+        createSyllogism(Figure.First, 'AA', Category.Politics,
+          'حزب الله مقاومةٌ إسلامية',
+          'كل مقاومةٍ إسلاميةٍ تدافع عن المستضعفين',
+          'حزب الله يدافع عن المستضعفين',
+          true,
+          'تطبيق مباشر للشكل الأول.'
+        ),
+        createSyllogism(Figure.First, 'AA', Category.Ethics,
+          'حب الدنيا رأس كل خطيئة',
+          'كل خطيئةٍ تبعد عن الله',
+          'حب الدنيا يبعد عن الله',
+          true,
+          'استدلال أخلاقي صحيح.'
+        ),
+        createSyllogism(Figure.First, 'EI', Category.Logic,
+          'بعض الناس ليسوا بمؤمنين',
+          'كل مؤمنٍ يدخل الجنة',
+          'عقيم',
+          false,
+          'الصغرى سالبة في الشكل الأول لا تنتج.'
+        ),
+        createSyllogism(Figure.First, 'AA', Category.Politics,
+          'كل تكفيريٍ يستبيح دماء المسلمين',
+          'كل من يستبيح دماء المسلمين مفسدٌ في الأرض',
+          'كل تكفيريٍ مفسدٌ في الأرض',
+          true,
+          'حكم شرعي منطقي على الجماعات التكفيرية.'
+        ),
+        createSyllogism(Figure.First, 'AE', Category.Fiqh,
+          'كل خمرٍ مسكرٌ',
+          'لا شيء من المسكرِ بطاهرٍ (على رأي المشهور)',
+          'لا شيء من الخمرِ بطاهرٍ',
+          true,
+          'قياس فقهي لنجاسة الخمر.'
+        ),
+
+        /* ================= الشكل الثاني (المنير) ================= */
+        createSyllogism(Figure.Second, 'EAE', Category.Aqeedah,
+          'الله تعالى ليس بجسمٍ',
+          'كل إنسانٍ جسمٌ',
+          'لا شيء من الله بإنسان',
+          true,
+          'الشكل الثاني: الأوسط (جسم) محمول فيهما. اختلفا كيفاً (سلب وإيجاب) وكبرت الكبرى.'
+        ),
+        createSyllogism(Figure.Second, 'AEE', Category.Politics,
+          'كل مقاومٍ شريف',
+          'لا أحدَ من المطبعين بشريف',
+          'لا أحدَ من المقاومين بمطبع',
+          true,
+          'التمييز بين المقاومة والتطبيع عبر الحد الأوسط (الشرف).'
+        ),
+        createSyllogism(Figure.Second, 'AA', Category.Logic,
+          'كل شيعي يحب أهل البيت',
+          'كل سني منصف يحب أهل البيت',
+          'عقيم (اتفاق في الكيف)',
+          false,
+          'لا ينتج الشكل الثاني من موجبتين. حب أهل البيت جامع مشترك ولا يقتضي التطابق المذهبي الكامل.'
+        ),
+        createSyllogism(Figure.Second, 'EIO', Category.Ethics,
+          'بعض الناس ليسوا بصادقين',
+          'كل مؤمنٍ صادقٌ',
+          'بعض الناس ليسوا بمؤمنين',
+          true,
+          'صغرى سالبة جزئية وكبرى موجبة كلية مع اختلاف الكيف.'
+        ),
+        createSyllogism(Figure.Second, 'AOO', Category.Aqeedah,
+          'كل مؤمنٍ يوالي علياً (ع)',
+          'بعض المسلمين (النواصب) لا يوالون علياً (ع)',
+          'بعض المسلمين ليسوا بمؤمنين',
+          true,
+          'إثبات أن الإيمان الخاص (الولاية) أخص من الإسلام العام.'
+        ),
+        createSyllogism(Figure.Second, 'AA', Category.Logic,
+          'كل ذهب معدن',
+          'كل نحاس معدن',
+          'عقيم',
+          false,
+          'لو أنتج لقلنا النحاس ذهب! وهذا باطل، لعدم استغراق الأوسط.'
+        ),
+        createSyllogism(Figure.Second, 'EAE', Category.Politics,
+          'لا أحد من الأحرار يرضى بالذل',
+          'كل من يقبل الوصاية الأمريكية يرضى بالذل',
+          'لا أحد من الأحرار يقبل الوصاية الأمريكية',
+          true,
+          'نفي الحرية عمن يقبل التبعية.'
+        ),
+        createSyllogism(Figure.Second, 'AEE', Category.Fiqh,
+          'كل ماءٍ طاهر',
+          'لا شيء من البول بطاهر',
+          'لا شيء من الماء ببول',
+          true,
+          'بديهي، تمييز الحقائق.'
+        ),
+        createSyllogism(Figure.Second, 'IEO', Category.Logic,
+          'بعض الحيوان يطير',
+          'لا شيء من الإنسان يطير',
+          'بعض الحيوان ليس بإنسان',
+          true,
+          'صحيح ومنتج.'
+        ),
+        createSyllogism(Figure.Second, 'EE', Category.Logic,
+          'لا شيء من الحجر ببشر',
+          'لا شيء من النبات ببشر',
+          'عقيم',
+          false,
+          'لا إنتاج من سالبتين في الإسلام ولا في المنطق الأرسطي.'
+        ),
+
+        /* ================= الشكل الثالث (الدقيق) ================= */
+        createSyllogism(Figure.Third, 'AAI', Category.Logic,
+          'كل ذهب معدن',
+          'كل ذهب ثمين',
+          'بعض المعدن ثمين',
+          true,
+          'الشكل الثالث: الأوسط (ذهب) موضوع فيهما. النتيجة دائماً جزئية.'
+        ),
+        createSyllogism(Figure.Third, 'IAI', Category.Aqeedah,
+          'بعض الصحابة فروا يوم أحد',
+          'كل الصحابة بايعوا تحت الشجرة',
+          'بعض من بايع تحت الشجرة فر يوم أحد',
+          true,
+          'يدل على أن البيعة لا تعصم من الخطأ أو الفرار.'
+        ),
+        createSyllogism(Figure.Third, 'AAI', Category.Fiqh,
+          'كل صلاة عبادة',
+          'كل صلاة تشترط الطهارة',
+          'بعض العبادة تشترط الطهارة',
+          true,
+          'لأن هناك عبادات لا تشترط الطهارة كالصوم (من حيث صحة الأداء لا القبول) أو ذكر الله.'
+        ),
+        createSyllogism(Figure.Third, 'OAO', Category.Logic,
+          'بعض البشر ليسوا مسلمين',
+          'كل البشر مخلوقون',
+          'عقيم (شرط إيجاب الصغرى مختل)',
+          false,
+          'الشكل الثالث يتطلب إيجاب الصغرى.'
+        ),
+        createSyllogism(Figure.Third, 'AII', Category.Politics,
+          'كل جهاد تضحية',
+          'بعض الجهاد استشهادي',
+          'بعض التضحية استشهادية',
+          true,
+          'صحيح.'
+        ),
+        createSyllogism(Figure.Third, 'IAI', Category.Ethics,
+          'بعض الغضب ممدوح (الغضب لله)',
+          'كل الغضب انفعال نفسي',
+          'بعض الانفعال النفسي ممدوح',
+          true,
+          'ليس كل انفعال مذموم.'
+        ),
+        createSyllogism(Figure.Third, 'EAO', Category.Logic,
+          'لا شيء من الذهب يصدأ',
+          'كل ذهب معدن',
+          'بعض المعدن لا يصدأ',
+          true,
+          'ضرب فيلابتون (Felapton) منتج.'
+        ),
+        createSyllogism(Figure.Third, 'EE', Category.Logic,
+          'لا شيء من الإنسان بحجر',
+          'لا شيء من الإنسان بنبات',
+          'عقيم',
+          false,
+          'سالبتان لا تنتجان.'
+        ),
+        createSyllogism(Figure.Third, 'AAI', Category.Politics,
+          'كل شهيد حي عند ربه',
+          'كل شهيد قتل في سبيل الله',
+          'بعض من قتل في سبيل الله حي عند ربه',
+          true,
+          'النتيجة الجزئية صادقة (وإن كان الحكم للكل، لكن المنطق يضمن الجزء).'
+        ),
+        createSyllogism(Figure.Third, 'IAI', Category.Ethics,
+          'بعض الفقراء متعففون',
+          'كل الفقراء محتاجون',
+          'بعض المحتاجين متعففون',
+          true,
+          'دعوة للبحث عن المتعففين.'
+        ),
+
+        /* ================= الشكل الرابع (العسر) ================= */
+        createSyllogism(Figure.Fourth, 'AAI', Category.Politics,
+          'كل صهيوني عدو',
+          'كل عدو يجب الحذر منه',
+          'بعض من يجب الحذر منه صهيوني',
+          true,
+          'ترتيب الشكل الرابع: (عدو -> صهيوني) و (يحذر منه -> عدو). (Bramantip).'
+        ),
+        createSyllogism(Figure.Fourth, 'AEE', Category.Aqeedah,
+          'كل ناصبي مبغض لأهل البيت',
+          'لا أحد من المؤمنين بناصبي',
+          'لا أحد من المبغضين لأهل البيت بمؤمن',
+          true,
+          'الشكل الرابع: الأوسط (ناصبي) موضوع الصغرى ومحمول الكبرى. الضرب AEE منتج.'
+        ),
+        createSyllogism(Figure.Fourth, 'AAI', Category.Fiqh,
+          'كل سائل نجس ماء قليل لاقته نجاسة (فرضاً)',
+          'الماء القليل سائل',
+          'بعض الماء القليل نجس',
+          true,
+          'مثال فقهي تعليمي.'
+        ),
+        createSyllogism(Figure.Fourth, 'IAI', Category.Politics,
+          'بعض القتلى شهداء',
+          'كل شهيد حي',
+          'بعض الأحياء قتلى (بالمعنى المادي الدنيوي)',
+          true,
+          'النتيجة صادقة: الشهداء أحياء عند ربهم وإن عدوا في القتلى مادياً.'
+        ),
+        createSyllogism(Figure.Fourth, 'AAI', Category.Logic,
+          'كل إنسان حيوان',
+          'كل ناطق إنسان',
+          'بعض الحيوان ناطق',
+          true,
+          'الأوسط (إنسان): موضوع الصغرى، محمول الكبرى.'
+        ),
+        createSyllogism(Figure.Fourth, 'EAO', Category.Politics,
+          'لا أحد من الصهاينة صاحب حق',
+          'كل صاحب حق يدافع عن أرضه',
+          'بعض من يدافع عن أرضه ليس بصهيوني',
+          true,
+          'ضرب Fesapo: لا ب م، كل ج ب -> بعض ج ليس م.'
+        ),
+        createSyllogism(Figure.Fourth, 'EIO', Category.Ethics,
+          'لا أحد من المتكبرين محبوب',
+          'بعض المحبوبين فقراء',
+          'بعض الفقراء ليسوا متكبرين',
+          true,
+          'ضرب Fresison: لا ب م، بعض ج ب -> بعض ج ليس م.'
+        ),
+        createSyllogism(Figure.Fourth, 'EE', Category.Logic,
+          'لا شيء من أ ب',
+          'لا شيء من ج أ',
+          'عقيم',
+          false,
+          'السالبتان لا تنتجان.'
+        ),
+        createSyllogism(Figure.Fourth, 'AIA', Category.Logic,
+          'كل أ ب',
+          'بعض ج أ',
+          'عقيم في الرابع',
+          false,
+          'عدم اجتماع الخستين.'
+        ),
+        createSyllogism(Figure.Fourth, 'AEE', Category.Aqeedah,
+          'كل إمام منصوص عليه',
+          'لا أحد من الحكام العباسيين بإمام',
+          'لا أحد من المنصوص عليهم بحاكم عباسي',
+          true,
+          'تطبيق الشكل الرابع لنفي الإمامة عن المغتصبين.'
+        ),
+      ];
+
+      // ==========================================
+      // Data Generator (to reach 100+ items)
+      // ==========================================
+      const terms = [
+          { s: 'المجاهد', m: 'منصور', p: 'مؤيد من الله', cat: Category.Politics },
+          { s: 'المنافق', m: 'في الدرك الأسفل', p: 'معذب', cat: Category.Aqeedah },
+          { s: 'الربا', m: 'حرام', p: 'ممحي البركة', cat: Category.Fiqh },
+          { s: 'الكذب', m: 'رذيلة', p: 'يهدي للنار', cat: Category.Ethics },
+          { s: 'فلسطين', m: 'أرض وقف', p: 'لا يجوز التنازل عنها', cat: Category.Politics },
+          { s: 'الشهادة', m: 'كرامة', p: 'فوز عظيم', cat: Category.Aqeedah },
+          { s: 'التطبيع', m: 'خيانة', p: 'طعنة في الظهر', cat: Category.Politics },
+          { s: 'الصلاة', m: 'عمود الدين', p: 'قربان كل تقي', cat: Category.Fiqh },
+          { s: 'الظلم', m: 'ظلمات', p: 'عاقبته وخيمة', cat: Category.Ethics },
+          { s: 'الوهابية', m: 'حركة تكفيرية', p: 'تشوه الإسلام', cat: Category.Politics },
+      ];
+
+      // Figure 1 (AA) Valid
+      terms.forEach(t => {
+          syllogisms.push(createSyllogism(Figure.First, 'AA', t.cat,
+              `كل ${t.s} ${t.m}`,
+              `كل ${t.m} ${t.p}`,
+              `كل ${t.s} ${t.p}`,
+              true,
+              'الشكل الأول (الموجبة الكلية): تسلسل منطقي يقيني.'
+          ));
+      });
+
+      // Figure 2 (EAE) Valid
+      terms.forEach(t => {
+          syllogisms.push(createSyllogism(Figure.Second, 'EAE', t.cat,
+              `لا شيء من ${t.s} بـ ${t.p}`, 
+              `كل ${t.m} ${t.p}`, 
+              `لا شيء من ${t.s} بـ ${t.m}`, 
+              true,
+              'الشكل الثاني (ضرب سيزار): نفي الصفة المشتركة ينفي التطابق.'
+          ));
+      });
+
+      // Figure 1 (EI) Sterile
+      terms.forEach((t) => {
+          syllogisms.push(createSyllogism(Figure.First, 'EI', Category.Logic,
+              `بعض ${t.s} ليس ${t.m}`,
+              `كل ${t.m} ${t.p}`,
+              'عقيم',
+              false,
+              'الشكل الأول يشترط إيجاب الصغرى. الصغرى السالبة تعقم القياس.'
+          ));
+      });
+
+      // Figure 3 (AAI) Valid
+      terms.forEach(t => {
+          syllogisms.push(createSyllogism(Figure.Third, 'AAI', t.cat,
+              `كل ${t.m} ${t.s}`,
+              `كل ${t.m} ${t.p}`,
+              `بعض ${t.s} ${t.p}`,
+              true,
+              'الشكل الثالث ينتج جزئية عند إيجاب المقدمتين.'
+          ));
+      });
+
+      // Extra Specific Examples
+      const extras = [
+          createSyllogism(Figure.First, 'AA', Category.Politics, 'أمريكا هي الشيطان الأكبر', 'كل شيطان عدو للإنسانية', 'أمريكا عدو للإنسانية', true, 'منطق الثورة.'),
+          createSyllogism(Figure.Second, 'AEE', Category.Aqeedah, 'كل معصوم منزه عن الكبائر', 'بعض الصحابة فعلوا الكبائر', 'بعض الصحابة ليسوا معصومين', true, 'نقض نظرية عدالة الصحابة المطلقة.'),
+          createSyllogism(Figure.First, 'AA', Category.Fiqh, 'التوسل تعظيم لله', 'كل تعظيم لله عبادة', 'التوسل عبادة (وليس شركاً)', true, 'رد على الشبهات الوهابية.'),
+          createSyllogism(Figure.First, 'AA', Category.Politics, 'نصرة غزة واجب شرعي', 'كل واجب شرعي محاسب عليه', 'نصرة غزة محاسب عليها', true, 'التكليف الشرعي.'),
+          createSyllogism(Figure.Second, 'EAE', Category.Ethics, 'لا أحد من المتواضعين يتكبر', 'كل إبليس متكبر', 'لا أحد من المتواضعين إبليس (أو من أتباعه)', true, 'التضاد بين التواضع والتكبر.'),
+          createSyllogism(Figure.Third, 'IAI', Category.History, 'بعض خلفاء بني أمية شربوا الخمر', 'كل خلفاء بني أمية سموا "أمير المؤمنين"', 'بعض من سمي "أمير المؤمنين" شارب خمر', true, 'سقوط القداسة عن اللقب.'),
+          createSyllogism(Figure.First, 'AA', Category.Aqeedah, 'المهدي (عج) هو الموعود', 'كل موعود يملأ الأرض قسطاً وعدلاً', 'المهدي (عج) يملأ الأرض قسطاً وعدلاً', true, 'عقيدة الانتظار.'),
+          createSyllogism(Figure.Fourth, 'AEE', Category.Logic, 'كل أ ب', 'لا شيء من ج أ', 'لا شيء من ج ب (؟) لا هذا شكل أول', false, 'مثال لاختبار الانتباه.'),
+          createSyllogism(Figure.First, 'AA', Category.Fiqh, 'الجهاد باب من أبواب الجنة', 'كل باب من أبواب الجنة مفتوح لخاصة الأولياء', 'الجهاد مفتوح لخاصة الأولياء', true, 'حديث عن أمير المؤمنين (ع).'),
+          createSyllogism(Figure.Second, 'AOO', Category.Politics, 'كل مقاوم حر', 'بعض الحكام العرب ليسوا أحراراً', 'بعض الحكام العرب ليسوا مقاومين', true, 'الواقع السياسي.'),
+          createSyllogism(Figure.First, 'AE', Category.Aqeedah, 'كل نبي يوحى إليه', 'لا أحد من المدعين الكذبة يوحى إليه', 'لا أحد من المدعين الكذبة نبي', true, 'تمييز النبوة.'),
+          createSyllogism(Figure.Third, 'OAO', Category.Logic, 'بعض المعدن ليس ذهباً', 'كل معدن عنصر', 'عقيم', false, 'شرط إيجاب الصغرى في الثالث مفقود.'),
+          createSyllogism(Figure.First, 'AA', Category.Ethics, 'صلة الرحم تزيد في العمر', 'كل ما يزيد في العمر بركة', 'صلة الرحم بركة', true, 'أثر العمل الصالح.'),
+          createSyllogism(Figure.Second, 'EAE', Category.Aqeedah, 'الله لا يظلم أحداً', 'كل طاغية يظلم', 'الله ليس بطاغية (حاشاه)', true, 'العدل الإلهي.'),
+          createSyllogism(Figure.Fourth, 'AAI', Category.Logic, 'كل وردة زهرة', 'كل زهرة نبات', 'بعض النبات وردة', true, 'شكل رابع منتج (Bramantip).'),
+          createSyllogism(Figure.First, 'AA', Category.Politics, 'إسرائيل غدة سرطانية', 'كل غدة سرطانية يجب استئصالها', 'إسرائيل يجب استئصالها', true, 'مقولة الإمام الخميني.'),
+          createSyllogism(Figure.First, 'AA', Category.Fiqh, 'الغناء اللهوي حرام', 'كل حرام يعاقب فاعله', 'الغناء اللهوي يعاقب فاعله', true, 'حكم الغناء.'),
+          createSyllogism(Figure.Second, 'AEE', Category.Aqeedah, 'كل نبي معصوم', 'لا أحد من الخطائين بمعصوم', 'لا أحد من الخطائين بنبي', true, 'عصمة الأنبياء.'),
+          createSyllogism(Figure.First, 'AA', Category.Politics, 'التطبيع خذلان', 'كل خذلان حرام', 'التطبيع حرام', true, 'الموقف الشرعي من التطبيع.'),
+          createSyllogism(Figure.Third, 'AII', Category.Logic, 'كل علم نور', 'بعض العلم نافع', 'بعض النافع نور', true, 'شكل ثالث منتج.'),
+      ];
+      syllogisms.push(...extras);
+
+      // ==========================================
+      // COMPONENT: LogicCard
+      // ==========================================
+      const LogicCard = ({ data }) => {
+        const [isFlipped, setIsFlipped] = useState(false);
+
+        const handleFlip = () => setIsFlipped(!isFlipped);
+
+        const getFigureName = (fig) => {
+          switch (fig) {
+            case Figure.First: return "الشكل الأول (البديع)";
+            case Figure.Second: return "الشكل الثاني (المنير)";
+            case Figure.Third: return "الشكل الثالث (الدقيق)";
+            case Figure.Fourth: return "الشكل الرابع (العسر)";
+            default: return "";
+          }
+        };
+
+        const getSymbol = (char) => {
+          const c = char.toUpperCase();
+          if (c === 'A') return 'كل';
+          if (c === 'E') return 'لا';
+          if (c === 'I') return 'ع';
+          if (c === 'O') return 'س';
+          return '?';
+        };
+
+        const getMoodDisplay = () => {
+          if (!data.moodCode) return "";
+          const cleanCode = data.moodCode.replace(/[^AEIOaeio]/g, '').toUpperCase();
+          if (cleanCode.length < 2) return "";
+
+          const minorChar = cleanCode[0];
+          const majorChar = cleanCode[1];
+          let resultChar = cleanCode[2];
+
+          if (data.isValid && !resultChar) {
+            if (data.figure === Figure.First) {
+              if (minorChar === 'A' && majorChar === 'A') resultChar = 'A';
+              if (minorChar === 'A' && majorChar === 'E') resultChar = 'E';
+              if (minorChar === 'I' && majorChar === 'A') resultChar = 'I';
+              if (minorChar === 'I' && majorChar === 'E') resultChar = 'O';
+            } else if (data.figure === Figure.Second) {
+              if (minorChar === 'E' && majorChar === 'A') resultChar = 'E';
+              if (minorChar === 'A' && majorChar === 'E') resultChar = 'E';
+              if (minorChar === 'I' && majorChar === 'E') resultChar = 'O';
+              if (minorChar === 'A' && majorChar === 'O') resultChar = 'O';
+              if (minorChar === 'O' && majorChar === 'A') resultChar = 'O';
+            } else if (data.figure === Figure.Third) {
+               if ((minorChar === 'A' && majorChar === 'A') || 
+                   (minorChar === 'I' && majorChar === 'A') || 
+                   (minorChar === 'A' && majorChar === 'I')) resultChar = 'I';
+               if ((minorChar === 'E' && majorChar === 'A') ||
+                   (minorChar === 'O' && majorChar === 'A') ||
+                   (minorChar === 'E' && majorChar === 'I')) resultChar = 'O';
+            } else if (data.figure === Figure.Fourth) {
+               if (minorChar === 'A' && majorChar === 'A') resultChar = 'I';
+               if (minorChar === 'A' && majorChar === 'E') resultChar = 'E';
+               if (minorChar === 'I' && majorChar === 'A') resultChar = 'I';
+               if (minorChar === 'E' && majorChar === 'A') resultChar = 'O';
+               if (minorChar === 'E' && majorChar === 'I') resultChar = 'O';
+            }
+          }
+
+          const s1 = getSymbol(minorChar);
+          const s2 = getSymbol(majorChar);
+          
+          if (data.isValid && resultChar) {
+              const s3 = getSymbol(resultChar);
+              return `(${s1} + ${s2} ينتج ${s3})`;
+          } else {
+              return `(${s1} + ${s2})`;
+          }
+        };
+
+        return (
+          <div className="perspective-1000 h-96 w-full cursor-pointer group" onClick={handleFlip}>
+            <div className={`relative w-full h-full duration-700 transform-style-3d transition-transform ${isFlipped ? 'rotate-y-180' : ''}`}>
+              
+              {/* Front Face */}
+              <div className="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-xl shadow-lg p-6 flex flex-col justify-between hover:shadow-xl transition-shadow">
+                <div>
+                  <div className="flex justify-between items-center mb-6 border-b pb-4 border-slate-100">
+                    <span className="bg-slate-50 text-slate-600 px-3 py-1 rounded-full text-xs font-bold font-serif border border-slate-200">
+                      {data.category}
+                    </span>
+                    <span className="text-slate-400 text-xs font-sans">اضغط للقلب</span>
+                  </div>
+                  
+                  <div className="space-y-8 mt-2">
+                    <div className="relative pr-6">
+                      <span className="absolute right-0 top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                      <p className="text-lg font-serif text-slate-800 leading-relaxed">
+                        <span className="text-slate-500 text-xs block mb-1">المقدمة الصغرى:</span>
+                        {data.minorPremise}
+                      </p>
+                    </div>
+                    <div className="relative pr-6">
+                      <span className="absolute right-0 top-1 w-2 h-2 rounded-full bg-slate-800"></span>
+                      <p className="text-lg font-serif text-slate-800 leading-relaxed font-bold">
+                        <span className="text-slate-500 text-xs block mb-1 font-normal">المقدمة الكبرى:</span>
+                        {data.majorPremise}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                   <div className="w-8 h-1 bg-slate-100 mx-auto rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Back Face */}
+              <div className={`absolute w-full h-full backface-hidden rotate-y-180 rounded-xl shadow-xl p-6 flex flex-col justify-between border-2 ${data.isValid ? 'bg-emerald-50/80 border-emerald-600' : 'bg-red-50/80 border-red-600'}`}>
+                
+                <div className="flex justify-between items-start">
+                   <span className={`text-[10px] font-bold px-2 py-1 rounded border ${data.isValid ? 'text-emerald-700 border-emerald-200 bg-emerald-100' : 'text-red-700 border-red-200 bg-red-100'}`}>
+                     {data.isValid ? 'منتج' : 'عقيم'}
+                   </span>
+                   <span className="text-xs font-bold font-sans text-slate-600 bg-white/60 px-2 py-1 rounded border border-slate-200 dir-ltr">
+                      {getMoodDisplay()}
+                   </span>
+                </div>
+
+                <div className="text-center mt-1">
+                   <span className="inline-block text-xs font-bold text-slate-500 bg-white/50 px-3 py-1 rounded-full mb-2 border border-slate-100 shadow-sm">
+                      {getFigureName(data.figure)}
+                   </span>
+                </div>
+
+                <div className="flex flex-col flex-grow justify-center text-center overflow-hidden">
+                  {!data.isValid && (
+                    <div className="mb-2 text-red-400 opacity-50 text-6xl font-sans font-black select-none pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-12 z-0">
+                      X
+                    </div>
+                  )}
+
+                  <div className="relative z-10 shrink-0">
+                      <span className="text-xs text-slate-500 block mb-1">النتيجة:</span>
+                      <h3 className={`text-lg font-bold mb-2 font-serif leading-normal ${data.isValid ? 'text-emerald-900' : 'text-red-900 line-through decoration-red-400/50 decoration-2'}`}>
+                      {data.result}
+                      </h3>
+                  </div>
+                  
+                  <div className="bg-white/90 p-3 rounded-lg shadow-sm border border-slate-100 text-right mt-1 relative z-10 overflow-y-auto custom-scrollbar flex-grow">
+                    <p className="text-slate-700 text-sm leading-relaxed font-serif text-justify">
+                      <span className="text-slate-400 text-xs ml-1">التعليل:</span>
+                      {data.explanation}
+                    </p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      // ==========================================
+      // COMPONENT: FilterBar
+      // ==========================================
+      const FilterBar = ({ currentFilter, onFilterChange }) => {
+        const filters = [
+          { id: 'all', label: 'الكل' },
+          { id: 'valid', label: 'المنتجة فقط' },
+          { id: 'invalid', label: 'العقيمة (للتعلم)' },
+          { id: 'fig1', label: 'الشكل الأول' },
+          { id: 'fig2', label: 'الشكل الثاني' },
+          { id: 'fig3', label: 'الشكل الثالث' },
+          { id: 'fig4', label: 'الشكل الرابع' },
+        ];
+
+        return (
+          <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-4 mb-8">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-wrap justify-center gap-2">
+                {filters.map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => onFilterChange(f.id)}
+                    className={`px-4 py-2 rounded-full font-serif text-sm transition-all duration-300 ${
+                      currentFilter === f.id
+                        ? 'bg-islamic-green text-white shadow-md transform scale-105'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-islamic-green hover:text-islamic-green'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      // ==========================================
+      // COMPONENT: App
+      // ==========================================
+      const App = () => {
+        const [filter, setFilter] = useState('all');
+
+        const filteredData = useMemo(() => {
+          switch (filter) {
+            case 'valid': return syllogisms.filter(s => s.isValid);
+            case 'invalid': return syllogisms.filter(s => !s.isValid);
+            case 'fig1': return syllogisms.filter(s => s.figure === Figure.First);
+            case 'fig2': return syllogisms.filter(s => s.figure === Figure.Second);
+            case 'fig3': return syllogisms.filter(s => s.figure === Figure.Third);
+            case 'fig4': return syllogisms.filter(s => s.figure === Figure.Fourth);
+            default: return syllogisms;
+          }
+        }, [filter]);
+
+        return (
+          <div className="min-h-screen bg-paper font-sans text-slate-800" dir="rtl">
+            <header className="bg-islamic-green text-white py-12 px-4 text-center relative overflow-hidden">
+              <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+              <div className="relative z-10 container mx-auto">
+                <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4 text-islamic-gold">
+                  تطبيقات المنطق: المنهج الحوزوي
+                </h1>
+                <p className="text-lg md:text-xl font-serif text-slate-100 max-w-2xl mx-auto leading-relaxed">
+                  أمثلة  للأشكال الأربعة والضروب (المنتجة والعقيمة) في رحاب العقيدة والمقاومة والأخلاق
+                </p>
+              </div>
+            </header>
+
+            <FilterBar currentFilter={filter} onFilterChange={setFilter} />
+
+            <main className="container mx-auto px-4 pb-20">
+              <div className="text-center mb-8 text-slate-500 font-serif">
+                تم عرض <span className="font-bold text-islamic-green text-xl mx-1">{filteredData.length}</span> بطاقة
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                {filteredData.map((item) => (
+                  <LogicCard key={item.id} data={item} />
+                ))}
+              </div>
+
+              {filteredData.length === 0 && (
+                <div className="text-center py-20 text-slate-400 font-serif text-xl">
+                  لا توجد أمثلة في هذه الفئة حالياً.
+                </div>
+              )}
+            </main>
+
+            <footer className="bg-slate-800 text-slate-400 py-8 text-center border-t-4 border-islamic-gold">
+              <div className="container mx-auto px-4 font-serif">
+                <p className="mb-2">تم إعداد الأمثلة استناداً إلى قواعد المنطق الأرسطي (منهج الشيخ المظفر).</p>
+                <p className="text-sm opacity-75">نسأل الله القبول - نصرةً للحق وأهله.</p>
+              </div>
+            </footer>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
